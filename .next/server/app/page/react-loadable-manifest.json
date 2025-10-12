@@ -1,8 +1,9 @@
 {
-  "56458": {
-    "id": 56458,
+  "[project]/app/components/Hero.tsx [app-client] (ecmascript, next/dynamic entry)": {
+    "id": "[project]/app/components/Hero.tsx [app-client] (ecmascript, next/dynamic entry)",
     "files": [
-      "static/chunks/5f0b85cd4c2aea21.js"
+      "static/chunks/_74c9997a._.js",
+      "static/chunks/app_components_Hero_tsx_fb9fdc07._.js"
     ]
   }
 }
