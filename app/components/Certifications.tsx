@@ -5,7 +5,7 @@ import { certifications } from "../config";
 
 const Certifications = () => {
   return (
-    <section className="py-20 px-4 max-w-6xl mx-auto">
+    <section id="certifications" className="py-10 px-4 max-w-6xl mx-auto">
       <motion.h2
         className="text-4xl font-bold text-center mb-12"
         initial={{ opacity: 0, y: 50 }}
@@ -19,7 +19,7 @@ const Certifications = () => {
         {certifications.map((cert, index) => (
           <motion.div
             key={index}
-            className="bg-gray-800 rounded-lg p-6 text-center hover:bg-gray-700 transition-colors"
+            className="bg-gray-200 dark:bg-gray-800 rounded-lg p-6 text-center hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: index * 0.1 }}

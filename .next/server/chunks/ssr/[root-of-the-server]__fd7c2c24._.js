@@ -76,9 +76,9 @@ __turbopack_context__.s([
 ]);
 const personalInfo = {
     name: "Rohith Peyarusahib",
-    title: "DBA Lead | MySQL & MongoDB Specialist",
-    tagline: "Database Administrator | Performance Optimizer | Migration Expert",
-    summary: "Dynamic and detail-oriented Database administrator with hands-on experience in MySQL and MongoDB database administration, optimization, and large-scale migrations. Adept at managing over 500+ databases in cloud and on-prem environments with a strong focus on availability, performance tuning, automation, and troubleshooting. Certified in MongoDB, Nutanix, and MySQL 8.0 Administration, with a solid academic foundation in AI and Machine Learning.",
+    title: "Database Consultant | Optimizing, Migrating & Implementing MySQL, MongoDB & PostgreSQL Solutions",
+    tagline: "",
+    summary: "Dynamic and detail-oriented Database administrator with hands-on experience in MySQL, MongoDB, and PostgreSQL database administration, optimization, and large-scale migrations. Adept at managing over 500+ databases in cloud and on-prem environments with a strong focus on availability, performance tuning, automation, and troubleshooting. Certified in MongoDB, Nutanix, and MySQL 8.0 Administration, with a solid academic foundation in AI and Machine Learning.",
     email: "rohithpeyarusahib@gmail.com",
     phone: "+91 6374123576",
     linkedin: "linkedin.com/in/rohithpeyarusahib",
@@ -94,15 +94,27 @@ const experience = [
     {
         company: "Geo Platinum IT Services (GeoPITS)",
         role: "DBA Lead",
-        period: "Mar 2023 – Present",
-        location: "Bengaluru",
+        period: "Jul 2025 – Present",
+        location: "Bengaluru, India",
         responsibilities: [
-            "Managed and monitored 500+ MySQL and MongoDB databases across AWS and Nutanix cloud infrastructure.",
-            "Implemented database health check automation and query performance audits for clients.",
-            "Collaborated with cross-functional teams for architecture planning and issue resolution.",
-            "Automated backup, monitoring, and alerting systems using PMM and Percona Toolkit.",
-            "Worked with infra team on Linux tuning, network configurations, and disk optimizations for DB workloads.",
-            "Delivered RCA and performance tuning for enterprise production systems."
+            "Lead a team of DBAs, ensuring **high-performance, reliable, and scalable database operations**.",
+            "Implemented **automation and performance tuning**, reducing system downtime and improving efficiency.",
+            "Established **best practices and operational frameworks**, boosting team productivity.",
+            "Achievements: Built a **high-performing DBA team** managing **hundreds of database instances** across cloud and on-prem environments.",
+            "Technologies: MySQL, MongoDB, PostgreSQL, Cloud Platforms, Automation"
+        ]
+    },
+    {
+        company: "Geo Platinum IT Services (GeoPITS)",
+        role: "Data Engineer",
+        period: "Mar 2023 – Jun 2025",
+        location: "Bengaluru, India",
+        responsibilities: [
+            "Executed **complex database migrations**: MySQL 5→8, private cloud → AWS RDS, MSSQL → PostgreSQL, with **minimal downtime**.",
+            "Optimized **dashboard queries and reporting**, reducing execution time and improving end-user experience.",
+            "Developed **real-time monitoring & alerting systems** using Bash scripts, PMM, and Grafana for proactive incident management.",
+            "Achievements: Ensured **seamless migration and monitoring** across multiple platforms, improving reliability and performance.",
+            "Technologies: MySQL, PostgreSQL, MongoDB, AWS RDS, DMS, Bash, PMM, Grafana"
         ]
     }
 ];
@@ -143,7 +155,8 @@ const projects = [
 const skills = {
     databases: [
         "MySQL (5.7/8.0)",
-        "MongoDB"
+        "MongoDB",
+        "PostgreSQL"
     ],
     performanceTuning: [
         "Query Optimization",
@@ -208,6 +221,7 @@ const metadata = {
         "DBA Lead",
         "MySQL DBA",
         "MongoDB DBA",
+        "PostgreSQL DBA",
         "Database Administrator",
         "Cloud Database",
         "Rohith Peyarusahib"

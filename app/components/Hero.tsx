@@ -30,7 +30,7 @@ const Hero = () => {
   }, [dimensions.width, dimensions.height]);
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Animated Background */}
       <div className="absolute inset-0">
         {particles.map((particle, i) => (
@@ -85,7 +85,7 @@ const Hero = () => {
           {personalInfo.name}
         </motion.h1>
         <motion.p
-          className="text-xl md:text-2xl text-gray-300 mb-2"
+          className="text-xl md:text-2xl text-white mb-4 font-semibold"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -93,12 +93,12 @@ const Hero = () => {
           {personalInfo.title}
         </motion.p>
         <motion.p
-          className="text-lg text-teal-400 mb-8"
+          className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          {personalInfo.tagline}
+          Helping businesses achieve faster, reliable, and scalable database systems with minimal downtime.
         </motion.p>
         <motion.div
           className="flex flex-col sm:flex-row gap-4 justify-center"
@@ -107,23 +107,19 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.6 }}
         >
           <a
-            href={personalInfo.resumeUrl}
-            download
+            href="#contact"
             className="flex items-center gap-2 px-6 py-3 bg-teal-500 hover:bg-teal-600 rounded-lg transition-colors"
           >
-            <Download size={20} />
-            Download Resume
+            📅 Schedule a Free Consultation
           </a>
           <a
-            href={`https://${personalInfo.linkedin}`}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#projects"
             className="flex items-center gap-2 px-6 py-3 border border-teal-500 hover:bg-teal-500 rounded-lg transition-colors"
           >
-            <Linkedin size={20} />
-            LinkedIn
+            🚀 View My Projects
           </a>
         </motion.div>
+
       </div>
     </section>
   );

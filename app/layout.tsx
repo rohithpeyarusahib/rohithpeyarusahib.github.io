@@ -17,7 +17,7 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: `${personalInfo.name} - ${personalInfo.title}`,
   description: personalInfo.summary,
-  keywords: ["DBA Lead", "MySQL DBA", "MongoDB DBA", "Database Administrator", "Cloud Database", "Rohith Peyarusahib"],
+  keywords: ["DBA Lead", "MySQL DBA", "MongoDB DBA", "PostgreSQL DBA", "Database Administrator", "Cloud Database", "Rohith Peyarusahib"],
   authors: [{ name: personalInfo.name }],
   openGraph: {
     title: `${personalInfo.name} - ${personalInfo.title}`,

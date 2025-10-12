@@ -13,7 +13,7 @@ const Skills = () => {
   ];
 
   return (
-    <section className="py-20 px-4 max-w-6xl mx-auto">
+    <section id="skills" className="py-10 px-4 max-w-6xl mx-auto">
       <motion.h2
         className="text-4xl font-bold text-center mb-12"
         initial={{ opacity: 0, y: 50 }}
@@ -27,7 +27,7 @@ const Skills = () => {
         {skillCategories.map((category, index) => (
           <motion.div
             key={index}
-            className="bg-gray-800 rounded-lg p-6"
+            className="bg-gray-200 dark:bg-gray-800 rounded-lg p-6"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: index * 0.1 }}
@@ -38,10 +38,10 @@ const Skills = () => {
               {category.items.map((skill, i) => (
                 <div key={i}>
                   <div className="flex justify-between mb-1">
-                    <span className="text-gray-300">{skill}</span>
+                    <span className="text-gray-700 dark:text-gray-300">{skill}</span>
                     <span className="text-teal-400">{skillProficiency[skill as keyof typeof skillProficiency] || 80}%</span>
                   </div>
-                  <div className="w-full bg-gray-700 rounded-full h-2">
+                  <div className="w-full bg-gray-300 dark:bg-gray-700 rounded-full h-2">
                     <motion.div
                       className="bg-teal-500 h-2 rounded-full"
                       initial={{ width: 0 }}

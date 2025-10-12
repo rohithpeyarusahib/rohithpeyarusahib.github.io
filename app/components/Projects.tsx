@@ -9,7 +9,7 @@ const Projects = () => {
   const [expanded, setExpanded] = useState<number | null>(null);
 
   return (
-    <section className="py-20 px-4 max-w-6xl mx-auto">
+    <section id="projects" className="py-10 px-4 max-w-6xl mx-auto">
       <motion.h2
         className="text-4xl font-bold text-center mb-12"
         initial={{ opacity: 0, y: 50 }}
@@ -23,7 +23,7 @@ const Projects = () => {
         {projects.map((project, index) => (
           <motion.div
             key={index}
-            className="bg-gray-800 rounded-lg p-6 cursor-pointer"
+            className="bg-gray-200 dark:bg-gray-800 rounded-lg p-6 cursor-pointer"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: index * 0.1 }}
@@ -32,7 +32,7 @@ const Projects = () => {
             onClick={() => setExpanded(expanded === index ? null : index)}
           >
             <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-            <p className="text-gray-300 mb-4">
+            <p className="text-gray-700 dark:text-gray-300 mb-4">
               {project.description.length > 100
                 ? `${project.description.substring(0, 100)}...`
                 : project.description}
@@ -46,7 +46,7 @@ const Projects = () => {
                 initial={{ opacity: 0, height: 0 }}
                 animate={{ opacity: 1, height: "auto" }}
                 exit={{ opacity: 0, height: 0 }}
-                className="mt-4 text-gray-300"
+                className="mt-4 text-gray-700 dark:text-gray-300"
               >
                 {project.description}
               </motion.div>

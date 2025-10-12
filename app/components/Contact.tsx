@@ -35,7 +35,7 @@ const Contact = () => {
   };
 
   return (
-    <section className="py-20 px-4 max-w-6xl mx-auto">
+    <section id="contact" className="py-10 px-4 max-w-6xl mx-auto">
       <motion.h2
         className="text-4xl font-bold text-center mb-12"
         initial={{ opacity: 0, y: 50 }}
@@ -83,7 +83,7 @@ const Contact = () => {
               {...register("name")}
               type="text"
               placeholder="Your Name"
-              className="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg focus:border-teal-500 focus:outline-none"
+              className="w-full p-3 bg-gray-200 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:border-teal-500 focus:outline-none"
             />
             {errors.name && <p className="text-red-500 mt-1">{errors.name.message}</p>}
           </div>
@@ -92,7 +92,7 @@ const Contact = () => {
               {...register("email")}
               type="email"
               placeholder="Your Email"
-              className="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg focus:border-teal-500 focus:outline-none"
+              className="w-full p-3 bg-gray-200 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:border-teal-500 focus:outline-none"
             />
             {errors.email && <p className="text-red-500 mt-1">{errors.email.message}</p>}
           </div>
@@ -101,7 +101,7 @@ const Contact = () => {
               {...register("message")}
               placeholder="Your Message"
               rows={5}
-              className="w-full p-3 bg-gray-800 border border-gray-700 rounded-lg focus:border-teal-500 focus:outline-none resize-none"
+              className="w-full p-3 bg-gray-200 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg focus:border-teal-500 focus:outline-none resize-none"
             />
             {errors.message && <p className="text-red-500 mt-1">{errors.message.message}</p>}
           </div>
