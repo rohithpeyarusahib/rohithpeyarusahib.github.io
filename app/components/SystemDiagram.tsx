@@ -45,7 +45,7 @@ const NodeLabel = ({ text, subtext }: { text: string, subtext: string }) => (
   </Html>
 );
 
-const SciFiNode = ({ position, color, text, subtext, active, shape = "octahedron" }: any) => {
+const SciFiNode = ({ position, color, text, subtext, active, shape = "octahedron" }: props) => {
   const coreRef = useRef<THREE.Mesh>(null);
   const ringRef = useRef<THREE.Mesh>(null);
 
@@ -69,13 +69,13 @@ const SciFiNode = ({ position, color, text, subtext, active, shape = "octahedron
         ) : (
           <boxGeometry args={[0.8, 0.8, 0.8]} />
         )}
-        <meshStandardMaterial 
-          color={color} 
-          emissive={color} 
-          emissiveIntensity={active ? 2 : 0.5} 
-          wireframe={shape !== "cylinder"} 
-          transparent 
-          opacity={0.8} 
+        <meshStandardMaterial
+          color={color}
+          emissive={color}
+          emissiveIntensity={active ? 2 : 0.5}
+          wireframe={shape !== "cylinder"}
+          transparent
+          opacity={0.8}
         />
         <Edges color="#ffffff" opacity={0.2} transparent />
       </mesh>
@@ -85,8 +85,8 @@ const SciFiNode = ({ position, color, text, subtext, active, shape = "octahedron
         <meshBasicMaterial color={color} transparent opacity={active ? 0.8 : 0.2} />
       </mesh>
       <mesh rotation-x={Math.PI / 2}>
-         <ringGeometry args={[1.4, 1.42, 64]} />
-         <meshBasicMaterial color="#ffffff" transparent opacity={0.1} side={THREE.DoubleSide} />
+        <ringGeometry args={[1.4, 1.42, 64]} />
+        <meshBasicMaterial color="#ffffff" transparent opacity={0.1} side={THREE.DoubleSide} />
       </mesh>
       <NodeLabel text={text} subtext={subtext} />
     </group>
@@ -100,18 +100,18 @@ function ArchitectureScene({ flowState }: { flowState: FlowState }) {
   const posApp1 = new THREE.Vector3(-4, 0, 0);
   const posApp2 = new THREE.Vector3(4, 0, 0);
   const posRedis = new THREE.Vector3(6, -3, 0);
-  
+
   const posDbMaster = new THREE.Vector3(-5, -6, 0);
   const posDbRep1 = new THREE.Vector3(0, -6, -2);
   const posDbRep2 = new THREE.Vector3(5, -6, -2);
-  
+
   const posS3 = new THREE.Vector3(-8, -8, -4);
 
   return (
     <group position={[0, 0.5, 0]}>
       {/* Background Ambience point cloud */}
       <points>
-        <bufferGeometry attach="geometry" {...new THREE.BufferGeometry().setFromPoints(Array.from({length: 1000}, () => new THREE.Vector3((Math.random()-0.5)*30, (Math.random()-0.5)*30, (Math.random()-0.5)*15 - 5)))} />
+        <bufferGeometry attach="geometry" {...new THREE.BufferGeometry().setFromPoints(Array.from({ length: 1000 }, () => new THREE.Vector3((Math.random() - 0.5) * 30, (Math.random() - 0.5) * 30, (Math.random() - 0.5) * 15 - 5)))} />
         <pointsMaterial attach="material" color="#ffffff" size={0.05} transparent opacity={0.1} />
       </points>
 
@@ -120,40 +120,40 @@ function ArchitectureScene({ flowState }: { flowState: FlowState }) {
       </Float>
 
       <SciFiNode position={posLB} color="#aaaaaa" text="HAProxy LB" subtext="Traffic Routing" active={flowState !== "IDLE"} shape="box" />
-      
+
       <SciFiNode position={posApp1} color="#aaaaff" text="App Core 01" subtext="Kubernetes Pod" active={flowState !== "IDLE"} shape="box" />
       <SciFiNode position={posApp2} color="#aaaaff" text="App Core 02" subtext="Kubernetes Pod" active={flowState !== "IDLE"} shape="box" />
-      
+
       <SciFiNode position={posRedis} color="#bb00ff" text="Redis Cluster" subtext="In-Memory Cache" active={flowState === "READ"} shape="octahedron" />
-      
+
       <SciFiNode position={posDbMaster} color={flowState === "WRITE" ? "#ff4400" : (flowState === "FAILOVER" ? "#ff0000" : "#ff8800")} text="Primary DB" subtext="MySQL Write Protocol" active={flowState === "WRITE" || flowState === "FAILOVER"} shape="cylinder" />
-      
+
       <SciFiNode position={posDbRep1} color={flowState === "FAILOVER" ? "#ff3333" : "#00ffff"} text="Replica 01" subtext="Async Read Node" active={flowState === "READ" || flowState === "FAILOVER"} shape="cylinder" />
       <SciFiNode position={posDbRep2} color="#00ffff" text="Replica 02" subtext="Async Read Node" active={flowState === "READ"} shape="cylinder" />
-      
+
       <SciFiNode position={posS3} color="#44aa44" text="Cloud Storage" subtext="S3 Cold Backup" active={flowState === "WRITE" || flowState === "IDLE"} shape="box" />
 
       {/* Volumetric Holographic Connection Lines */}
-      {[ [posUser, posLB], [posLB, posApp1], [posLB, posApp2] ].map((pts, i) => (
+      {[[posUser, posLB], [posLB, posApp1], [posLB, posApp2]].map((pts, i) => (
         <line key={i}>
-           <bufferGeometry attach="geometry" {...new THREE.BufferGeometry().setFromPoints(pts)} />
-           <lineBasicMaterial attach="material" color="#ffffff" opacity={0.15} transparent />
+          <bufferGeometry attach="geometry" {...new THREE.BufferGeometry().setFromPoints(pts)} />
+          <lineBasicMaterial attach="material" color="#ffffff" opacity={0.15} transparent />
         </line>
       ))}
-      
+
       {/* High Volume Data Packets Stream */}
       {[posApp1, posApp2].map((app, i) => (
-         <group key={i}>
-            <FlowParticles source={posUser} target={posLB} color="#ffffff" active={flowState !== "IDLE"} />
-            <FlowParticles source={posLB} target={app} color="#ffffff" active={flowState !== "IDLE"} />
-            
-            {/* Split writes and reads powerfully */}
-            <FlowParticles source={app} target={posDbMaster} color="#ff4400" active={flowState === "WRITE"} />
-            <FlowParticles source={app} target={posDbRep1} color="#00ffff" active={flowState === "READ"} />
-            <FlowParticles source={app} target={posDbRep2} color="#00ffff" active={flowState === "READ"} />
-            
-            <FlowParticles source={app} target={posRedis} color="#bb00ff" active={flowState === "READ"} />
-         </group>
+        <group key={i}>
+          <FlowParticles source={posUser} target={posLB} color="#ffffff" active={flowState !== "IDLE"} />
+          <FlowParticles source={posLB} target={app} color="#ffffff" active={flowState !== "IDLE"} />
+
+          {/* Split writes and reads powerfully */}
+          <FlowParticles source={app} target={posDbMaster} color="#ff4400" active={flowState === "WRITE"} />
+          <FlowParticles source={app} target={posDbRep1} color="#00ffff" active={flowState === "READ"} />
+          <FlowParticles source={app} target={posDbRep2} color="#00ffff" active={flowState === "READ"} />
+
+          <FlowParticles source={app} target={posRedis} color="#bb00ff" active={flowState === "READ"} />
+        </group>
       ))}
       <FlowParticles source={posDbMaster} target={posS3} color="#44aa44" active={flowState === "WRITE"} />
       <FlowParticles source={posDbMaster} target={posDbRep1} color="#ffffff" active={flowState === "WRITE"} />
@@ -169,33 +169,33 @@ export default function SystemDiagram() {
     <section id="architecture" className="py-24 px-4 max-w-7xl mx-auto border-t border-white/10 font-mono relative z-10 w-full overflow-hidden">
       <div className="mb-12 flex flex-col md:flex-row justify-between items-end">
         <h2 className="text-4xl md:text-5xl font-bold text-white tracking-tighter uppercase mix-blend-difference">
-          Active <br/> 
+          Active <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-white/30 tracking-widest italic">
             [Topology_Render]
           </span>
         </h2>
-        
+
         {/* Interactive Controls */}
         <div className="flex flex-wrap gap-4 mt-8 md:mt-0 z-20 relative">
-          <button 
+          <button
             onClick={() => setFlowState("WRITE")}
             className={`px-4 py-2 border text-xs tracking-widest uppercase transition-all ${flowState === "WRITE" ? "bg-[#ff4400]/20 border-[#ff4400] text-[#ff4400] shadow-[0_0_15px_rgba(255,68,0,0.5)]" : "border-white/20 text-white/50 hover:border-white/50"}`}
           >
             &gt;_ Write Flow
           </button>
-          <button 
+          <button
             onClick={() => setFlowState("READ")}
             className={`px-4 py-2 border text-xs tracking-widest uppercase transition-all ${flowState === "READ" ? "bg-[#00ffff]/20 border-[#00ffff] text-[#00ffff] shadow-[0_0_15px_rgba(0,255,255,0.5)]" : "border-white/20 text-white/50 hover:border-white/50"}`}
           >
             &gt;_ Read Flow
           </button>
-          <button 
+          <button
             onClick={() => setFlowState("FAILOVER")}
             className={`px-4 py-2 border text-xs tracking-widest uppercase transition-all ${flowState === "FAILOVER" ? "bg-[#ff0000]/20 border-[#ff0000] text-[#ff0000] shadow-[0_0_15px_rgba(255,0,0,0.5)] animate-pulse" : "border-white/20 text-white/50 hover:border-white/50"}`}
           >
             [X] Failover
           </button>
-          <button 
+          <button
             onClick={() => setFlowState("IDLE")}
             className="px-4 py-2 border border-white/20 text-white/50 text-xs tracking-widest uppercase hover:text-white"
           >
@@ -207,7 +207,7 @@ export default function SystemDiagram() {
       <div className="w-full h-[600px] bg-black border border-white/20 relative rounded-none shadow-[0_0_30px_rgba(255,255,255,0.02)]">
         {/* Subtle grid background */}
         <div className="absolute inset-0 opacity-[0.03] bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:3vw_3vw] pointer-events-none" />
-        
+
         <Canvas camera={{ position: [0, 4, 18], fov: 60 }} dpr={[1, 2]}>
           <ambientLight intensity={0.2} />
           <directionalLight position={[0, 10, 5]} intensity={0.5} />
@@ -218,13 +218,13 @@ export default function SystemDiagram() {
         {/* Legend */}
         <div className="absolute bottom-4 left-4 flex flex-col gap-2 pointer-events-none">
           <div className="flex items-center gap-2 text-[8px] uppercase tracking-widest text-white/50">
-             <span className="w-2 h-2 rounded-full bg-[#ff4400] shadow-[0_0_5px_#ff4400]" /> Primary Write
+            <span className="w-2 h-2 rounded-full bg-[#ff4400] shadow-[0_0_5px_#ff4400]" /> Primary Write
           </div>
           <div className="flex items-center gap-2 text-[8px] uppercase tracking-widest text-white/50">
-             <span className="w-2 h-2 rounded-full bg-[#00ffff] shadow-[0_0_5px_#00ffff]" /> Async Read
+            <span className="w-2 h-2 rounded-full bg-[#00ffff] shadow-[0_0_5px_#00ffff]" /> Async Read
           </div>
           <div className="flex items-center gap-2 text-[8px] uppercase tracking-widest text-white/50">
-             <span className="w-2 h-2 rounded-full bg-[#bb00ff] shadow-[0_0_5px_#bb00ff]" /> In-Memory Cache
+            <span className="w-2 h-2 rounded-full bg-[#bb00ff] shadow-[0_0_5px_#bb00ff]" /> In-Memory Cache
           </div>
         </div>
       </div>
