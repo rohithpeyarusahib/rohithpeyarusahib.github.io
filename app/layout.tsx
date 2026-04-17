@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import { personalInfo } from "./config";
+import CustomCursor from "./components/ui/CustomCursor";
+import SmoothScroll from "./components/ui/SmoothScroll";
+import Preloader from "./components/ui/Preloader";
+import ChatBot from "./components/ui/ChatBot";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -57,9 +61,14 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${inter.variable} ${poppins.variable} font-sans antialiased bg-gray-900 text-white`}
+        className={`${inter.variable} ${poppins.variable} font-sans antialiased bg-black text-white`}
       >
-        {children}
+        <SmoothScroll>
+          <Preloader />
+          <CustomCursor />
+          <ChatBot />
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );

@@ -1,119 +1,69 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Database, Server, Shield, Search, HardDrive, Activity } from "lucide-react";
 
 const services = [
   {
-    title: "Database Performance Optimization",
-    description: "Improve query speed, reduce latency, and enhance overall database performance.",
-    icon: Database,
-    keywords: "MySQL Performance Optimization, MongoDB Tuning, PostgreSQL Optimization",
+    title: "Cluster Performance Tuning",
+    description: "Deep indexing analysis, IOPS optimization, and critical query restructuring to destroy latency.",
+    keywords: "B-Tree Optimization, Query Explains, IOPS Scaling",
   },
   {
-    title: "Database Migration & Implementation",
-    description: "Seamless migrations and end-to-end implementation for MySQL, MongoDB, and PostgreSQL with minimal downtime.",
-    icon: Server,
-    keywords: "MySQL Migration, MongoDB Implementation, PostgreSQL Migration",
+    title: "Zero-Downtime Migrations",
+    description: "Architecting seamless cross-cloud data migrations utilizing binlog routing and logical replication.",
+    keywords: "AWS DMS, MySQL Binlog, pglogical",
   },
   {
-    title: "High Availability & Replication Setup",
-    description: "Implement replication, failover, and disaster recovery strategies for reliable and scalable databases.",
-    icon: Shield,
-    keywords: "PostgreSQL High Availability, MySQL Replication, MongoDB HA",
+    title: "High-Availability Matrices",
+    description: "Deploying multi-region Active-Passive and Active-Active data meshes. Guaranteed 99.999% uptime.",
+    keywords: "Galera Cluster, Patroni, Redis Sentinel",
   },
   {
-    title: "Database Health Audits",
-    description: "Comprehensive audits to identify bottlenecks, slow queries, and configuration improvements.",
-    icon: Search,
-    keywords: "Database Audit, Query Optimization, DB Performance Review",
-  },
-  {
-    title: "Backup & Disaster Recovery",
-    description: "Design secure backup strategies and restore solutions to prevent data loss and ensure business continuity.",
-    icon: HardDrive,
-    keywords: "MySQL Backup Strategy, MongoDB DR, PostgreSQL Recovery",
-  },
-  {
-    title: "Database Monitoring & Automation",
-    description: "Set up proactive monitoring, alerts, and automation scripts for optimal database performance.",
-    icon: Activity,
-    keywords: "Database Monitoring, Automation Scripts, Real-time Alerts",
+    title: "Deep System Audits",
+    description: "Ruthless examination of security groups, weak schemas, and transactional deadlocks.",
+    keywords: "Deadlock Analysis, ACID Compliance, InfoSec Validation",
   },
 ];
 
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 50 },
-  show: { opacity: 1, y: 0 },
-};
-
 const Services = () => {
   return (
-    <section id="services" className="py-10 px-4 max-w-6xl mx-auto">
-      <motion.h2
-        className="text-4xl font-bold text-left mb-12"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-      >
-        Services
-      </motion.h2>
-      <motion.div
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8"
-        variants={container}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true }}
-      >
+    <section id="services" className="py-24 px-4 max-w-6xl mx-auto border-t border-white/10 font-mono mt-12 relative z-10 w-full overflow-hidden">
+      <div className="mb-20 flex flex-col items-start border-b border-white/10 pb-8">
+        <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tighter uppercase leading-none mix-blend-difference mb-4">
+          Operational <br/> 
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-white/80 to-white/20 tracking-widest">
+            [Capabilities]
+          </span>
+        </h2>
+        <span className="text-white/40 text-[10px] tracking-[0.3em] uppercase border border-white/20 px-2 py-1 bg-white/5 inline-block">Sys.Execution.Vectors</span>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-0 border border-white/20 bg-[#020202]">
         {services.map((service, index) => (
           <motion.div
             key={index}
-            className="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
-            variants={item}
-            whileHover={{ scale: 1.05, rotateY: 5 }}
-            transition={{ type: "spring", stiffness: 300 }}
+            className={`p-10 border-white/10 hover:bg-white/5 hover:border-white/30 transition-colors duration-500 group relative ${index % 2 === 0 ? "md:border-r" : ""} ${index < 2 ? "border-b" : ""}`}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            viewport={{ once: true }}
           >
-            <div className="flex items-center mb-4">
-              <motion.div
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
-                transition={{ delay: index * 0.1 + 0.5, type: "spring" }}
-                viewport={{ once: true }}
-              >
-                <service.icon className="w-8 h-8 text-teal-400 mr-3" />
-              </motion.div>
-              <h3 className="text-xl font-semibold">{service.title}</h3>
+            <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-white/50 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-white/50 opacity-0 group-hover:opacity-100 transition-opacity" />
+
+            <div className="flex items-center gap-3 mb-6">
+              <span className="text-white font-bold text-xs uppercase tracking-widest animate-pulse">&gt;_</span>
+              <h3 className="text-xl font-bold tracking-tight text-white uppercase">{service.title}</h3>
             </div>
-            <p className="text-gray-300 mb-2">{service.description}</p>
-            <p className="text-sm text-teal-400">{service.keywords}</p>
+            <p className="text-white/60 mb-8 text-sm leading-relaxed tracking-wide">{service.description}</p>
+            <div className="mt-auto border-t border-white/10 pt-4">
+              <p className="text-[9px] text-white/30 uppercase tracking-[0.2em] break-words">
+                Tags: <span className="text-white/80">{service.keywords}</span>
+              </p>
+            </div>
           </motion.div>
         ))}
-      </motion.div>
-      <motion.div
-        className="text-center"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.6 }}
-        viewport={{ once: true }}
-      >
-        <a
-          href="#contact"
-          className="inline-block px-6 py-3 bg-teal-500 hover:bg-teal-600 rounded-lg transition-colors"
-        >
-          Get in Touch
-        </a>
-      </motion.div>
+      </div>
     </section>
   );
 };

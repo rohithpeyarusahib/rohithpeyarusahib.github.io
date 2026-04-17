@@ -1,16 +1,9 @@
 {
-  "[project]/app/components/Navbar.tsx [app-client] (ecmascript, next/dynamic entry)": {
-    "id": "[project]/app/components/Navbar.tsx [app-client] (ecmascript, next/dynamic entry)",
+  "[project]/rohithpeyarusahib.github.io/app/components/canvas/HeroCanvas.tsx [app-client] (ecmascript, next/dynamic entry)": {
+    "id": "[project]/rohithpeyarusahib.github.io/app/components/canvas/HeroCanvas.tsx [app-client] (ecmascript, next/dynamic entry)",
     "files": [
-      "static/chunks/_bc49a610._.js",
-      "static/chunks/app_components_Navbar_tsx_a480e9a4._.js"
-    ]
-  },
-  "[project]/app/components/Hero.tsx [app-client] (ecmascript, next/dynamic entry)": {
-    "id": "[project]/app/components/Hero.tsx [app-client] (ecmascript, next/dynamic entry)",
-    "files": [
-      "static/chunks/app_components_Hero_tsx_2807623d._.js",
-      "static/chunks/app_components_Hero_tsx_a480e9a4._.js"
+      "static/chunks/rohithpeyarusahib_github_io_app_components_canvas_HeroCanvas_tsx_035507d5._.js",
+      "static/chunks/rohithpeyarusahib_github_io_app_components_canvas_HeroCanvas_tsx_583fcc82._.js"
     ]
   }
 }

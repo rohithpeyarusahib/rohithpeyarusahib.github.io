@@ -1,0 +1,9409 @@
+(globalThis.TURBOPACK || (globalThis.TURBOPACK = [])).push([typeof document === "object" ? document.currentScript : undefined,
+"[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/render/dom/viewport/index.mjs [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "inView",
+    ()=>inView
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$utils$2f$resolve$2d$elements$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/motion-dom/dist/es/utils/resolve-elements.mjs [app-client] (ecmascript)");
+;
+const thresholds = {
+    some: 0,
+    all: 1
+};
+function inView(elementOrSelector, onStart) {
+    let { root, margin: rootMargin, amount = "some" } = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : {};
+    const elements = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$utils$2f$resolve$2d$elements$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["resolveElements"])(elementOrSelector);
+    const activeIntersections = new WeakMap();
+    const onIntersectionChange = (entries)=>{
+        entries.forEach((entry)=>{
+            const onEnd = activeIntersections.get(entry.target);
+            /**
+             * If there's no change to the intersection, we don't need to
+             * do anything here.
+             */ if (entry.isIntersecting === Boolean(onEnd)) return;
+            if (entry.isIntersecting) {
+                const newOnEnd = onStart(entry.target, entry);
+                if (typeof newOnEnd === "function") {
+                    activeIntersections.set(entry.target, newOnEnd);
+                } else {
+                    observer.unobserve(entry.target);
+                }
+            } else if (typeof onEnd === "function") {
+                onEnd(entry);
+                activeIntersections.delete(entry.target);
+            }
+        });
+    };
+    const observer = new IntersectionObserver(onIntersectionChange, {
+        root,
+        rootMargin,
+        threshold: typeof amount === "number" ? amount : thresholds[amount]
+    });
+    elements.forEach((element)=>observer.observe(element));
+    return ()=>observer.disconnect();
+}
+;
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/utils/use-in-view.mjs [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "useInView",
+    ()=>useInView
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$dom$2f$viewport$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/render/dom/viewport/index.mjs [app-client] (ecmascript)");
+"use client";
+;
+;
+function useInView(ref) {
+    let { root, margin, amount, once = false, initial = false } = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
+    const [isInView, setInView] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(initial);
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "useInView.useEffect": ()=>{
+            if (!ref.current || once && isInView) return;
+            const onEnter = {
+                "useInView.useEffect.onEnter": ()=>{
+                    setInView(true);
+                    return once ? undefined : ({
+                        "useInView.useEffect.onEnter": ()=>setInView(false)
+                    })["useInView.useEffect.onEnter"];
+                }
+            }["useInView.useEffect.onEnter"];
+            const options = {
+                root: root && root.current || undefined,
+                margin,
+                amount
+            };
+            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$dom$2f$viewport$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["inView"])(ref.current, onEnter, options);
+        }
+    }["useInView.useEffect"], [
+        root,
+        ref,
+        margin,
+        once,
+        amount
+    ]);
+    return isInView;
+}
+;
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/utils/use-composed-ref.mjs [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "useComposedRefs",
+    ()=>useComposedRefs
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+;
+/**
+ * Taken from https://github.com/radix-ui/primitives/blob/main/packages/react/compose-refs/src/compose-refs.tsx
+ */ /**
+ * Set a given ref to a given value
+ * This utility takes care of different types of refs: callback refs and RefObject(s)
+ */ function setRef(ref, value) {
+    if (typeof ref === "function") {
+        return ref(value);
+    } else if (ref !== null && ref !== undefined) {
+        ref.current = value;
+    }
+}
+/**
+ * A utility to compose multiple refs together
+ * Accepts callback refs and RefObject(s)
+ */ function composeRefs() {
+    for(var _len = arguments.length, refs = new Array(_len), _key = 0; _key < _len; _key++){
+        refs[_key] = arguments[_key];
+    }
+    return (node)=>{
+        let hasCleanup = false;
+        const cleanups = refs.map((ref)=>{
+            const cleanup = setRef(ref, node);
+            if (!hasCleanup && typeof cleanup === "function") {
+                hasCleanup = true;
+            }
+            return cleanup;
+        });
+        // React <19 will log an error to the console if a callback ref returns a
+        // value. We don't use ref cleanups internally so this will only happen if a
+        // user's ref callback returns a value, which we only expect if they are
+        // using the cleanup functionality added in React 19.
+        if (hasCleanup) {
+            return ()=>{
+                for(let i = 0; i < cleanups.length; i++){
+                    const cleanup = cleanups[i];
+                    if (typeof cleanup === "function") {
+                        cleanup();
+                    } else {
+                        setRef(refs[i], null);
+                    }
+                }
+            };
+        }
+    };
+}
+/**
+ * A custom hook that composes multiple refs
+ * Accepts callback refs and RefObject(s)
+ */ function useComposedRefs() {
+    for(var _len = arguments.length, refs = new Array(_len), _key = 0; _key < _len; _key++){
+        refs[_key] = arguments[_key];
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    return __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"](composeRefs(...refs), refs);
+}
+;
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/components/AnimatePresence/PopChild.mjs [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "PopChild",
+    ()=>PopChild
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/next/dist/compiled/react/jsx-runtime.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$utils$2f$is$2d$html$2d$element$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/motion-dom/dist/es/utils/is-html-element.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$context$2f$MotionConfigContext$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/context/MotionConfigContext.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$utils$2f$use$2d$composed$2d$ref$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/utils/use-composed-ref.mjs [app-client] (ecmascript)");
+"use client";
+;
+;
+;
+;
+;
+;
+/**
+ * Measurement functionality has to be within a separate component
+ * to leverage snapshot lifecycle.
+ */ class PopChildMeasure extends __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Component"] {
+    getSnapshotBeforeUpdate(prevProps) {
+        const element = this.props.childRef.current;
+        if (element && prevProps.isPresent && !this.props.isPresent) {
+            const parent = element.offsetParent;
+            const parentWidth = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$utils$2f$is$2d$html$2d$element$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isHTMLElement"])(parent) ? parent.offsetWidth || 0 : 0;
+            const size = this.props.sizeRef.current;
+            size.height = element.offsetHeight || 0;
+            size.width = element.offsetWidth || 0;
+            size.top = element.offsetTop;
+            size.left = element.offsetLeft;
+            size.right = parentWidth - size.width - size.left;
+        }
+        return null;
+    }
+    /**
+     * Required with getSnapshotBeforeUpdate to stop React complaining.
+     */ componentDidUpdate() {}
+    render() {
+        return this.props.children;
+    }
+}
+function PopChild(param) {
+    let { children, isPresent, anchorX, root } = param;
+    const id = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useId"])();
+    const ref = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
+    const size = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])({
+        width: 0,
+        height: 0,
+        top: 0,
+        left: 0,
+        right: 0
+    });
+    const { nonce } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useContext"])(__TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$context$2f$MotionConfigContext$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["MotionConfigContext"]);
+    const composedRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$utils$2f$use$2d$composed$2d$ref$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useComposedRefs"])(ref, children === null || children === void 0 ? void 0 : children.ref);
+    /**
+     * We create and inject a style block so we can apply this explicit
+     * sizing in a non-destructive manner by just deleting the style block.
+     *
+     * We can't apply size via render as the measurement happens
+     * in getSnapshotBeforeUpdate (post-render), likewise if we apply the
+     * styles directly on the DOM node, we might be overwriting
+     * styles set via the style prop.
+     */ (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useInsertionEffect"])({
+        "PopChild.useInsertionEffect": ()=>{
+            const { width, height, top, left, right } = size.current;
+            if (isPresent || !ref.current || !width || !height) return;
+            const x = anchorX === "left" ? "left: ".concat(left) : "right: ".concat(right);
+            ref.current.dataset.motionPopId = id;
+            const style = document.createElement("style");
+            if (nonce) style.nonce = nonce;
+            const parent = root !== null && root !== void 0 ? root : document.head;
+            parent.appendChild(style);
+            if (style.sheet) {
+                style.sheet.insertRule('\n          [data-motion-pop-id="'.concat(id, '"] {\n            position: absolute !important;\n            width: ').concat(width, "px !important;\n            height: ").concat(height, "px !important;\n            ").concat(x, "px !important;\n            top: ").concat(top, "px !important;\n          }\n        "));
+            }
+            return ({
+                "PopChild.useInsertionEffect": ()=>{
+                    if (parent.contains(style)) {
+                        parent.removeChild(style);
+                    }
+                }
+            })["PopChild.useInsertionEffect"];
+        }
+    }["PopChild.useInsertionEffect"], [
+        isPresent
+    ]);
+    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsx"])(PopChildMeasure, {
+        isPresent: isPresent,
+        childRef: ref,
+        sizeRef: size,
+        children: __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["cloneElement"](children, {
+            ref: composedRef
+        })
+    });
+}
+;
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/components/AnimatePresence/PresenceChild.mjs [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "PresenceChild",
+    ()=>PresenceChild
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/next/dist/compiled/react/jsx-runtime.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$context$2f$PresenceContext$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/context/PresenceContext.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$utils$2f$use$2d$constant$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/utils/use-constant.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$PopChild$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/components/AnimatePresence/PopChild.mjs [app-client] (ecmascript)");
+"use client";
+;
+;
+;
+;
+;
+;
+const PresenceChild = (param)=>{
+    let { children, initial, isPresent, onExitComplete, custom, presenceAffectsLayout, mode, anchorX, root } = param;
+    const presenceChildren = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$utils$2f$use$2d$constant$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useConstant"])(newChildrenMap);
+    const id = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useId"])();
+    let isReusedContext = true;
+    let context = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
+        "PresenceChild.useMemo[context]": ()=>{
+            isReusedContext = false;
+            return {
+                id,
+                initial,
+                isPresent,
+                custom,
+                onExitComplete: ({
+                    "PresenceChild.useMemo[context]": (childId)=>{
+                        presenceChildren.set(childId, true);
+                        for (const isComplete of presenceChildren.values()){
+                            if (!isComplete) return; // can stop searching when any is incomplete
+                        }
+                        onExitComplete && onExitComplete();
+                    }
+                })["PresenceChild.useMemo[context]"],
+                register: ({
+                    "PresenceChild.useMemo[context]": (childId)=>{
+                        presenceChildren.set(childId, false);
+                        return ({
+                            "PresenceChild.useMemo[context]": ()=>presenceChildren.delete(childId)
+                        })["PresenceChild.useMemo[context]"];
+                    }
+                })["PresenceChild.useMemo[context]"]
+            };
+        }
+    }["PresenceChild.useMemo[context]"], [
+        isPresent,
+        presenceChildren,
+        onExitComplete
+    ]);
+    /**
+     * If the presence of a child affects the layout of the components around it,
+     * we want to make a new context value to ensure they get re-rendered
+     * so they can detect that layout change.
+     */ if (presenceAffectsLayout && isReusedContext) {
+        context = {
+            ...context
+        };
+    }
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
+        "PresenceChild.useMemo": ()=>{
+            presenceChildren.forEach({
+                "PresenceChild.useMemo": (_, key)=>presenceChildren.set(key, false)
+            }["PresenceChild.useMemo"]);
+        }
+    }["PresenceChild.useMemo"], [
+        isPresent
+    ]);
+    /**
+     * If there's no `motion` components to fire exit animations, we want to remove this
+     * component immediately.
+     */ __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"]({
+        "PresenceChild.useEffect": ()=>{
+            !isPresent && !presenceChildren.size && onExitComplete && onExitComplete();
+        }
+    }["PresenceChild.useEffect"], [
+        isPresent
+    ]);
+    if (mode === "popLayout") {
+        children = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsx"])(__TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$PopChild$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["PopChild"], {
+            isPresent: isPresent,
+            anchorX: anchorX,
+            root: root,
+            children: children
+        });
+    }
+    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsx"])(__TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$context$2f$PresenceContext$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["PresenceContext"].Provider, {
+        value: context,
+        children: children
+    });
+};
+function newChildrenMap() {
+    return new Map();
+}
+;
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/components/AnimatePresence/utils.mjs [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "getChildKey",
+    ()=>getChildKey,
+    "onlyElements",
+    ()=>onlyElements
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+;
+const getChildKey = (child)=>child.key || "";
+function onlyElements(children) {
+    const filtered = [];
+    // We use forEach here instead of map as map mutates the component key by preprending `.$`
+    __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Children"].forEach(children, (child)=>{
+        if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isValidElement"])(child)) filtered.push(child);
+    });
+    return filtered;
+}
+;
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/components/AnimatePresence/index.mjs [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "AnimatePresence",
+    ()=>AnimatePresence
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = /*#__PURE__*/ __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/next/dist/build/polyfills/process.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/next/dist/compiled/react/jsx-runtime.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$context$2f$LayoutGroupContext$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/context/LayoutGroupContext.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$utils$2f$use$2d$constant$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/utils/use-constant.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$utils$2f$use$2d$isomorphic$2d$effect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/utils/use-isomorphic-effect.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$PresenceChild$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/components/AnimatePresence/PresenceChild.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$use$2d$presence$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/components/AnimatePresence/use-presence.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$utils$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/components/AnimatePresence/utils.mjs [app-client] (ecmascript)");
+"use client";
+;
+;
+;
+;
+;
+;
+;
+;
+/**
+ * `AnimatePresence` enables the animation of components that have been removed from the tree.
+ *
+ * When adding/removing more than a single child, every child **must** be given a unique `key` prop.
+ *
+ * Any `motion` components that have an `exit` property defined will animate out when removed from
+ * the tree.
+ *
+ * ```jsx
+ * import { motion, AnimatePresence } from 'framer-motion'
+ *
+ * export const Items = ({ items }) => (
+ *   <AnimatePresence>
+ *     {items.map(item => (
+ *       <motion.div
+ *         key={item.id}
+ *         initial={{ opacity: 0 }}
+ *         animate={{ opacity: 1 }}
+ *         exit={{ opacity: 0 }}
+ *       />
+ *     ))}
+ *   </AnimatePresence>
+ * )
+ * ```
+ *
+ * You can sequence exit animations throughout a tree using variants.
+ *
+ * If a child contains multiple `motion` components with `exit` props, it will only unmount the child
+ * once all `motion` components have finished animating out. Likewise, any components using
+ * `usePresence` all need to call `safeToRemove`.
+ *
+ * @public
+ */ const AnimatePresence = (param)=>{
+    let { children, custom, initial = true, onExitComplete, presenceAffectsLayout = true, mode = "sync", propagate = false, anchorX = "left", root } = param;
+    const [isParentPresent, safeToRemove] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$use$2d$presence$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["usePresence"])(propagate);
+    /**
+     * Filter any children that aren't ReactElements. We can only track components
+     * between renders with a props.key.
+     */ const presentChildren = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
+        "AnimatePresence.useMemo[presentChildren]": ()=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$utils$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["onlyElements"])(children)
+    }["AnimatePresence.useMemo[presentChildren]"], [
+        children
+    ]);
+    /**
+     * Track the keys of the currently rendered children. This is used to
+     * determine which children are exiting.
+     */ const presentKeys = propagate && !isParentPresent ? [] : presentChildren.map(__TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$utils$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getChildKey"]);
+    /**
+     * If `initial={false}` we only want to pass this to components in the first render.
+     */ const isInitialRender = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(true);
+    /**
+     * A ref containing the currently present children. When all exit animations
+     * are complete, we use this to re-render the component with the latest children
+     * *committed* rather than the latest children *rendered*.
+     */ const pendingPresentChildren = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(presentChildren);
+    /**
+     * Track which exiting children have finished animating out.
+     */ const exitComplete = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$utils$2f$use$2d$constant$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useConstant"])({
+        "AnimatePresence.useConstant[exitComplete]": ()=>new Map()
+    }["AnimatePresence.useConstant[exitComplete]"]);
+    /**
+     * Save children to render as React state. To ensure this component is concurrent-safe,
+     * we check for exiting children via an effect.
+     */ const [diffedChildren, setDiffedChildren] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(presentChildren);
+    const [renderedChildren, setRenderedChildren] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(presentChildren);
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$utils$2f$use$2d$isomorphic$2d$effect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useIsomorphicLayoutEffect"])({
+        "AnimatePresence.useIsomorphicLayoutEffect": ()=>{
+            isInitialRender.current = false;
+            pendingPresentChildren.current = presentChildren;
+            /**
+         * Update complete status of exiting children.
+         */ for(let i = 0; i < renderedChildren.length; i++){
+                const key = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$utils$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getChildKey"])(renderedChildren[i]);
+                if (!presentKeys.includes(key)) {
+                    if (exitComplete.get(key) !== true) {
+                        exitComplete.set(key, false);
+                    }
+                } else {
+                    exitComplete.delete(key);
+                }
+            }
+        }
+    }["AnimatePresence.useIsomorphicLayoutEffect"], [
+        renderedChildren,
+        presentKeys.length,
+        presentKeys.join("-")
+    ]);
+    const exitingChildren = [];
+    if (presentChildren !== diffedChildren) {
+        let nextChildren = [
+            ...presentChildren
+        ];
+        /**
+         * Loop through all the currently rendered components and decide which
+         * are exiting.
+         */ for(let i = 0; i < renderedChildren.length; i++){
+            const child = renderedChildren[i];
+            const key = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$utils$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getChildKey"])(child);
+            if (!presentKeys.includes(key)) {
+                nextChildren.splice(i, 0, child);
+                exitingChildren.push(child);
+            }
+        }
+        /**
+         * If we're in "wait" mode, and we have exiting children, we want to
+         * only render these until they've all exited.
+         */ if (mode === "wait" && exitingChildren.length) {
+            nextChildren = exitingChildren;
+        }
+        setRenderedChildren((0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$utils$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["onlyElements"])(nextChildren));
+        setDiffedChildren(presentChildren);
+        /**
+         * Early return to ensure once we've set state with the latest diffed
+         * children, we can immediately re-render.
+         */ return null;
+    }
+    if (("TURBOPACK compile-time value", "development") !== "production" && mode === "wait" && renderedChildren.length > 1) {
+        console.warn('You\'re attempting to animate multiple children within AnimatePresence, but its mode is set to "wait". This will lead to odd visual behaviour.');
+    }
+    /**
+     * If we've been provided a forceRender function by the LayoutGroupContext,
+     * we can use it to force a re-render amongst all surrounding components once
+     * all components have finished animating out.
+     */ const { forceRender } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useContext"])(__TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$context$2f$LayoutGroupContext$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["LayoutGroupContext"]);
+    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsx"])(__TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
+        children: renderedChildren.map((child)=>{
+            const key = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$utils$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getChildKey"])(child);
+            const isPresent = propagate && !isParentPresent ? false : presentChildren === renderedChildren || presentKeys.includes(key);
+            const onExit = ()=>{
+                if (exitComplete.has(key)) {
+                    exitComplete.set(key, true);
+                } else {
+                    return;
+                }
+                let isEveryExitComplete = true;
+                exitComplete.forEach((isExitComplete)=>{
+                    if (!isExitComplete) isEveryExitComplete = false;
+                });
+                if (isEveryExitComplete) {
+                    forceRender === null || forceRender === void 0 ? void 0 : forceRender();
+                    setRenderedChildren(pendingPresentChildren.current);
+                    propagate && (safeToRemove === null || safeToRemove === void 0 ? void 0 : safeToRemove());
+                    onExitComplete && onExitComplete();
+                }
+            };
+            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsx"])(__TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$PresenceChild$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["PresenceChild"], {
+                isPresent: isPresent,
+                initial: !isInitialRender.current || initial ? undefined : false,
+                custom: custom,
+                presenceAffectsLayout: presenceAffectsLayout,
+                mode: mode,
+                root: root,
+                onExitComplete: isPresent ? undefined : onExit,
+                anchorX: anchorX,
+                children: child
+            }, key);
+        })
+    });
+};
+;
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/render/dom/scroll/info.mjs [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "createScrollInfo",
+    ()=>createScrollInfo,
+    "updateScrollInfo",
+    ()=>updateScrollInfo
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$utils$2f$dist$2f$es$2f$progress$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/motion-utils/dist/es/progress.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$utils$2f$dist$2f$es$2f$velocity$2d$per$2d$second$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/motion-utils/dist/es/velocity-per-second.mjs [app-client] (ecmascript)");
+;
+/**
+ * A time in milliseconds, beyond which we consider the scroll velocity to be 0.
+ */ const maxElapsed = 50;
+const createAxisInfo = ()=>({
+        current: 0,
+        offset: [],
+        progress: 0,
+        scrollLength: 0,
+        targetOffset: 0,
+        targetLength: 0,
+        containerLength: 0,
+        velocity: 0
+    });
+const createScrollInfo = ()=>({
+        time: 0,
+        x: createAxisInfo(),
+        y: createAxisInfo()
+    });
+const keys = {
+    x: {
+        length: "Width",
+        position: "Left"
+    },
+    y: {
+        length: "Height",
+        position: "Top"
+    }
+};
+function updateAxisInfo(element, axisName, info, time) {
+    const axis = info[axisName];
+    const { length, position } = keys[axisName];
+    const prev = axis.current;
+    const prevTime = info.time;
+    axis.current = element["scroll".concat(position)];
+    axis.scrollLength = element["scroll".concat(length)] - element["client".concat(length)];
+    axis.offset.length = 0;
+    axis.offset[0] = 0;
+    axis.offset[1] = axis.scrollLength;
+    axis.progress = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$utils$2f$dist$2f$es$2f$progress$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["progress"])(0, axis.scrollLength, axis.current);
+    const elapsed = time - prevTime;
+    axis.velocity = elapsed > maxElapsed ? 0 : (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$utils$2f$dist$2f$es$2f$velocity$2d$per$2d$second$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["velocityPerSecond"])(axis.current - prev, elapsed);
+}
+function updateScrollInfo(element, info, time) {
+    updateAxisInfo(element, "x", info, time);
+    updateAxisInfo(element, "y", info, time);
+    info.time = time;
+}
+;
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/render/dom/scroll/offsets/inset.mjs [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "calcInset",
+    ()=>calcInset
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$utils$2f$is$2d$html$2d$element$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/motion-dom/dist/es/utils/is-html-element.mjs [app-client] (ecmascript)");
+;
+function calcInset(element, container) {
+    const inset = {
+        x: 0,
+        y: 0
+    };
+    let current = element;
+    while(current && current !== container){
+        if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$utils$2f$is$2d$html$2d$element$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isHTMLElement"])(current)) {
+            inset.x += current.offsetLeft;
+            inset.y += current.offsetTop;
+            current = current.offsetParent;
+        } else if (current.tagName === "svg") {
+            /**
+             * This isn't an ideal approach to measuring the offset of <svg /> tags.
+             * It would be preferable, given they behave like HTMLElements in most ways
+             * to use offsetLeft/Top. But these don't exist on <svg />. Likewise we
+             * can't use .getBBox() like most SVG elements as these provide the offset
+             * relative to the SVG itself, which for <svg /> is usually 0x0.
+             */ const svgBoundingBox = current.getBoundingClientRect();
+            current = current.parentElement;
+            const parentBoundingBox = current.getBoundingClientRect();
+            inset.x += svgBoundingBox.left - parentBoundingBox.left;
+            inset.y += svgBoundingBox.top - parentBoundingBox.top;
+        } else if (current instanceof SVGGraphicsElement) {
+            const { x, y } = current.getBBox();
+            inset.x += x;
+            inset.y += y;
+            let svg = null;
+            let parent = current.parentNode;
+            while(!svg){
+                if (parent.tagName === "svg") {
+                    svg = parent;
+                }
+                parent = current.parentNode;
+            }
+            current = svg;
+        } else {
+            break;
+        }
+    }
+    return inset;
+}
+;
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/render/dom/scroll/offsets/edge.mjs [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "namedEdges",
+    ()=>namedEdges,
+    "resolveEdge",
+    ()=>resolveEdge
+]);
+const namedEdges = {
+    start: 0,
+    center: 0.5,
+    end: 1
+};
+function resolveEdge(edge, length) {
+    let inset = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : 0;
+    let delta = 0;
+    /**
+     * If we have this edge defined as a preset, replace the definition
+     * with the numerical value.
+     */ if (edge in namedEdges) {
+        edge = namedEdges[edge];
+    }
+    /**
+     * Handle unit values
+     */ if (typeof edge === "string") {
+        const asNumber = parseFloat(edge);
+        if (edge.endsWith("px")) {
+            delta = asNumber;
+        } else if (edge.endsWith("%")) {
+            edge = asNumber / 100;
+        } else if (edge.endsWith("vw")) {
+            delta = asNumber / 100 * document.documentElement.clientWidth;
+        } else if (edge.endsWith("vh")) {
+            delta = asNumber / 100 * document.documentElement.clientHeight;
+        } else {
+            edge = asNumber;
+        }
+    }
+    /**
+     * If the edge is defined as a number, handle as a progress value.
+     */ if (typeof edge === "number") {
+        delta = length * edge;
+    }
+    return inset + delta;
+}
+;
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/render/dom/scroll/offsets/offset.mjs [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "resolveOffset",
+    ()=>resolveOffset
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$dom$2f$scroll$2f$offsets$2f$edge$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/render/dom/scroll/offsets/edge.mjs [app-client] (ecmascript)");
+;
+const defaultOffset = [
+    0,
+    0
+];
+function resolveOffset(offset, containerLength, targetLength, targetInset) {
+    let offsetDefinition = Array.isArray(offset) ? offset : defaultOffset;
+    let targetPoint = 0;
+    let containerPoint = 0;
+    if (typeof offset === "number") {
+        /**
+         * If we're provided offset: [0, 0.5, 1] then each number x should become
+         * [x, x], so we default to the behaviour of mapping 0 => 0 of both target
+         * and container etc.
+         */ offsetDefinition = [
+            offset,
+            offset
+        ];
+    } else if (typeof offset === "string") {
+        offset = offset.trim();
+        if (offset.includes(" ")) {
+            offsetDefinition = offset.split(" ");
+        } else {
+            /**
+             * If we're provided a definition like "100px" then we want to apply
+             * that only to the top of the target point, leaving the container at 0.
+             * Whereas a named offset like "end" should be applied to both.
+             */ offsetDefinition = [
+                offset,
+                __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$dom$2f$scroll$2f$offsets$2f$edge$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["namedEdges"][offset] ? offset : "0"
+            ];
+        }
+    }
+    targetPoint = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$dom$2f$scroll$2f$offsets$2f$edge$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["resolveEdge"])(offsetDefinition[0], targetLength, targetInset);
+    containerPoint = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$dom$2f$scroll$2f$offsets$2f$edge$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["resolveEdge"])(offsetDefinition[1], containerLength);
+    return targetPoint - containerPoint;
+}
+;
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/render/dom/scroll/offsets/presets.mjs [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "ScrollOffset",
+    ()=>ScrollOffset
+]);
+const ScrollOffset = {
+    Enter: [
+        [
+            0,
+            1
+        ],
+        [
+            1,
+            1
+        ]
+    ],
+    Exit: [
+        [
+            0,
+            0
+        ],
+        [
+            1,
+            0
+        ]
+    ],
+    Any: [
+        [
+            1,
+            0
+        ],
+        [
+            0,
+            1
+        ]
+    ],
+    All: [
+        [
+            0,
+            0
+        ],
+        [
+            1,
+            1
+        ]
+    ]
+};
+;
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/render/dom/scroll/offsets/index.mjs [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "resolveOffsets",
+    ()=>resolveOffsets
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$utils$2f$interpolate$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/motion-dom/dist/es/utils/interpolate.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$animation$2f$keyframes$2f$offsets$2f$default$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/motion-dom/dist/es/animation/keyframes/offsets/default.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$utils$2f$dist$2f$es$2f$clamp$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/motion-utils/dist/es/clamp.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$dom$2f$scroll$2f$offsets$2f$inset$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/render/dom/scroll/offsets/inset.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$dom$2f$scroll$2f$offsets$2f$offset$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/render/dom/scroll/offsets/offset.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$dom$2f$scroll$2f$offsets$2f$presets$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/render/dom/scroll/offsets/presets.mjs [app-client] (ecmascript)");
+;
+;
+;
+;
+;
+const point = {
+    x: 0,
+    y: 0
+};
+function getTargetSize(target) {
+    return "getBBox" in target && target.tagName !== "svg" ? target.getBBox() : {
+        width: target.clientWidth,
+        height: target.clientHeight
+    };
+}
+function resolveOffsets(container, info, options) {
+    const { offset: offsetDefinition = __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$dom$2f$scroll$2f$offsets$2f$presets$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["ScrollOffset"].All } = options;
+    const { target = container, axis = "y" } = options;
+    const lengthLabel = axis === "y" ? "height" : "width";
+    const inset = target !== container ? (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$dom$2f$scroll$2f$offsets$2f$inset$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["calcInset"])(target, container) : point;
+    /**
+     * Measure the target and container. If they're the same thing then we
+     * use the container's scrollWidth/Height as the target, from there
+     * all other calculations can remain the same.
+     */ const targetSize = target === container ? {
+        width: container.scrollWidth,
+        height: container.scrollHeight
+    } : getTargetSize(target);
+    const containerSize = {
+        width: container.clientWidth,
+        height: container.clientHeight
+    };
+    /**
+     * Reset the length of the resolved offset array rather than creating a new one.
+     * TODO: More reusable data structures for targetSize/containerSize would also be good.
+     */ info[axis].offset.length = 0;
+    /**
+     * Populate the offset array by resolving the user's offset definition into
+     * a list of pixel scroll offets.
+     */ let hasChanged = !info[axis].interpolate;
+    const numOffsets = offsetDefinition.length;
+    for(let i = 0; i < numOffsets; i++){
+        const offset = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$dom$2f$scroll$2f$offsets$2f$offset$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["resolveOffset"])(offsetDefinition[i], containerSize[lengthLabel], targetSize[lengthLabel], inset[axis]);
+        if (!hasChanged && offset !== info[axis].interpolatorOffsets[i]) {
+            hasChanged = true;
+        }
+        info[axis].offset[i] = offset;
+    }
+    /**
+     * If the pixel scroll offsets have changed, create a new interpolator function
+     * to map scroll value into a progress.
+     */ if (hasChanged) {
+        info[axis].interpolate = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$utils$2f$interpolate$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["interpolate"])(info[axis].offset, (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$animation$2f$keyframes$2f$offsets$2f$default$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["defaultOffset"])(offsetDefinition), {
+            clamp: false
+        });
+        info[axis].interpolatorOffsets = [
+            ...info[axis].offset
+        ];
+    }
+    info[axis].progress = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$utils$2f$dist$2f$es$2f$clamp$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["clamp"])(0, 1, info[axis].interpolate(info[axis].current));
+}
+;
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/render/dom/scroll/on-scroll-handler.mjs [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "createOnScrollHandler",
+    ()=>createOnScrollHandler
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = /*#__PURE__*/ __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/next/dist/build/polyfills/process.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$utils$2f$dist$2f$es$2f$warn$2d$once$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/motion-utils/dist/es/warn-once.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$dom$2f$scroll$2f$info$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/render/dom/scroll/info.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$dom$2f$scroll$2f$offsets$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/render/dom/scroll/offsets/index.mjs [app-client] (ecmascript)");
+;
+;
+;
+function measure(container) {
+    let target = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : container, info = arguments.length > 2 ? arguments[2] : void 0;
+    /**
+     * Find inset of target within scrollable container
+     */ info.x.targetOffset = 0;
+    info.y.targetOffset = 0;
+    if (target !== container) {
+        let node = target;
+        while(node && node !== container){
+            info.x.targetOffset += node.offsetLeft;
+            info.y.targetOffset += node.offsetTop;
+            node = node.offsetParent;
+        }
+    }
+    info.x.targetLength = target === container ? target.scrollWidth : target.clientWidth;
+    info.y.targetLength = target === container ? target.scrollHeight : target.clientHeight;
+    info.x.containerLength = container.clientWidth;
+    info.y.containerLength = container.clientHeight;
+    /**
+     * In development mode ensure scroll containers aren't position: static as this makes
+     * it difficult to measure their relative positions.
+     */ if ("TURBOPACK compile-time truthy", 1) {
+        if (container && target && target !== container) {
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$utils$2f$dist$2f$es$2f$warn$2d$once$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["warnOnce"])(getComputedStyle(container).position !== "static", "Please ensure that the container has a non-static position, like 'relative', 'fixed', or 'absolute' to ensure scroll offset is calculated correctly.");
+        }
+    }
+}
+function createOnScrollHandler(element, onScroll, info) {
+    let options = arguments.length > 3 && arguments[3] !== void 0 ? arguments[3] : {};
+    return {
+        measure: (time)=>{
+            measure(element, options.target, info);
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$dom$2f$scroll$2f$info$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["updateScrollInfo"])(element, info, time);
+            if (options.offset || options.target) {
+                (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$dom$2f$scroll$2f$offsets$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["resolveOffsets"])(element, info, options);
+            }
+        },
+        notify: ()=>onScroll(info)
+    };
+}
+;
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/render/dom/scroll/track.mjs [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "scrollInfo",
+    ()=>scrollInfo
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$resize$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/motion-dom/dist/es/resize/index.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$frameloop$2f$frame$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/motion-dom/dist/es/frameloop/frame.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$utils$2f$dist$2f$es$2f$noop$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/motion-utils/dist/es/noop.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$dom$2f$scroll$2f$info$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/render/dom/scroll/info.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$dom$2f$scroll$2f$on$2d$scroll$2d$handler$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/render/dom/scroll/on-scroll-handler.mjs [app-client] (ecmascript)");
+;
+;
+;
+;
+const scrollListeners = new WeakMap();
+const resizeListeners = new WeakMap();
+const onScrollHandlers = new WeakMap();
+const getEventTarget = (element)=>element === document.scrollingElement ? window : element;
+function scrollInfo(onScroll) {
+    let { container = document.scrollingElement, ...options } = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
+    if (!container) return __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$utils$2f$dist$2f$es$2f$noop$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["noop"];
+    let containerHandlers = onScrollHandlers.get(container);
+    /**
+     * Get the onScroll handlers for this container.
+     * If one isn't found, create a new one.
+     */ if (!containerHandlers) {
+        containerHandlers = new Set();
+        onScrollHandlers.set(container, containerHandlers);
+    }
+    /**
+     * Create a new onScroll handler for the provided callback.
+     */ const info = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$dom$2f$scroll$2f$info$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createScrollInfo"])();
+    const containerHandler = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$dom$2f$scroll$2f$on$2d$scroll$2d$handler$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createOnScrollHandler"])(container, onScroll, info, options);
+    containerHandlers.add(containerHandler);
+    /**
+     * Check if there's a scroll event listener for this container.
+     * If not, create one.
+     */ if (!scrollListeners.has(container)) {
+        const measureAll = ()=>{
+            for (const handler of containerHandlers){
+                handler.measure(__TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$frameloop$2f$frame$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["frameData"].timestamp);
+            }
+            __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$frameloop$2f$frame$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["frame"].preUpdate(notifyAll);
+        };
+        const notifyAll = ()=>{
+            for (const handler of containerHandlers){
+                handler.notify();
+            }
+        };
+        const listener = ()=>__TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$frameloop$2f$frame$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["frame"].read(measureAll);
+        scrollListeners.set(container, listener);
+        const target = getEventTarget(container);
+        window.addEventListener("resize", listener, {
+            passive: true
+        });
+        if (container !== document.documentElement) {
+            resizeListeners.set(container, (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$resize$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["resize"])(container, listener));
+        }
+        target.addEventListener("scroll", listener, {
+            passive: true
+        });
+        listener();
+    }
+    const listener = scrollListeners.get(container);
+    __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$frameloop$2f$frame$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["frame"].read(listener, false, true);
+    return ()=>{
+        (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$frameloop$2f$frame$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["cancelFrame"])(listener);
+        /**
+         * Check if we even have any handlers for this container.
+         */ const currentHandlers = onScrollHandlers.get(container);
+        if (!currentHandlers) return;
+        currentHandlers.delete(containerHandler);
+        if (currentHandlers.size) return;
+        /**
+         * If no more handlers, remove the scroll listener too.
+         */ const scrollListener = scrollListeners.get(container);
+        scrollListeners.delete(container);
+        if (scrollListener) {
+            var _resizeListeners_get;
+            getEventTarget(container).removeEventListener("scroll", scrollListener);
+            (_resizeListeners_get = resizeListeners.get(container)) === null || _resizeListeners_get === void 0 ? void 0 : _resizeListeners_get();
+            window.removeEventListener("resize", scrollListener);
+        }
+    };
+}
+;
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/render/dom/scroll/utils/get-timeline.mjs [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "getTimeline",
+    ()=>getTimeline
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$utils$2f$supports$2f$scroll$2d$timeline$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/motion-dom/dist/es/utils/supports/scroll-timeline.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$dom$2f$scroll$2f$track$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/render/dom/scroll/track.mjs [app-client] (ecmascript)");
+;
+;
+const timelineCache = new Map();
+function scrollTimelineFallback(options) {
+    const currentTime = {
+        value: 0
+    };
+    const cancel = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$dom$2f$scroll$2f$track$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["scrollInfo"])((info)=>{
+        currentTime.value = info[options.axis].progress * 100;
+    }, options);
+    return {
+        currentTime,
+        cancel
+    };
+}
+function getTimeline(param) {
+    let { source, container, ...options } = param;
+    const { axis } = options;
+    if (source) container = source;
+    var _timelineCache_get;
+    const containerCache = (_timelineCache_get = timelineCache.get(container)) !== null && _timelineCache_get !== void 0 ? _timelineCache_get : new Map();
+    timelineCache.set(container, containerCache);
+    var _options_target;
+    const targetKey = (_options_target = options.target) !== null && _options_target !== void 0 ? _options_target : "self";
+    var _containerCache_get;
+    const targetCache = (_containerCache_get = containerCache.get(targetKey)) !== null && _containerCache_get !== void 0 ? _containerCache_get : {};
+    var _options_offset;
+    const axisKey = axis + ((_options_offset = options.offset) !== null && _options_offset !== void 0 ? _options_offset : []).join(",");
+    if (!targetCache[axisKey]) {
+        targetCache[axisKey] = !options.target && (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$utils$2f$supports$2f$scroll$2d$timeline$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["supportsScrollTimeline"])() ? new ScrollTimeline({
+            source: container,
+            axis
+        }) : scrollTimelineFallback({
+            container,
+            ...options
+        });
+    }
+    return targetCache[axisKey];
+}
+;
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/render/dom/scroll/attach-animation.mjs [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "attachToAnimation",
+    ()=>attachToAnimation
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$scroll$2f$observe$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/motion-dom/dist/es/scroll/observe.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$dom$2f$scroll$2f$utils$2f$get$2d$timeline$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/render/dom/scroll/utils/get-timeline.mjs [app-client] (ecmascript)");
+;
+;
+function attachToAnimation(animation, options) {
+    const timeline = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$dom$2f$scroll$2f$utils$2f$get$2d$timeline$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getTimeline"])(options);
+    return animation.attachTimeline({
+        timeline: options.target ? undefined : timeline,
+        observe: (valueAnimation)=>{
+            valueAnimation.pause();
+            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$scroll$2f$observe$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["observeTimeline"])((progress)=>{
+                valueAnimation.time = valueAnimation.iterationDuration * progress;
+            }, timeline);
+        }
+    });
+}
+;
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/render/dom/scroll/attach-function.mjs [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "attachToFunction",
+    ()=>attachToFunction
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$scroll$2f$observe$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/motion-dom/dist/es/scroll/observe.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$dom$2f$scroll$2f$track$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/render/dom/scroll/track.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$dom$2f$scroll$2f$utils$2f$get$2d$timeline$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/render/dom/scroll/utils/get-timeline.mjs [app-client] (ecmascript)");
+;
+;
+;
+/**
+ * If the onScroll function has two arguments, it's expecting
+ * more specific information about the scroll from scrollInfo.
+ */ function isOnScrollWithInfo(onScroll) {
+    return onScroll.length === 2;
+}
+function attachToFunction(onScroll, options) {
+    if (isOnScrollWithInfo(onScroll)) {
+        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$dom$2f$scroll$2f$track$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["scrollInfo"])((info)=>{
+            onScroll(info[options.axis].progress, info);
+        }, options);
+    } else {
+        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$scroll$2f$observe$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["observeTimeline"])(onScroll, (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$dom$2f$scroll$2f$utils$2f$get$2d$timeline$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["getTimeline"])(options));
+    }
+}
+;
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/render/dom/scroll/index.mjs [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "scroll",
+    ()=>scroll
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$utils$2f$dist$2f$es$2f$noop$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/motion-utils/dist/es/noop.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$dom$2f$scroll$2f$attach$2d$animation$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/render/dom/scroll/attach-animation.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$dom$2f$scroll$2f$attach$2d$function$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/render/dom/scroll/attach-function.mjs [app-client] (ecmascript)");
+;
+;
+;
+function scroll(onScroll) {
+    let { axis = "y", container = document.scrollingElement, ...options } = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
+    if (!container) return __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$utils$2f$dist$2f$es$2f$noop$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["noop"];
+    const optionsWithDefaults = {
+        axis,
+        container,
+        ...options
+    };
+    return typeof onScroll === "function" ? (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$dom$2f$scroll$2f$attach$2d$function$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["attachToFunction"])(onScroll, optionsWithDefaults) : (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$dom$2f$scroll$2f$attach$2d$animation$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["attachToAnimation"])(onScroll, optionsWithDefaults);
+}
+;
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/value/use-scroll.mjs [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "useScroll",
+    ()=>useScroll
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$value$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/motion-dom/dist/es/value/index.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$utils$2f$dist$2f$es$2f$errors$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/motion-utils/dist/es/errors.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$dom$2f$scroll$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/render/dom/scroll/index.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$utils$2f$use$2d$constant$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/utils/use-constant.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$utils$2f$use$2d$isomorphic$2d$effect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/framer-motion/dist/es/utils/use-isomorphic-effect.mjs [app-client] (ecmascript)");
+"use client";
+;
+;
+;
+;
+;
+;
+const createScrollMotionValues = ()=>({
+        scrollX: (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$value$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motionValue"])(0),
+        scrollY: (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$value$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motionValue"])(0),
+        scrollXProgress: (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$value$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motionValue"])(0),
+        scrollYProgress: (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$value$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motionValue"])(0)
+    });
+const isRefPending = (ref)=>{
+    if (!ref) return false;
+    return !ref.current;
+};
+function useScroll() {
+    let { container, target, ...options } = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {};
+    const values = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$utils$2f$use$2d$constant$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useConstant"])(createScrollMotionValues);
+    const scrollAnimation = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
+    const needsStart = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(false);
+    const start = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useCallback"])({
+        "useScroll.useCallback[start]": ()=>{
+            scrollAnimation.current = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$dom$2f$scroll$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["scroll"])({
+                "useScroll.useCallback[start]": (_progress, param)=>{
+                    let { x, y } = param;
+                    values.scrollX.set(x.current);
+                    values.scrollXProgress.set(x.progress);
+                    values.scrollY.set(y.current);
+                    values.scrollYProgress.set(y.progress);
+                }
+            }["useScroll.useCallback[start]"], {
+                ...options,
+                container: (container === null || container === void 0 ? void 0 : container.current) || undefined,
+                target: (target === null || target === void 0 ? void 0 : target.current) || undefined
+            });
+            return ({
+                "useScroll.useCallback[start]": ()=>{
+                    var _scrollAnimation_current;
+                    (_scrollAnimation_current = scrollAnimation.current) === null || _scrollAnimation_current === void 0 ? void 0 : _scrollAnimation_current.call(scrollAnimation);
+                }
+            })["useScroll.useCallback[start]"];
+        }
+    }["useScroll.useCallback[start]"], [
+        container,
+        target,
+        JSON.stringify(options.offset)
+    ]);
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$utils$2f$use$2d$isomorphic$2d$effect$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useIsomorphicLayoutEffect"])({
+        "useScroll.useIsomorphicLayoutEffect": ()=>{
+            needsStart.current = false;
+            if (isRefPending(container) || isRefPending(target)) {
+                needsStart.current = true;
+                return;
+            } else {
+                return start();
+            }
+        }
+    }["useScroll.useIsomorphicLayoutEffect"], [
+        start
+    ]);
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "useScroll.useEffect": ()=>{
+            if (needsStart.current) {
+                (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$utils$2f$dist$2f$es$2f$errors$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["invariant"])(!isRefPending(container), "Container ref is defined but not hydrated", "use-scroll-ref");
+                (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$utils$2f$dist$2f$es$2f$errors$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["invariant"])(!isRefPending(target), "Target ref is defined but not hydrated", "use-scroll-ref");
+                return start();
+            } else {
+                return;
+            }
+        }
+    }["useScroll.useEffect"], [
+        start
+    ]);
+    return values;
+}
+;
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/clsx/dist/clsx.mjs [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "clsx",
+    ()=>clsx,
+    "default",
+    ()=>__TURBOPACK__default__export__
+]);
+function r(e) {
+    var t, f, n = "";
+    if ("string" == typeof e || "number" == typeof e) n += e;
+    else if ("object" == typeof e) if (Array.isArray(e)) {
+        var o = e.length;
+        for(t = 0; t < o; t++)e[t] && (f = r(e[t])) && (n && (n += " "), n += f);
+    } else for(f in e)e[f] && (n && (n += " "), n += f);
+    return n;
+}
+function clsx() {
+    for(var e, t, f = 0, n = "", o = arguments.length; f < o; f++)(e = arguments[f]) && (t = r(e)) && (n && (n += " "), n += t);
+    return n;
+}
+const __TURBOPACK__default__export__ = clsx;
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/tailwind-merge/dist/bundle-mjs.mjs [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "createTailwindMerge",
+    ()=>createTailwindMerge,
+    "extendTailwindMerge",
+    ()=>extendTailwindMerge,
+    "fromTheme",
+    ()=>fromTheme,
+    "getDefaultConfig",
+    ()=>getDefaultConfig,
+    "mergeConfigs",
+    ()=>mergeConfigs,
+    "twJoin",
+    ()=>twJoin,
+    "twMerge",
+    ()=>twMerge,
+    "validators",
+    ()=>validators
+]);
+const CLASS_PART_SEPARATOR = '-';
+const createClassGroupUtils = (config)=>{
+    const classMap = createClassMap(config);
+    const { conflictingClassGroups, conflictingClassGroupModifiers } = config;
+    const getClassGroupId = (className)=>{
+        const classParts = className.split(CLASS_PART_SEPARATOR);
+        // Classes like `-inset-1` produce an empty string as first classPart. We assume that classes for negative values are used correctly and remove it from classParts.
+        if (classParts[0] === '' && classParts.length !== 1) {
+            classParts.shift();
+        }
+        return getGroupRecursive(classParts, classMap) || getGroupIdForArbitraryProperty(className);
+    };
+    const getConflictingClassGroupIds = (classGroupId, hasPostfixModifier)=>{
+        const conflicts = conflictingClassGroups[classGroupId] || [];
+        if (hasPostfixModifier && conflictingClassGroupModifiers[classGroupId]) {
+            return [
+                ...conflicts,
+                ...conflictingClassGroupModifiers[classGroupId]
+            ];
+        }
+        return conflicts;
+    };
+    return {
+        getClassGroupId,
+        getConflictingClassGroupIds
+    };
+};
+const getGroupRecursive = (classParts, classPartObject)=>{
+    var _classPartObject_validators_find;
+    if (classParts.length === 0) {
+        return classPartObject.classGroupId;
+    }
+    const currentClassPart = classParts[0];
+    const nextClassPartObject = classPartObject.nextPart.get(currentClassPart);
+    const classGroupFromNextClassPart = nextClassPartObject ? getGroupRecursive(classParts.slice(1), nextClassPartObject) : undefined;
+    if (classGroupFromNextClassPart) {
+        return classGroupFromNextClassPart;
+    }
+    if (classPartObject.validators.length === 0) {
+        return undefined;
+    }
+    const classRest = classParts.join(CLASS_PART_SEPARATOR);
+    return (_classPartObject_validators_find = classPartObject.validators.find((param)=>{
+        let { validator } = param;
+        return validator(classRest);
+    })) === null || _classPartObject_validators_find === void 0 ? void 0 : _classPartObject_validators_find.classGroupId;
+};
+const arbitraryPropertyRegex = /^\[(.+)\]$/;
+const getGroupIdForArbitraryProperty = (className)=>{
+    if (arbitraryPropertyRegex.test(className)) {
+        const arbitraryPropertyClassName = arbitraryPropertyRegex.exec(className)[1];
+        const property = arbitraryPropertyClassName === null || arbitraryPropertyClassName === void 0 ? void 0 : arbitraryPropertyClassName.substring(0, arbitraryPropertyClassName.indexOf(':'));
+        if (property) {
+            // I use two dots here because one dot is used as prefix for class groups in plugins
+            return 'arbitrary..' + property;
+        }
+    }
+};
+/**
+ * Exported for testing only
+ */ const createClassMap = (config)=>{
+    const { theme, prefix } = config;
+    const classMap = {
+        nextPart: new Map(),
+        validators: []
+    };
+    const prefixedClassGroupEntries = getPrefixedClassGroupEntries(Object.entries(config.classGroups), prefix);
+    prefixedClassGroupEntries.forEach((param)=>{
+        let [classGroupId, classGroup] = param;
+        processClassesRecursively(classGroup, classMap, classGroupId, theme);
+    });
+    return classMap;
+};
+const processClassesRecursively = (classGroup, classPartObject, classGroupId, theme)=>{
+    classGroup.forEach((classDefinition)=>{
+        if (typeof classDefinition === 'string') {
+            const classPartObjectToEdit = classDefinition === '' ? classPartObject : getPart(classPartObject, classDefinition);
+            classPartObjectToEdit.classGroupId = classGroupId;
+            return;
+        }
+        if (typeof classDefinition === 'function') {
+            if (isThemeGetter(classDefinition)) {
+                processClassesRecursively(classDefinition(theme), classPartObject, classGroupId, theme);
+                return;
+            }
+            classPartObject.validators.push({
+                validator: classDefinition,
+                classGroupId
+            });
+            return;
+        }
+        Object.entries(classDefinition).forEach((param)=>{
+            let [key, classGroup] = param;
+            processClassesRecursively(classGroup, getPart(classPartObject, key), classGroupId, theme);
+        });
+    });
+};
+const getPart = (classPartObject, path)=>{
+    let currentClassPartObject = classPartObject;
+    path.split(CLASS_PART_SEPARATOR).forEach((pathPart)=>{
+        if (!currentClassPartObject.nextPart.has(pathPart)) {
+            currentClassPartObject.nextPart.set(pathPart, {
+                nextPart: new Map(),
+                validators: []
+            });
+        }
+        currentClassPartObject = currentClassPartObject.nextPart.get(pathPart);
+    });
+    return currentClassPartObject;
+};
+const isThemeGetter = (func)=>func.isThemeGetter;
+const getPrefixedClassGroupEntries = (classGroupEntries, prefix)=>{
+    if (!prefix) {
+        return classGroupEntries;
+    }
+    return classGroupEntries.map((param)=>{
+        let [classGroupId, classGroup] = param;
+        const prefixedClassGroup = classGroup.map((classDefinition)=>{
+            if (typeof classDefinition === 'string') {
+                return prefix + classDefinition;
+            }
+            if (typeof classDefinition === 'object') {
+                return Object.fromEntries(Object.entries(classDefinition).map((param)=>{
+                    let [key, value] = param;
+                    return [
+                        prefix + key,
+                        value
+                    ];
+                }));
+            }
+            return classDefinition;
+        });
+        return [
+            classGroupId,
+            prefixedClassGroup
+        ];
+    });
+};
+// LRU cache inspired from hashlru (https://github.com/dominictarr/hashlru/blob/v1.0.4/index.js) but object replaced with Map to improve performance
+const createLruCache = (maxCacheSize)=>{
+    if (maxCacheSize < 1) {
+        return {
+            get: ()=>undefined,
+            set: ()=>{}
+        };
+    }
+    let cacheSize = 0;
+    let cache = new Map();
+    let previousCache = new Map();
+    const update = (key, value)=>{
+        cache.set(key, value);
+        cacheSize++;
+        if (cacheSize > maxCacheSize) {
+            cacheSize = 0;
+            previousCache = cache;
+            cache = new Map();
+        }
+    };
+    return {
+        get (key) {
+            let value = cache.get(key);
+            if (value !== undefined) {
+                return value;
+            }
+            if ((value = previousCache.get(key)) !== undefined) {
+                update(key, value);
+                return value;
+            }
+        },
+        set (key, value) {
+            if (cache.has(key)) {
+                cache.set(key, value);
+            } else {
+                update(key, value);
+            }
+        }
+    };
+};
+const IMPORTANT_MODIFIER = '!';
+const createParseClassName = (config)=>{
+    const { separator, experimentalParseClassName } = config;
+    const isSeparatorSingleCharacter = separator.length === 1;
+    const firstSeparatorCharacter = separator[0];
+    const separatorLength = separator.length;
+    // parseClassName inspired by https://github.com/tailwindlabs/tailwindcss/blob/v3.2.2/src/util/splitAtTopLevelOnly.js
+    const parseClassName = (className)=>{
+        const modifiers = [];
+        let bracketDepth = 0;
+        let modifierStart = 0;
+        let postfixModifierPosition;
+        for(let index = 0; index < className.length; index++){
+            let currentCharacter = className[index];
+            if (bracketDepth === 0) {
+                if (currentCharacter === firstSeparatorCharacter && (isSeparatorSingleCharacter || className.slice(index, index + separatorLength) === separator)) {
+                    modifiers.push(className.slice(modifierStart, index));
+                    modifierStart = index + separatorLength;
+                    continue;
+                }
+                if (currentCharacter === '/') {
+                    postfixModifierPosition = index;
+                    continue;
+                }
+            }
+            if (currentCharacter === '[') {
+                bracketDepth++;
+            } else if (currentCharacter === ']') {
+                bracketDepth--;
+            }
+        }
+        const baseClassNameWithImportantModifier = modifiers.length === 0 ? className : className.substring(modifierStart);
+        const hasImportantModifier = baseClassNameWithImportantModifier.startsWith(IMPORTANT_MODIFIER);
+        const baseClassName = hasImportantModifier ? baseClassNameWithImportantModifier.substring(1) : baseClassNameWithImportantModifier;
+        const maybePostfixModifierPosition = postfixModifierPosition && postfixModifierPosition > modifierStart ? postfixModifierPosition - modifierStart : undefined;
+        return {
+            modifiers,
+            hasImportantModifier,
+            baseClassName,
+            maybePostfixModifierPosition
+        };
+    };
+    if (experimentalParseClassName) {
+        return (className)=>experimentalParseClassName({
+                className,
+                parseClassName
+            });
+    }
+    return parseClassName;
+};
+/**
+ * Sorts modifiers according to following schema:
+ * - Predefined modifiers are sorted alphabetically
+ * - When an arbitrary variant appears, it must be preserved which modifiers are before and after it
+ */ const sortModifiers = (modifiers)=>{
+    if (modifiers.length <= 1) {
+        return modifiers;
+    }
+    const sortedModifiers = [];
+    let unsortedModifiers = [];
+    modifiers.forEach((modifier)=>{
+        const isArbitraryVariant = modifier[0] === '[';
+        if (isArbitraryVariant) {
+            sortedModifiers.push(...unsortedModifiers.sort(), modifier);
+            unsortedModifiers = [];
+        } else {
+            unsortedModifiers.push(modifier);
+        }
+    });
+    sortedModifiers.push(...unsortedModifiers.sort());
+    return sortedModifiers;
+};
+const createConfigUtils = (config)=>({
+        cache: createLruCache(config.cacheSize),
+        parseClassName: createParseClassName(config),
+        ...createClassGroupUtils(config)
+    });
+const SPLIT_CLASSES_REGEX = /\s+/;
+const mergeClassList = (classList, configUtils)=>{
+    const { parseClassName, getClassGroupId, getConflictingClassGroupIds } = configUtils;
+    /**
+   * Set of classGroupIds in following format:
+   * `{importantModifier}{variantModifiers}{classGroupId}`
+   * @example 'float'
+   * @example 'hover:focus:bg-color'
+   * @example 'md:!pr'
+   */ const classGroupsInConflict = [];
+    const classNames = classList.trim().split(SPLIT_CLASSES_REGEX);
+    let result = '';
+    for(let index = classNames.length - 1; index >= 0; index -= 1){
+        const originalClassName = classNames[index];
+        const { modifiers, hasImportantModifier, baseClassName, maybePostfixModifierPosition } = parseClassName(originalClassName);
+        let hasPostfixModifier = Boolean(maybePostfixModifierPosition);
+        let classGroupId = getClassGroupId(hasPostfixModifier ? baseClassName.substring(0, maybePostfixModifierPosition) : baseClassName);
+        if (!classGroupId) {
+            if (!hasPostfixModifier) {
+                // Not a Tailwind class
+                result = originalClassName + (result.length > 0 ? ' ' + result : result);
+                continue;
+            }
+            classGroupId = getClassGroupId(baseClassName);
+            if (!classGroupId) {
+                // Not a Tailwind class
+                result = originalClassName + (result.length > 0 ? ' ' + result : result);
+                continue;
+            }
+            hasPostfixModifier = false;
+        }
+        const variantModifier = sortModifiers(modifiers).join(':');
+        const modifierId = hasImportantModifier ? variantModifier + IMPORTANT_MODIFIER : variantModifier;
+        const classId = modifierId + classGroupId;
+        if (classGroupsInConflict.includes(classId)) {
+            continue;
+        }
+        classGroupsInConflict.push(classId);
+        const conflictGroups = getConflictingClassGroupIds(classGroupId, hasPostfixModifier);
+        for(let i = 0; i < conflictGroups.length; ++i){
+            const group = conflictGroups[i];
+            classGroupsInConflict.push(modifierId + group);
+        }
+        // Tailwind class not in conflict
+        result = originalClassName + (result.length > 0 ? ' ' + result : result);
+    }
+    return result;
+};
+/**
+ * The code in this file is copied from https://github.com/lukeed/clsx and modified to suit the needs of tailwind-merge better.
+ *
+ * Specifically:
+ * - Runtime code from https://github.com/lukeed/clsx/blob/v1.2.1/src/index.js
+ * - TypeScript types from https://github.com/lukeed/clsx/blob/v1.2.1/clsx.d.ts
+ *
+ * Original code has MIT license: Copyright (c) Luke Edwards <luke.edwards05@gmail.com> (lukeed.com)
+ */ function twJoin() {
+    let index = 0;
+    let argument;
+    let resolvedValue;
+    let string = '';
+    while(index < arguments.length){
+        if (argument = arguments[index++]) {
+            if (resolvedValue = toValue(argument)) {
+                string && (string += ' ');
+                string += resolvedValue;
+            }
+        }
+    }
+    return string;
+}
+const toValue = (mix)=>{
+    if (typeof mix === 'string') {
+        return mix;
+    }
+    let resolvedValue;
+    let string = '';
+    for(let k = 0; k < mix.length; k++){
+        if (mix[k]) {
+            if (resolvedValue = toValue(mix[k])) {
+                string && (string += ' ');
+                string += resolvedValue;
+            }
+        }
+    }
+    return string;
+};
+function createTailwindMerge(createConfigFirst) {
+    for(var _len = arguments.length, createConfigRest = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++){
+        createConfigRest[_key - 1] = arguments[_key];
+    }
+    let configUtils;
+    let cacheGet;
+    let cacheSet;
+    let functionToCall = initTailwindMerge;
+    function initTailwindMerge(classList) {
+        const config = createConfigRest.reduce((previousConfig, createConfigCurrent)=>createConfigCurrent(previousConfig), createConfigFirst());
+        configUtils = createConfigUtils(config);
+        cacheGet = configUtils.cache.get;
+        cacheSet = configUtils.cache.set;
+        functionToCall = tailwindMerge;
+        return tailwindMerge(classList);
+    }
+    function tailwindMerge(classList) {
+        const cachedResult = cacheGet(classList);
+        if (cachedResult) {
+            return cachedResult;
+        }
+        const result = mergeClassList(classList, configUtils);
+        cacheSet(classList, result);
+        return result;
+    }
+    return function callTailwindMerge() {
+        return functionToCall(twJoin.apply(null, arguments));
+    };
+}
+const fromTheme = (key)=>{
+    const themeGetter = (theme)=>theme[key] || [];
+    themeGetter.isThemeGetter = true;
+    return themeGetter;
+};
+const arbitraryValueRegex = /^\[(?:([a-z-]+):)?(.+)\]$/i;
+const fractionRegex = /^\d+\/\d+$/;
+const stringLengths = /*#__PURE__*/ new Set([
+    'px',
+    'full',
+    'screen'
+]);
+const tshirtUnitRegex = /^(\d+(\.\d+)?)?(xs|sm|md|lg|xl)$/;
+const lengthUnitRegex = /\d+(%|px|r?em|[sdl]?v([hwib]|min|max)|pt|pc|in|cm|mm|cap|ch|ex|r?lh|cq(w|h|i|b|min|max))|\b(calc|min|max|clamp)\(.+\)|^0$/;
+const colorFunctionRegex = /^(rgba?|hsla?|hwb|(ok)?(lab|lch)|color-mix)\(.+\)$/;
+// Shadow always begins with x and y offset separated by underscore optionally prepended by inset
+const shadowRegex = /^(inset_)?-?((\d+)?\.?(\d+)[a-z]+|0)_-?((\d+)?\.?(\d+)[a-z]+|0)/;
+const imageRegex = /^(url|image|image-set|cross-fade|element|(repeating-)?(linear|radial|conic)-gradient)\(.+\)$/;
+const isLength = (value)=>isNumber(value) || stringLengths.has(value) || fractionRegex.test(value);
+const isArbitraryLength = (value)=>getIsArbitraryValue(value, 'length', isLengthOnly);
+const isNumber = (value)=>Boolean(value) && !Number.isNaN(Number(value));
+const isArbitraryNumber = (value)=>getIsArbitraryValue(value, 'number', isNumber);
+const isInteger = (value)=>Boolean(value) && Number.isInteger(Number(value));
+const isPercent = (value)=>value.endsWith('%') && isNumber(value.slice(0, -1));
+const isArbitraryValue = (value)=>arbitraryValueRegex.test(value);
+const isTshirtSize = (value)=>tshirtUnitRegex.test(value);
+const sizeLabels = /*#__PURE__*/ new Set([
+    'length',
+    'size',
+    'percentage'
+]);
+const isArbitrarySize = (value)=>getIsArbitraryValue(value, sizeLabels, isNever);
+const isArbitraryPosition = (value)=>getIsArbitraryValue(value, 'position', isNever);
+const imageLabels = /*#__PURE__*/ new Set([
+    'image',
+    'url'
+]);
+const isArbitraryImage = (value)=>getIsArbitraryValue(value, imageLabels, isImage);
+const isArbitraryShadow = (value)=>getIsArbitraryValue(value, '', isShadow);
+const isAny = ()=>true;
+const getIsArbitraryValue = (value, label, testValue)=>{
+    const result = arbitraryValueRegex.exec(value);
+    if (result) {
+        if (result[1]) {
+            return typeof label === 'string' ? result[1] === label : label.has(result[1]);
+        }
+        return testValue(result[2]);
+    }
+    return false;
+};
+const isLengthOnly = (value)=>// `colorFunctionRegex` check is necessary because color functions can have percentages in them which which would be incorrectly classified as lengths.
+    // For example, `hsl(0 0% 0%)` would be classified as a length without this check.
+    // I could also use lookbehind assertion in `lengthUnitRegex` but that isn't supported widely enough.
+    lengthUnitRegex.test(value) && !colorFunctionRegex.test(value);
+const isNever = ()=>false;
+const isShadow = (value)=>shadowRegex.test(value);
+const isImage = (value)=>imageRegex.test(value);
+const validators = /*#__PURE__*/ Object.defineProperty({
+    __proto__: null,
+    isAny,
+    isArbitraryImage,
+    isArbitraryLength,
+    isArbitraryNumber,
+    isArbitraryPosition,
+    isArbitraryShadow,
+    isArbitrarySize,
+    isArbitraryValue,
+    isInteger,
+    isLength,
+    isNumber,
+    isPercent,
+    isTshirtSize
+}, Symbol.toStringTag, {
+    value: 'Module'
+});
+const getDefaultConfig = ()=>{
+    const colors = fromTheme('colors');
+    const spacing = fromTheme('spacing');
+    const blur = fromTheme('blur');
+    const brightness = fromTheme('brightness');
+    const borderColor = fromTheme('borderColor');
+    const borderRadius = fromTheme('borderRadius');
+    const borderSpacing = fromTheme('borderSpacing');
+    const borderWidth = fromTheme('borderWidth');
+    const contrast = fromTheme('contrast');
+    const grayscale = fromTheme('grayscale');
+    const hueRotate = fromTheme('hueRotate');
+    const invert = fromTheme('invert');
+    const gap = fromTheme('gap');
+    const gradientColorStops = fromTheme('gradientColorStops');
+    const gradientColorStopPositions = fromTheme('gradientColorStopPositions');
+    const inset = fromTheme('inset');
+    const margin = fromTheme('margin');
+    const opacity = fromTheme('opacity');
+    const padding = fromTheme('padding');
+    const saturate = fromTheme('saturate');
+    const scale = fromTheme('scale');
+    const sepia = fromTheme('sepia');
+    const skew = fromTheme('skew');
+    const space = fromTheme('space');
+    const translate = fromTheme('translate');
+    const getOverscroll = ()=>[
+            'auto',
+            'contain',
+            'none'
+        ];
+    const getOverflow = ()=>[
+            'auto',
+            'hidden',
+            'clip',
+            'visible',
+            'scroll'
+        ];
+    const getSpacingWithAutoAndArbitrary = ()=>[
+            'auto',
+            isArbitraryValue,
+            spacing
+        ];
+    const getSpacingWithArbitrary = ()=>[
+            isArbitraryValue,
+            spacing
+        ];
+    const getLengthWithEmptyAndArbitrary = ()=>[
+            '',
+            isLength,
+            isArbitraryLength
+        ];
+    const getNumberWithAutoAndArbitrary = ()=>[
+            'auto',
+            isNumber,
+            isArbitraryValue
+        ];
+    const getPositions = ()=>[
+            'bottom',
+            'center',
+            'left',
+            'left-bottom',
+            'left-top',
+            'right',
+            'right-bottom',
+            'right-top',
+            'top'
+        ];
+    const getLineStyles = ()=>[
+            'solid',
+            'dashed',
+            'dotted',
+            'double',
+            'none'
+        ];
+    const getBlendModes = ()=>[
+            'normal',
+            'multiply',
+            'screen',
+            'overlay',
+            'darken',
+            'lighten',
+            'color-dodge',
+            'color-burn',
+            'hard-light',
+            'soft-light',
+            'difference',
+            'exclusion',
+            'hue',
+            'saturation',
+            'color',
+            'luminosity'
+        ];
+    const getAlign = ()=>[
+            'start',
+            'end',
+            'center',
+            'between',
+            'around',
+            'evenly',
+            'stretch'
+        ];
+    const getZeroAndEmpty = ()=>[
+            '',
+            '0',
+            isArbitraryValue
+        ];
+    const getBreaks = ()=>[
+            'auto',
+            'avoid',
+            'all',
+            'avoid-page',
+            'page',
+            'left',
+            'right',
+            'column'
+        ];
+    const getNumberAndArbitrary = ()=>[
+            isNumber,
+            isArbitraryValue
+        ];
+    return {
+        cacheSize: 500,
+        separator: ':',
+        theme: {
+            colors: [
+                isAny
+            ],
+            spacing: [
+                isLength,
+                isArbitraryLength
+            ],
+            blur: [
+                'none',
+                '',
+                isTshirtSize,
+                isArbitraryValue
+            ],
+            brightness: getNumberAndArbitrary(),
+            borderColor: [
+                colors
+            ],
+            borderRadius: [
+                'none',
+                '',
+                'full',
+                isTshirtSize,
+                isArbitraryValue
+            ],
+            borderSpacing: getSpacingWithArbitrary(),
+            borderWidth: getLengthWithEmptyAndArbitrary(),
+            contrast: getNumberAndArbitrary(),
+            grayscale: getZeroAndEmpty(),
+            hueRotate: getNumberAndArbitrary(),
+            invert: getZeroAndEmpty(),
+            gap: getSpacingWithArbitrary(),
+            gradientColorStops: [
+                colors
+            ],
+            gradientColorStopPositions: [
+                isPercent,
+                isArbitraryLength
+            ],
+            inset: getSpacingWithAutoAndArbitrary(),
+            margin: getSpacingWithAutoAndArbitrary(),
+            opacity: getNumberAndArbitrary(),
+            padding: getSpacingWithArbitrary(),
+            saturate: getNumberAndArbitrary(),
+            scale: getNumberAndArbitrary(),
+            sepia: getZeroAndEmpty(),
+            skew: getNumberAndArbitrary(),
+            space: getSpacingWithArbitrary(),
+            translate: getSpacingWithArbitrary()
+        },
+        classGroups: {
+            // Layout
+            /**
+       * Aspect Ratio
+       * @see https://tailwindcss.com/docs/aspect-ratio
+       */ aspect: [
+                {
+                    aspect: [
+                        'auto',
+                        'square',
+                        'video',
+                        isArbitraryValue
+                    ]
+                }
+            ],
+            /**
+       * Container
+       * @see https://tailwindcss.com/docs/container
+       */ container: [
+                'container'
+            ],
+            /**
+       * Columns
+       * @see https://tailwindcss.com/docs/columns
+       */ columns: [
+                {
+                    columns: [
+                        isTshirtSize
+                    ]
+                }
+            ],
+            /**
+       * Break After
+       * @see https://tailwindcss.com/docs/break-after
+       */ 'break-after': [
+                {
+                    'break-after': getBreaks()
+                }
+            ],
+            /**
+       * Break Before
+       * @see https://tailwindcss.com/docs/break-before
+       */ 'break-before': [
+                {
+                    'break-before': getBreaks()
+                }
+            ],
+            /**
+       * Break Inside
+       * @see https://tailwindcss.com/docs/break-inside
+       */ 'break-inside': [
+                {
+                    'break-inside': [
+                        'auto',
+                        'avoid',
+                        'avoid-page',
+                        'avoid-column'
+                    ]
+                }
+            ],
+            /**
+       * Box Decoration Break
+       * @see https://tailwindcss.com/docs/box-decoration-break
+       */ 'box-decoration': [
+                {
+                    'box-decoration': [
+                        'slice',
+                        'clone'
+                    ]
+                }
+            ],
+            /**
+       * Box Sizing
+       * @see https://tailwindcss.com/docs/box-sizing
+       */ box: [
+                {
+                    box: [
+                        'border',
+                        'content'
+                    ]
+                }
+            ],
+            /**
+       * Display
+       * @see https://tailwindcss.com/docs/display
+       */ display: [
+                'block',
+                'inline-block',
+                'inline',
+                'flex',
+                'inline-flex',
+                'table',
+                'inline-table',
+                'table-caption',
+                'table-cell',
+                'table-column',
+                'table-column-group',
+                'table-footer-group',
+                'table-header-group',
+                'table-row-group',
+                'table-row',
+                'flow-root',
+                'grid',
+                'inline-grid',
+                'contents',
+                'list-item',
+                'hidden'
+            ],
+            /**
+       * Floats
+       * @see https://tailwindcss.com/docs/float
+       */ float: [
+                {
+                    float: [
+                        'right',
+                        'left',
+                        'none',
+                        'start',
+                        'end'
+                    ]
+                }
+            ],
+            /**
+       * Clear
+       * @see https://tailwindcss.com/docs/clear
+       */ clear: [
+                {
+                    clear: [
+                        'left',
+                        'right',
+                        'both',
+                        'none',
+                        'start',
+                        'end'
+                    ]
+                }
+            ],
+            /**
+       * Isolation
+       * @see https://tailwindcss.com/docs/isolation
+       */ isolation: [
+                'isolate',
+                'isolation-auto'
+            ],
+            /**
+       * Object Fit
+       * @see https://tailwindcss.com/docs/object-fit
+       */ 'object-fit': [
+                {
+                    object: [
+                        'contain',
+                        'cover',
+                        'fill',
+                        'none',
+                        'scale-down'
+                    ]
+                }
+            ],
+            /**
+       * Object Position
+       * @see https://tailwindcss.com/docs/object-position
+       */ 'object-position': [
+                {
+                    object: [
+                        ...getPositions(),
+                        isArbitraryValue
+                    ]
+                }
+            ],
+            /**
+       * Overflow
+       * @see https://tailwindcss.com/docs/overflow
+       */ overflow: [
+                {
+                    overflow: getOverflow()
+                }
+            ],
+            /**
+       * Overflow X
+       * @see https://tailwindcss.com/docs/overflow
+       */ 'overflow-x': [
+                {
+                    'overflow-x': getOverflow()
+                }
+            ],
+            /**
+       * Overflow Y
+       * @see https://tailwindcss.com/docs/overflow
+       */ 'overflow-y': [
+                {
+                    'overflow-y': getOverflow()
+                }
+            ],
+            /**
+       * Overscroll Behavior
+       * @see https://tailwindcss.com/docs/overscroll-behavior
+       */ overscroll: [
+                {
+                    overscroll: getOverscroll()
+                }
+            ],
+            /**
+       * Overscroll Behavior X
+       * @see https://tailwindcss.com/docs/overscroll-behavior
+       */ 'overscroll-x': [
+                {
+                    'overscroll-x': getOverscroll()
+                }
+            ],
+            /**
+       * Overscroll Behavior Y
+       * @see https://tailwindcss.com/docs/overscroll-behavior
+       */ 'overscroll-y': [
+                {
+                    'overscroll-y': getOverscroll()
+                }
+            ],
+            /**
+       * Position
+       * @see https://tailwindcss.com/docs/position
+       */ position: [
+                'static',
+                'fixed',
+                'absolute',
+                'relative',
+                'sticky'
+            ],
+            /**
+       * Top / Right / Bottom / Left
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       */ inset: [
+                {
+                    inset: [
+                        inset
+                    ]
+                }
+            ],
+            /**
+       * Right / Left
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       */ 'inset-x': [
+                {
+                    'inset-x': [
+                        inset
+                    ]
+                }
+            ],
+            /**
+       * Top / Bottom
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       */ 'inset-y': [
+                {
+                    'inset-y': [
+                        inset
+                    ]
+                }
+            ],
+            /**
+       * Start
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       */ start: [
+                {
+                    start: [
+                        inset
+                    ]
+                }
+            ],
+            /**
+       * End
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       */ end: [
+                {
+                    end: [
+                        inset
+                    ]
+                }
+            ],
+            /**
+       * Top
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       */ top: [
+                {
+                    top: [
+                        inset
+                    ]
+                }
+            ],
+            /**
+       * Right
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       */ right: [
+                {
+                    right: [
+                        inset
+                    ]
+                }
+            ],
+            /**
+       * Bottom
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       */ bottom: [
+                {
+                    bottom: [
+                        inset
+                    ]
+                }
+            ],
+            /**
+       * Left
+       * @see https://tailwindcss.com/docs/top-right-bottom-left
+       */ left: [
+                {
+                    left: [
+                        inset
+                    ]
+                }
+            ],
+            /**
+       * Visibility
+       * @see https://tailwindcss.com/docs/visibility
+       */ visibility: [
+                'visible',
+                'invisible',
+                'collapse'
+            ],
+            /**
+       * Z-Index
+       * @see https://tailwindcss.com/docs/z-index
+       */ z: [
+                {
+                    z: [
+                        'auto',
+                        isInteger,
+                        isArbitraryValue
+                    ]
+                }
+            ],
+            // Flexbox and Grid
+            /**
+       * Flex Basis
+       * @see https://tailwindcss.com/docs/flex-basis
+       */ basis: [
+                {
+                    basis: getSpacingWithAutoAndArbitrary()
+                }
+            ],
+            /**
+       * Flex Direction
+       * @see https://tailwindcss.com/docs/flex-direction
+       */ 'flex-direction': [
+                {
+                    flex: [
+                        'row',
+                        'row-reverse',
+                        'col',
+                        'col-reverse'
+                    ]
+                }
+            ],
+            /**
+       * Flex Wrap
+       * @see https://tailwindcss.com/docs/flex-wrap
+       */ 'flex-wrap': [
+                {
+                    flex: [
+                        'wrap',
+                        'wrap-reverse',
+                        'nowrap'
+                    ]
+                }
+            ],
+            /**
+       * Flex
+       * @see https://tailwindcss.com/docs/flex
+       */ flex: [
+                {
+                    flex: [
+                        '1',
+                        'auto',
+                        'initial',
+                        'none',
+                        isArbitraryValue
+                    ]
+                }
+            ],
+            /**
+       * Flex Grow
+       * @see https://tailwindcss.com/docs/flex-grow
+       */ grow: [
+                {
+                    grow: getZeroAndEmpty()
+                }
+            ],
+            /**
+       * Flex Shrink
+       * @see https://tailwindcss.com/docs/flex-shrink
+       */ shrink: [
+                {
+                    shrink: getZeroAndEmpty()
+                }
+            ],
+            /**
+       * Order
+       * @see https://tailwindcss.com/docs/order
+       */ order: [
+                {
+                    order: [
+                        'first',
+                        'last',
+                        'none',
+                        isInteger,
+                        isArbitraryValue
+                    ]
+                }
+            ],
+            /**
+       * Grid Template Columns
+       * @see https://tailwindcss.com/docs/grid-template-columns
+       */ 'grid-cols': [
+                {
+                    'grid-cols': [
+                        isAny
+                    ]
+                }
+            ],
+            /**
+       * Grid Column Start / End
+       * @see https://tailwindcss.com/docs/grid-column
+       */ 'col-start-end': [
+                {
+                    col: [
+                        'auto',
+                        {
+                            span: [
+                                'full',
+                                isInteger,
+                                isArbitraryValue
+                            ]
+                        },
+                        isArbitraryValue
+                    ]
+                }
+            ],
+            /**
+       * Grid Column Start
+       * @see https://tailwindcss.com/docs/grid-column
+       */ 'col-start': [
+                {
+                    'col-start': getNumberWithAutoAndArbitrary()
+                }
+            ],
+            /**
+       * Grid Column End
+       * @see https://tailwindcss.com/docs/grid-column
+       */ 'col-end': [
+                {
+                    'col-end': getNumberWithAutoAndArbitrary()
+                }
+            ],
+            /**
+       * Grid Template Rows
+       * @see https://tailwindcss.com/docs/grid-template-rows
+       */ 'grid-rows': [
+                {
+                    'grid-rows': [
+                        isAny
+                    ]
+                }
+            ],
+            /**
+       * Grid Row Start / End
+       * @see https://tailwindcss.com/docs/grid-row
+       */ 'row-start-end': [
+                {
+                    row: [
+                        'auto',
+                        {
+                            span: [
+                                isInteger,
+                                isArbitraryValue
+                            ]
+                        },
+                        isArbitraryValue
+                    ]
+                }
+            ],
+            /**
+       * Grid Row Start
+       * @see https://tailwindcss.com/docs/grid-row
+       */ 'row-start': [
+                {
+                    'row-start': getNumberWithAutoAndArbitrary()
+                }
+            ],
+            /**
+       * Grid Row End
+       * @see https://tailwindcss.com/docs/grid-row
+       */ 'row-end': [
+                {
+                    'row-end': getNumberWithAutoAndArbitrary()
+                }
+            ],
+            /**
+       * Grid Auto Flow
+       * @see https://tailwindcss.com/docs/grid-auto-flow
+       */ 'grid-flow': [
+                {
+                    'grid-flow': [
+                        'row',
+                        'col',
+                        'dense',
+                        'row-dense',
+                        'col-dense'
+                    ]
+                }
+            ],
+            /**
+       * Grid Auto Columns
+       * @see https://tailwindcss.com/docs/grid-auto-columns
+       */ 'auto-cols': [
+                {
+                    'auto-cols': [
+                        'auto',
+                        'min',
+                        'max',
+                        'fr',
+                        isArbitraryValue
+                    ]
+                }
+            ],
+            /**
+       * Grid Auto Rows
+       * @see https://tailwindcss.com/docs/grid-auto-rows
+       */ 'auto-rows': [
+                {
+                    'auto-rows': [
+                        'auto',
+                        'min',
+                        'max',
+                        'fr',
+                        isArbitraryValue
+                    ]
+                }
+            ],
+            /**
+       * Gap
+       * @see https://tailwindcss.com/docs/gap
+       */ gap: [
+                {
+                    gap: [
+                        gap
+                    ]
+                }
+            ],
+            /**
+       * Gap X
+       * @see https://tailwindcss.com/docs/gap
+       */ 'gap-x': [
+                {
+                    'gap-x': [
+                        gap
+                    ]
+                }
+            ],
+            /**
+       * Gap Y
+       * @see https://tailwindcss.com/docs/gap
+       */ 'gap-y': [
+                {
+                    'gap-y': [
+                        gap
+                    ]
+                }
+            ],
+            /**
+       * Justify Content
+       * @see https://tailwindcss.com/docs/justify-content
+       */ 'justify-content': [
+                {
+                    justify: [
+                        'normal',
+                        ...getAlign()
+                    ]
+                }
+            ],
+            /**
+       * Justify Items
+       * @see https://tailwindcss.com/docs/justify-items
+       */ 'justify-items': [
+                {
+                    'justify-items': [
+                        'start',
+                        'end',
+                        'center',
+                        'stretch'
+                    ]
+                }
+            ],
+            /**
+       * Justify Self
+       * @see https://tailwindcss.com/docs/justify-self
+       */ 'justify-self': [
+                {
+                    'justify-self': [
+                        'auto',
+                        'start',
+                        'end',
+                        'center',
+                        'stretch'
+                    ]
+                }
+            ],
+            /**
+       * Align Content
+       * @see https://tailwindcss.com/docs/align-content
+       */ 'align-content': [
+                {
+                    content: [
+                        'normal',
+                        ...getAlign(),
+                        'baseline'
+                    ]
+                }
+            ],
+            /**
+       * Align Items
+       * @see https://tailwindcss.com/docs/align-items
+       */ 'align-items': [
+                {
+                    items: [
+                        'start',
+                        'end',
+                        'center',
+                        'baseline',
+                        'stretch'
+                    ]
+                }
+            ],
+            /**
+       * Align Self
+       * @see https://tailwindcss.com/docs/align-self
+       */ 'align-self': [
+                {
+                    self: [
+                        'auto',
+                        'start',
+                        'end',
+                        'center',
+                        'stretch',
+                        'baseline'
+                    ]
+                }
+            ],
+            /**
+       * Place Content
+       * @see https://tailwindcss.com/docs/place-content
+       */ 'place-content': [
+                {
+                    'place-content': [
+                        ...getAlign(),
+                        'baseline'
+                    ]
+                }
+            ],
+            /**
+       * Place Items
+       * @see https://tailwindcss.com/docs/place-items
+       */ 'place-items': [
+                {
+                    'place-items': [
+                        'start',
+                        'end',
+                        'center',
+                        'baseline',
+                        'stretch'
+                    ]
+                }
+            ],
+            /**
+       * Place Self
+       * @see https://tailwindcss.com/docs/place-self
+       */ 'place-self': [
+                {
+                    'place-self': [
+                        'auto',
+                        'start',
+                        'end',
+                        'center',
+                        'stretch'
+                    ]
+                }
+            ],
+            // Spacing
+            /**
+       * Padding
+       * @see https://tailwindcss.com/docs/padding
+       */ p: [
+                {
+                    p: [
+                        padding
+                    ]
+                }
+            ],
+            /**
+       * Padding X
+       * @see https://tailwindcss.com/docs/padding
+       */ px: [
+                {
+                    px: [
+                        padding
+                    ]
+                }
+            ],
+            /**
+       * Padding Y
+       * @see https://tailwindcss.com/docs/padding
+       */ py: [
+                {
+                    py: [
+                        padding
+                    ]
+                }
+            ],
+            /**
+       * Padding Start
+       * @see https://tailwindcss.com/docs/padding
+       */ ps: [
+                {
+                    ps: [
+                        padding
+                    ]
+                }
+            ],
+            /**
+       * Padding End
+       * @see https://tailwindcss.com/docs/padding
+       */ pe: [
+                {
+                    pe: [
+                        padding
+                    ]
+                }
+            ],
+            /**
+       * Padding Top
+       * @see https://tailwindcss.com/docs/padding
+       */ pt: [
+                {
+                    pt: [
+                        padding
+                    ]
+                }
+            ],
+            /**
+       * Padding Right
+       * @see https://tailwindcss.com/docs/padding
+       */ pr: [
+                {
+                    pr: [
+                        padding
+                    ]
+                }
+            ],
+            /**
+       * Padding Bottom
+       * @see https://tailwindcss.com/docs/padding
+       */ pb: [
+                {
+                    pb: [
+                        padding
+                    ]
+                }
+            ],
+            /**
+       * Padding Left
+       * @see https://tailwindcss.com/docs/padding
+       */ pl: [
+                {
+                    pl: [
+                        padding
+                    ]
+                }
+            ],
+            /**
+       * Margin
+       * @see https://tailwindcss.com/docs/margin
+       */ m: [
+                {
+                    m: [
+                        margin
+                    ]
+                }
+            ],
+            /**
+       * Margin X
+       * @see https://tailwindcss.com/docs/margin
+       */ mx: [
+                {
+                    mx: [
+                        margin
+                    ]
+                }
+            ],
+            /**
+       * Margin Y
+       * @see https://tailwindcss.com/docs/margin
+       */ my: [
+                {
+                    my: [
+                        margin
+                    ]
+                }
+            ],
+            /**
+       * Margin Start
+       * @see https://tailwindcss.com/docs/margin
+       */ ms: [
+                {
+                    ms: [
+                        margin
+                    ]
+                }
+            ],
+            /**
+       * Margin End
+       * @see https://tailwindcss.com/docs/margin
+       */ me: [
+                {
+                    me: [
+                        margin
+                    ]
+                }
+            ],
+            /**
+       * Margin Top
+       * @see https://tailwindcss.com/docs/margin
+       */ mt: [
+                {
+                    mt: [
+                        margin
+                    ]
+                }
+            ],
+            /**
+       * Margin Right
+       * @see https://tailwindcss.com/docs/margin
+       */ mr: [
+                {
+                    mr: [
+                        margin
+                    ]
+                }
+            ],
+            /**
+       * Margin Bottom
+       * @see https://tailwindcss.com/docs/margin
+       */ mb: [
+                {
+                    mb: [
+                        margin
+                    ]
+                }
+            ],
+            /**
+       * Margin Left
+       * @see https://tailwindcss.com/docs/margin
+       */ ml: [
+                {
+                    ml: [
+                        margin
+                    ]
+                }
+            ],
+            /**
+       * Space Between X
+       * @see https://tailwindcss.com/docs/space
+       */ 'space-x': [
+                {
+                    'space-x': [
+                        space
+                    ]
+                }
+            ],
+            /**
+       * Space Between X Reverse
+       * @see https://tailwindcss.com/docs/space
+       */ 'space-x-reverse': [
+                'space-x-reverse'
+            ],
+            /**
+       * Space Between Y
+       * @see https://tailwindcss.com/docs/space
+       */ 'space-y': [
+                {
+                    'space-y': [
+                        space
+                    ]
+                }
+            ],
+            /**
+       * Space Between Y Reverse
+       * @see https://tailwindcss.com/docs/space
+       */ 'space-y-reverse': [
+                'space-y-reverse'
+            ],
+            // Sizing
+            /**
+       * Width
+       * @see https://tailwindcss.com/docs/width
+       */ w: [
+                {
+                    w: [
+                        'auto',
+                        'min',
+                        'max',
+                        'fit',
+                        'svw',
+                        'lvw',
+                        'dvw',
+                        isArbitraryValue,
+                        spacing
+                    ]
+                }
+            ],
+            /**
+       * Min-Width
+       * @see https://tailwindcss.com/docs/min-width
+       */ 'min-w': [
+                {
+                    'min-w': [
+                        isArbitraryValue,
+                        spacing,
+                        'min',
+                        'max',
+                        'fit'
+                    ]
+                }
+            ],
+            /**
+       * Max-Width
+       * @see https://tailwindcss.com/docs/max-width
+       */ 'max-w': [
+                {
+                    'max-w': [
+                        isArbitraryValue,
+                        spacing,
+                        'none',
+                        'full',
+                        'min',
+                        'max',
+                        'fit',
+                        'prose',
+                        {
+                            screen: [
+                                isTshirtSize
+                            ]
+                        },
+                        isTshirtSize
+                    ]
+                }
+            ],
+            /**
+       * Height
+       * @see https://tailwindcss.com/docs/height
+       */ h: [
+                {
+                    h: [
+                        isArbitraryValue,
+                        spacing,
+                        'auto',
+                        'min',
+                        'max',
+                        'fit',
+                        'svh',
+                        'lvh',
+                        'dvh'
+                    ]
+                }
+            ],
+            /**
+       * Min-Height
+       * @see https://tailwindcss.com/docs/min-height
+       */ 'min-h': [
+                {
+                    'min-h': [
+                        isArbitraryValue,
+                        spacing,
+                        'min',
+                        'max',
+                        'fit',
+                        'svh',
+                        'lvh',
+                        'dvh'
+                    ]
+                }
+            ],
+            /**
+       * Max-Height
+       * @see https://tailwindcss.com/docs/max-height
+       */ 'max-h': [
+                {
+                    'max-h': [
+                        isArbitraryValue,
+                        spacing,
+                        'min',
+                        'max',
+                        'fit',
+                        'svh',
+                        'lvh',
+                        'dvh'
+                    ]
+                }
+            ],
+            /**
+       * Size
+       * @see https://tailwindcss.com/docs/size
+       */ size: [
+                {
+                    size: [
+                        isArbitraryValue,
+                        spacing,
+                        'auto',
+                        'min',
+                        'max',
+                        'fit'
+                    ]
+                }
+            ],
+            // Typography
+            /**
+       * Font Size
+       * @see https://tailwindcss.com/docs/font-size
+       */ 'font-size': [
+                {
+                    text: [
+                        'base',
+                        isTshirtSize,
+                        isArbitraryLength
+                    ]
+                }
+            ],
+            /**
+       * Font Smoothing
+       * @see https://tailwindcss.com/docs/font-smoothing
+       */ 'font-smoothing': [
+                'antialiased',
+                'subpixel-antialiased'
+            ],
+            /**
+       * Font Style
+       * @see https://tailwindcss.com/docs/font-style
+       */ 'font-style': [
+                'italic',
+                'not-italic'
+            ],
+            /**
+       * Font Weight
+       * @see https://tailwindcss.com/docs/font-weight
+       */ 'font-weight': [
+                {
+                    font: [
+                        'thin',
+                        'extralight',
+                        'light',
+                        'normal',
+                        'medium',
+                        'semibold',
+                        'bold',
+                        'extrabold',
+                        'black',
+                        isArbitraryNumber
+                    ]
+                }
+            ],
+            /**
+       * Font Family
+       * @see https://tailwindcss.com/docs/font-family
+       */ 'font-family': [
+                {
+                    font: [
+                        isAny
+                    ]
+                }
+            ],
+            /**
+       * Font Variant Numeric
+       * @see https://tailwindcss.com/docs/font-variant-numeric
+       */ 'fvn-normal': [
+                'normal-nums'
+            ],
+            /**
+       * Font Variant Numeric
+       * @see https://tailwindcss.com/docs/font-variant-numeric
+       */ 'fvn-ordinal': [
+                'ordinal'
+            ],
+            /**
+       * Font Variant Numeric
+       * @see https://tailwindcss.com/docs/font-variant-numeric
+       */ 'fvn-slashed-zero': [
+                'slashed-zero'
+            ],
+            /**
+       * Font Variant Numeric
+       * @see https://tailwindcss.com/docs/font-variant-numeric
+       */ 'fvn-figure': [
+                'lining-nums',
+                'oldstyle-nums'
+            ],
+            /**
+       * Font Variant Numeric
+       * @see https://tailwindcss.com/docs/font-variant-numeric
+       */ 'fvn-spacing': [
+                'proportional-nums',
+                'tabular-nums'
+            ],
+            /**
+       * Font Variant Numeric
+       * @see https://tailwindcss.com/docs/font-variant-numeric
+       */ 'fvn-fraction': [
+                'diagonal-fractions',
+                'stacked-fractions'
+            ],
+            /**
+       * Letter Spacing
+       * @see https://tailwindcss.com/docs/letter-spacing
+       */ tracking: [
+                {
+                    tracking: [
+                        'tighter',
+                        'tight',
+                        'normal',
+                        'wide',
+                        'wider',
+                        'widest',
+                        isArbitraryValue
+                    ]
+                }
+            ],
+            /**
+       * Line Clamp
+       * @see https://tailwindcss.com/docs/line-clamp
+       */ 'line-clamp': [
+                {
+                    'line-clamp': [
+                        'none',
+                        isNumber,
+                        isArbitraryNumber
+                    ]
+                }
+            ],
+            /**
+       * Line Height
+       * @see https://tailwindcss.com/docs/line-height
+       */ leading: [
+                {
+                    leading: [
+                        'none',
+                        'tight',
+                        'snug',
+                        'normal',
+                        'relaxed',
+                        'loose',
+                        isLength,
+                        isArbitraryValue
+                    ]
+                }
+            ],
+            /**
+       * List Style Image
+       * @see https://tailwindcss.com/docs/list-style-image
+       */ 'list-image': [
+                {
+                    'list-image': [
+                        'none',
+                        isArbitraryValue
+                    ]
+                }
+            ],
+            /**
+       * List Style Type
+       * @see https://tailwindcss.com/docs/list-style-type
+       */ 'list-style-type': [
+                {
+                    list: [
+                        'none',
+                        'disc',
+                        'decimal',
+                        isArbitraryValue
+                    ]
+                }
+            ],
+            /**
+       * List Style Position
+       * @see https://tailwindcss.com/docs/list-style-position
+       */ 'list-style-position': [
+                {
+                    list: [
+                        'inside',
+                        'outside'
+                    ]
+                }
+            ],
+            /**
+       * Placeholder Color
+       * @deprecated since Tailwind CSS v3.0.0
+       * @see https://tailwindcss.com/docs/placeholder-color
+       */ 'placeholder-color': [
+                {
+                    placeholder: [
+                        colors
+                    ]
+                }
+            ],
+            /**
+       * Placeholder Opacity
+       * @see https://tailwindcss.com/docs/placeholder-opacity
+       */ 'placeholder-opacity': [
+                {
+                    'placeholder-opacity': [
+                        opacity
+                    ]
+                }
+            ],
+            /**
+       * Text Alignment
+       * @see https://tailwindcss.com/docs/text-align
+       */ 'text-alignment': [
+                {
+                    text: [
+                        'left',
+                        'center',
+                        'right',
+                        'justify',
+                        'start',
+                        'end'
+                    ]
+                }
+            ],
+            /**
+       * Text Color
+       * @see https://tailwindcss.com/docs/text-color
+       */ 'text-color': [
+                {
+                    text: [
+                        colors
+                    ]
+                }
+            ],
+            /**
+       * Text Opacity
+       * @see https://tailwindcss.com/docs/text-opacity
+       */ 'text-opacity': [
+                {
+                    'text-opacity': [
+                        opacity
+                    ]
+                }
+            ],
+            /**
+       * Text Decoration
+       * @see https://tailwindcss.com/docs/text-decoration
+       */ 'text-decoration': [
+                'underline',
+                'overline',
+                'line-through',
+                'no-underline'
+            ],
+            /**
+       * Text Decoration Style
+       * @see https://tailwindcss.com/docs/text-decoration-style
+       */ 'text-decoration-style': [
+                {
+                    decoration: [
+                        ...getLineStyles(),
+                        'wavy'
+                    ]
+                }
+            ],
+            /**
+       * Text Decoration Thickness
+       * @see https://tailwindcss.com/docs/text-decoration-thickness
+       */ 'text-decoration-thickness': [
+                {
+                    decoration: [
+                        'auto',
+                        'from-font',
+                        isLength,
+                        isArbitraryLength
+                    ]
+                }
+            ],
+            /**
+       * Text Underline Offset
+       * @see https://tailwindcss.com/docs/text-underline-offset
+       */ 'underline-offset': [
+                {
+                    'underline-offset': [
+                        'auto',
+                        isLength,
+                        isArbitraryValue
+                    ]
+                }
+            ],
+            /**
+       * Text Decoration Color
+       * @see https://tailwindcss.com/docs/text-decoration-color
+       */ 'text-decoration-color': [
+                {
+                    decoration: [
+                        colors
+                    ]
+                }
+            ],
+            /**
+       * Text Transform
+       * @see https://tailwindcss.com/docs/text-transform
+       */ 'text-transform': [
+                'uppercase',
+                'lowercase',
+                'capitalize',
+                'normal-case'
+            ],
+            /**
+       * Text Overflow
+       * @see https://tailwindcss.com/docs/text-overflow
+       */ 'text-overflow': [
+                'truncate',
+                'text-ellipsis',
+                'text-clip'
+            ],
+            /**
+       * Text Wrap
+       * @see https://tailwindcss.com/docs/text-wrap
+       */ 'text-wrap': [
+                {
+                    text: [
+                        'wrap',
+                        'nowrap',
+                        'balance',
+                        'pretty'
+                    ]
+                }
+            ],
+            /**
+       * Text Indent
+       * @see https://tailwindcss.com/docs/text-indent
+       */ indent: [
+                {
+                    indent: getSpacingWithArbitrary()
+                }
+            ],
+            /**
+       * Vertical Alignment
+       * @see https://tailwindcss.com/docs/vertical-align
+       */ 'vertical-align': [
+                {
+                    align: [
+                        'baseline',
+                        'top',
+                        'middle',
+                        'bottom',
+                        'text-top',
+                        'text-bottom',
+                        'sub',
+                        'super',
+                        isArbitraryValue
+                    ]
+                }
+            ],
+            /**
+       * Whitespace
+       * @see https://tailwindcss.com/docs/whitespace
+       */ whitespace: [
+                {
+                    whitespace: [
+                        'normal',
+                        'nowrap',
+                        'pre',
+                        'pre-line',
+                        'pre-wrap',
+                        'break-spaces'
+                    ]
+                }
+            ],
+            /**
+       * Word Break
+       * @see https://tailwindcss.com/docs/word-break
+       */ break: [
+                {
+                    break: [
+                        'normal',
+                        'words',
+                        'all',
+                        'keep'
+                    ]
+                }
+            ],
+            /**
+       * Hyphens
+       * @see https://tailwindcss.com/docs/hyphens
+       */ hyphens: [
+                {
+                    hyphens: [
+                        'none',
+                        'manual',
+                        'auto'
+                    ]
+                }
+            ],
+            /**
+       * Content
+       * @see https://tailwindcss.com/docs/content
+       */ content: [
+                {
+                    content: [
+                        'none',
+                        isArbitraryValue
+                    ]
+                }
+            ],
+            // Backgrounds
+            /**
+       * Background Attachment
+       * @see https://tailwindcss.com/docs/background-attachment
+       */ 'bg-attachment': [
+                {
+                    bg: [
+                        'fixed',
+                        'local',
+                        'scroll'
+                    ]
+                }
+            ],
+            /**
+       * Background Clip
+       * @see https://tailwindcss.com/docs/background-clip
+       */ 'bg-clip': [
+                {
+                    'bg-clip': [
+                        'border',
+                        'padding',
+                        'content',
+                        'text'
+                    ]
+                }
+            ],
+            /**
+       * Background Opacity
+       * @deprecated since Tailwind CSS v3.0.0
+       * @see https://tailwindcss.com/docs/background-opacity
+       */ 'bg-opacity': [
+                {
+                    'bg-opacity': [
+                        opacity
+                    ]
+                }
+            ],
+            /**
+       * Background Origin
+       * @see https://tailwindcss.com/docs/background-origin
+       */ 'bg-origin': [
+                {
+                    'bg-origin': [
+                        'border',
+                        'padding',
+                        'content'
+                    ]
+                }
+            ],
+            /**
+       * Background Position
+       * @see https://tailwindcss.com/docs/background-position
+       */ 'bg-position': [
+                {
+                    bg: [
+                        ...getPositions(),
+                        isArbitraryPosition
+                    ]
+                }
+            ],
+            /**
+       * Background Repeat
+       * @see https://tailwindcss.com/docs/background-repeat
+       */ 'bg-repeat': [
+                {
+                    bg: [
+                        'no-repeat',
+                        {
+                            repeat: [
+                                '',
+                                'x',
+                                'y',
+                                'round',
+                                'space'
+                            ]
+                        }
+                    ]
+                }
+            ],
+            /**
+       * Background Size
+       * @see https://tailwindcss.com/docs/background-size
+       */ 'bg-size': [
+                {
+                    bg: [
+                        'auto',
+                        'cover',
+                        'contain',
+                        isArbitrarySize
+                    ]
+                }
+            ],
+            /**
+       * Background Image
+       * @see https://tailwindcss.com/docs/background-image
+       */ 'bg-image': [
+                {
+                    bg: [
+                        'none',
+                        {
+                            'gradient-to': [
+                                't',
+                                'tr',
+                                'r',
+                                'br',
+                                'b',
+                                'bl',
+                                'l',
+                                'tl'
+                            ]
+                        },
+                        isArbitraryImage
+                    ]
+                }
+            ],
+            /**
+       * Background Color
+       * @see https://tailwindcss.com/docs/background-color
+       */ 'bg-color': [
+                {
+                    bg: [
+                        colors
+                    ]
+                }
+            ],
+            /**
+       * Gradient Color Stops From Position
+       * @see https://tailwindcss.com/docs/gradient-color-stops
+       */ 'gradient-from-pos': [
+                {
+                    from: [
+                        gradientColorStopPositions
+                    ]
+                }
+            ],
+            /**
+       * Gradient Color Stops Via Position
+       * @see https://tailwindcss.com/docs/gradient-color-stops
+       */ 'gradient-via-pos': [
+                {
+                    via: [
+                        gradientColorStopPositions
+                    ]
+                }
+            ],
+            /**
+       * Gradient Color Stops To Position
+       * @see https://tailwindcss.com/docs/gradient-color-stops
+       */ 'gradient-to-pos': [
+                {
+                    to: [
+                        gradientColorStopPositions
+                    ]
+                }
+            ],
+            /**
+       * Gradient Color Stops From
+       * @see https://tailwindcss.com/docs/gradient-color-stops
+       */ 'gradient-from': [
+                {
+                    from: [
+                        gradientColorStops
+                    ]
+                }
+            ],
+            /**
+       * Gradient Color Stops Via
+       * @see https://tailwindcss.com/docs/gradient-color-stops
+       */ 'gradient-via': [
+                {
+                    via: [
+                        gradientColorStops
+                    ]
+                }
+            ],
+            /**
+       * Gradient Color Stops To
+       * @see https://tailwindcss.com/docs/gradient-color-stops
+       */ 'gradient-to': [
+                {
+                    to: [
+                        gradientColorStops
+                    ]
+                }
+            ],
+            // Borders
+            /**
+       * Border Radius
+       * @see https://tailwindcss.com/docs/border-radius
+       */ rounded: [
+                {
+                    rounded: [
+                        borderRadius
+                    ]
+                }
+            ],
+            /**
+       * Border Radius Start
+       * @see https://tailwindcss.com/docs/border-radius
+       */ 'rounded-s': [
+                {
+                    'rounded-s': [
+                        borderRadius
+                    ]
+                }
+            ],
+            /**
+       * Border Radius End
+       * @see https://tailwindcss.com/docs/border-radius
+       */ 'rounded-e': [
+                {
+                    'rounded-e': [
+                        borderRadius
+                    ]
+                }
+            ],
+            /**
+       * Border Radius Top
+       * @see https://tailwindcss.com/docs/border-radius
+       */ 'rounded-t': [
+                {
+                    'rounded-t': [
+                        borderRadius
+                    ]
+                }
+            ],
+            /**
+       * Border Radius Right
+       * @see https://tailwindcss.com/docs/border-radius
+       */ 'rounded-r': [
+                {
+                    'rounded-r': [
+                        borderRadius
+                    ]
+                }
+            ],
+            /**
+       * Border Radius Bottom
+       * @see https://tailwindcss.com/docs/border-radius
+       */ 'rounded-b': [
+                {
+                    'rounded-b': [
+                        borderRadius
+                    ]
+                }
+            ],
+            /**
+       * Border Radius Left
+       * @see https://tailwindcss.com/docs/border-radius
+       */ 'rounded-l': [
+                {
+                    'rounded-l': [
+                        borderRadius
+                    ]
+                }
+            ],
+            /**
+       * Border Radius Start Start
+       * @see https://tailwindcss.com/docs/border-radius
+       */ 'rounded-ss': [
+                {
+                    'rounded-ss': [
+                        borderRadius
+                    ]
+                }
+            ],
+            /**
+       * Border Radius Start End
+       * @see https://tailwindcss.com/docs/border-radius
+       */ 'rounded-se': [
+                {
+                    'rounded-se': [
+                        borderRadius
+                    ]
+                }
+            ],
+            /**
+       * Border Radius End End
+       * @see https://tailwindcss.com/docs/border-radius
+       */ 'rounded-ee': [
+                {
+                    'rounded-ee': [
+                        borderRadius
+                    ]
+                }
+            ],
+            /**
+       * Border Radius End Start
+       * @see https://tailwindcss.com/docs/border-radius
+       */ 'rounded-es': [
+                {
+                    'rounded-es': [
+                        borderRadius
+                    ]
+                }
+            ],
+            /**
+       * Border Radius Top Left
+       * @see https://tailwindcss.com/docs/border-radius
+       */ 'rounded-tl': [
+                {
+                    'rounded-tl': [
+                        borderRadius
+                    ]
+                }
+            ],
+            /**
+       * Border Radius Top Right
+       * @see https://tailwindcss.com/docs/border-radius
+       */ 'rounded-tr': [
+                {
+                    'rounded-tr': [
+                        borderRadius
+                    ]
+                }
+            ],
+            /**
+       * Border Radius Bottom Right
+       * @see https://tailwindcss.com/docs/border-radius
+       */ 'rounded-br': [
+                {
+                    'rounded-br': [
+                        borderRadius
+                    ]
+                }
+            ],
+            /**
+       * Border Radius Bottom Left
+       * @see https://tailwindcss.com/docs/border-radius
+       */ 'rounded-bl': [
+                {
+                    'rounded-bl': [
+                        borderRadius
+                    ]
+                }
+            ],
+            /**
+       * Border Width
+       * @see https://tailwindcss.com/docs/border-width
+       */ 'border-w': [
+                {
+                    border: [
+                        borderWidth
+                    ]
+                }
+            ],
+            /**
+       * Border Width X
+       * @see https://tailwindcss.com/docs/border-width
+       */ 'border-w-x': [
+                {
+                    'border-x': [
+                        borderWidth
+                    ]
+                }
+            ],
+            /**
+       * Border Width Y
+       * @see https://tailwindcss.com/docs/border-width
+       */ 'border-w-y': [
+                {
+                    'border-y': [
+                        borderWidth
+                    ]
+                }
+            ],
+            /**
+       * Border Width Start
+       * @see https://tailwindcss.com/docs/border-width
+       */ 'border-w-s': [
+                {
+                    'border-s': [
+                        borderWidth
+                    ]
+                }
+            ],
+            /**
+       * Border Width End
+       * @see https://tailwindcss.com/docs/border-width
+       */ 'border-w-e': [
+                {
+                    'border-e': [
+                        borderWidth
+                    ]
+                }
+            ],
+            /**
+       * Border Width Top
+       * @see https://tailwindcss.com/docs/border-width
+       */ 'border-w-t': [
+                {
+                    'border-t': [
+                        borderWidth
+                    ]
+                }
+            ],
+            /**
+       * Border Width Right
+       * @see https://tailwindcss.com/docs/border-width
+       */ 'border-w-r': [
+                {
+                    'border-r': [
+                        borderWidth
+                    ]
+                }
+            ],
+            /**
+       * Border Width Bottom
+       * @see https://tailwindcss.com/docs/border-width
+       */ 'border-w-b': [
+                {
+                    'border-b': [
+                        borderWidth
+                    ]
+                }
+            ],
+            /**
+       * Border Width Left
+       * @see https://tailwindcss.com/docs/border-width
+       */ 'border-w-l': [
+                {
+                    'border-l': [
+                        borderWidth
+                    ]
+                }
+            ],
+            /**
+       * Border Opacity
+       * @see https://tailwindcss.com/docs/border-opacity
+       */ 'border-opacity': [
+                {
+                    'border-opacity': [
+                        opacity
+                    ]
+                }
+            ],
+            /**
+       * Border Style
+       * @see https://tailwindcss.com/docs/border-style
+       */ 'border-style': [
+                {
+                    border: [
+                        ...getLineStyles(),
+                        'hidden'
+                    ]
+                }
+            ],
+            /**
+       * Divide Width X
+       * @see https://tailwindcss.com/docs/divide-width
+       */ 'divide-x': [
+                {
+                    'divide-x': [
+                        borderWidth
+                    ]
+                }
+            ],
+            /**
+       * Divide Width X Reverse
+       * @see https://tailwindcss.com/docs/divide-width
+       */ 'divide-x-reverse': [
+                'divide-x-reverse'
+            ],
+            /**
+       * Divide Width Y
+       * @see https://tailwindcss.com/docs/divide-width
+       */ 'divide-y': [
+                {
+                    'divide-y': [
+                        borderWidth
+                    ]
+                }
+            ],
+            /**
+       * Divide Width Y Reverse
+       * @see https://tailwindcss.com/docs/divide-width
+       */ 'divide-y-reverse': [
+                'divide-y-reverse'
+            ],
+            /**
+       * Divide Opacity
+       * @see https://tailwindcss.com/docs/divide-opacity
+       */ 'divide-opacity': [
+                {
+                    'divide-opacity': [
+                        opacity
+                    ]
+                }
+            ],
+            /**
+       * Divide Style
+       * @see https://tailwindcss.com/docs/divide-style
+       */ 'divide-style': [
+                {
+                    divide: getLineStyles()
+                }
+            ],
+            /**
+       * Border Color
+       * @see https://tailwindcss.com/docs/border-color
+       */ 'border-color': [
+                {
+                    border: [
+                        borderColor
+                    ]
+                }
+            ],
+            /**
+       * Border Color X
+       * @see https://tailwindcss.com/docs/border-color
+       */ 'border-color-x': [
+                {
+                    'border-x': [
+                        borderColor
+                    ]
+                }
+            ],
+            /**
+       * Border Color Y
+       * @see https://tailwindcss.com/docs/border-color
+       */ 'border-color-y': [
+                {
+                    'border-y': [
+                        borderColor
+                    ]
+                }
+            ],
+            /**
+       * Border Color S
+       * @see https://tailwindcss.com/docs/border-color
+       */ 'border-color-s': [
+                {
+                    'border-s': [
+                        borderColor
+                    ]
+                }
+            ],
+            /**
+       * Border Color E
+       * @see https://tailwindcss.com/docs/border-color
+       */ 'border-color-e': [
+                {
+                    'border-e': [
+                        borderColor
+                    ]
+                }
+            ],
+            /**
+       * Border Color Top
+       * @see https://tailwindcss.com/docs/border-color
+       */ 'border-color-t': [
+                {
+                    'border-t': [
+                        borderColor
+                    ]
+                }
+            ],
+            /**
+       * Border Color Right
+       * @see https://tailwindcss.com/docs/border-color
+       */ 'border-color-r': [
+                {
+                    'border-r': [
+                        borderColor
+                    ]
+                }
+            ],
+            /**
+       * Border Color Bottom
+       * @see https://tailwindcss.com/docs/border-color
+       */ 'border-color-b': [
+                {
+                    'border-b': [
+                        borderColor
+                    ]
+                }
+            ],
+            /**
+       * Border Color Left
+       * @see https://tailwindcss.com/docs/border-color
+       */ 'border-color-l': [
+                {
+                    'border-l': [
+                        borderColor
+                    ]
+                }
+            ],
+            /**
+       * Divide Color
+       * @see https://tailwindcss.com/docs/divide-color
+       */ 'divide-color': [
+                {
+                    divide: [
+                        borderColor
+                    ]
+                }
+            ],
+            /**
+       * Outline Style
+       * @see https://tailwindcss.com/docs/outline-style
+       */ 'outline-style': [
+                {
+                    outline: [
+                        '',
+                        ...getLineStyles()
+                    ]
+                }
+            ],
+            /**
+       * Outline Offset
+       * @see https://tailwindcss.com/docs/outline-offset
+       */ 'outline-offset': [
+                {
+                    'outline-offset': [
+                        isLength,
+                        isArbitraryValue
+                    ]
+                }
+            ],
+            /**
+       * Outline Width
+       * @see https://tailwindcss.com/docs/outline-width
+       */ 'outline-w': [
+                {
+                    outline: [
+                        isLength,
+                        isArbitraryLength
+                    ]
+                }
+            ],
+            /**
+       * Outline Color
+       * @see https://tailwindcss.com/docs/outline-color
+       */ 'outline-color': [
+                {
+                    outline: [
+                        colors
+                    ]
+                }
+            ],
+            /**
+       * Ring Width
+       * @see https://tailwindcss.com/docs/ring-width
+       */ 'ring-w': [
+                {
+                    ring: getLengthWithEmptyAndArbitrary()
+                }
+            ],
+            /**
+       * Ring Width Inset
+       * @see https://tailwindcss.com/docs/ring-width
+       */ 'ring-w-inset': [
+                'ring-inset'
+            ],
+            /**
+       * Ring Color
+       * @see https://tailwindcss.com/docs/ring-color
+       */ 'ring-color': [
+                {
+                    ring: [
+                        colors
+                    ]
+                }
+            ],
+            /**
+       * Ring Opacity
+       * @see https://tailwindcss.com/docs/ring-opacity
+       */ 'ring-opacity': [
+                {
+                    'ring-opacity': [
+                        opacity
+                    ]
+                }
+            ],
+            /**
+       * Ring Offset Width
+       * @see https://tailwindcss.com/docs/ring-offset-width
+       */ 'ring-offset-w': [
+                {
+                    'ring-offset': [
+                        isLength,
+                        isArbitraryLength
+                    ]
+                }
+            ],
+            /**
+       * Ring Offset Color
+       * @see https://tailwindcss.com/docs/ring-offset-color
+       */ 'ring-offset-color': [
+                {
+                    'ring-offset': [
+                        colors
+                    ]
+                }
+            ],
+            // Effects
+            /**
+       * Box Shadow
+       * @see https://tailwindcss.com/docs/box-shadow
+       */ shadow: [
+                {
+                    shadow: [
+                        '',
+                        'inner',
+                        'none',
+                        isTshirtSize,
+                        isArbitraryShadow
+                    ]
+                }
+            ],
+            /**
+       * Box Shadow Color
+       * @see https://tailwindcss.com/docs/box-shadow-color
+       */ 'shadow-color': [
+                {
+                    shadow: [
+                        isAny
+                    ]
+                }
+            ],
+            /**
+       * Opacity
+       * @see https://tailwindcss.com/docs/opacity
+       */ opacity: [
+                {
+                    opacity: [
+                        opacity
+                    ]
+                }
+            ],
+            /**
+       * Mix Blend Mode
+       * @see https://tailwindcss.com/docs/mix-blend-mode
+       */ 'mix-blend': [
+                {
+                    'mix-blend': [
+                        ...getBlendModes(),
+                        'plus-lighter',
+                        'plus-darker'
+                    ]
+                }
+            ],
+            /**
+       * Background Blend Mode
+       * @see https://tailwindcss.com/docs/background-blend-mode
+       */ 'bg-blend': [
+                {
+                    'bg-blend': getBlendModes()
+                }
+            ],
+            // Filters
+            /**
+       * Filter
+       * @deprecated since Tailwind CSS v3.0.0
+       * @see https://tailwindcss.com/docs/filter
+       */ filter: [
+                {
+                    filter: [
+                        '',
+                        'none'
+                    ]
+                }
+            ],
+            /**
+       * Blur
+       * @see https://tailwindcss.com/docs/blur
+       */ blur: [
+                {
+                    blur: [
+                        blur
+                    ]
+                }
+            ],
+            /**
+       * Brightness
+       * @see https://tailwindcss.com/docs/brightness
+       */ brightness: [
+                {
+                    brightness: [
+                        brightness
+                    ]
+                }
+            ],
+            /**
+       * Contrast
+       * @see https://tailwindcss.com/docs/contrast
+       */ contrast: [
+                {
+                    contrast: [
+                        contrast
+                    ]
+                }
+            ],
+            /**
+       * Drop Shadow
+       * @see https://tailwindcss.com/docs/drop-shadow
+       */ 'drop-shadow': [
+                {
+                    'drop-shadow': [
+                        '',
+                        'none',
+                        isTshirtSize,
+                        isArbitraryValue
+                    ]
+                }
+            ],
+            /**
+       * Grayscale
+       * @see https://tailwindcss.com/docs/grayscale
+       */ grayscale: [
+                {
+                    grayscale: [
+                        grayscale
+                    ]
+                }
+            ],
+            /**
+       * Hue Rotate
+       * @see https://tailwindcss.com/docs/hue-rotate
+       */ 'hue-rotate': [
+                {
+                    'hue-rotate': [
+                        hueRotate
+                    ]
+                }
+            ],
+            /**
+       * Invert
+       * @see https://tailwindcss.com/docs/invert
+       */ invert: [
+                {
+                    invert: [
+                        invert
+                    ]
+                }
+            ],
+            /**
+       * Saturate
+       * @see https://tailwindcss.com/docs/saturate
+       */ saturate: [
+                {
+                    saturate: [
+                        saturate
+                    ]
+                }
+            ],
+            /**
+       * Sepia
+       * @see https://tailwindcss.com/docs/sepia
+       */ sepia: [
+                {
+                    sepia: [
+                        sepia
+                    ]
+                }
+            ],
+            /**
+       * Backdrop Filter
+       * @deprecated since Tailwind CSS v3.0.0
+       * @see https://tailwindcss.com/docs/backdrop-filter
+       */ 'backdrop-filter': [
+                {
+                    'backdrop-filter': [
+                        '',
+                        'none'
+                    ]
+                }
+            ],
+            /**
+       * Backdrop Blur
+       * @see https://tailwindcss.com/docs/backdrop-blur
+       */ 'backdrop-blur': [
+                {
+                    'backdrop-blur': [
+                        blur
+                    ]
+                }
+            ],
+            /**
+       * Backdrop Brightness
+       * @see https://tailwindcss.com/docs/backdrop-brightness
+       */ 'backdrop-brightness': [
+                {
+                    'backdrop-brightness': [
+                        brightness
+                    ]
+                }
+            ],
+            /**
+       * Backdrop Contrast
+       * @see https://tailwindcss.com/docs/backdrop-contrast
+       */ 'backdrop-contrast': [
+                {
+                    'backdrop-contrast': [
+                        contrast
+                    ]
+                }
+            ],
+            /**
+       * Backdrop Grayscale
+       * @see https://tailwindcss.com/docs/backdrop-grayscale
+       */ 'backdrop-grayscale': [
+                {
+                    'backdrop-grayscale': [
+                        grayscale
+                    ]
+                }
+            ],
+            /**
+       * Backdrop Hue Rotate
+       * @see https://tailwindcss.com/docs/backdrop-hue-rotate
+       */ 'backdrop-hue-rotate': [
+                {
+                    'backdrop-hue-rotate': [
+                        hueRotate
+                    ]
+                }
+            ],
+            /**
+       * Backdrop Invert
+       * @see https://tailwindcss.com/docs/backdrop-invert
+       */ 'backdrop-invert': [
+                {
+                    'backdrop-invert': [
+                        invert
+                    ]
+                }
+            ],
+            /**
+       * Backdrop Opacity
+       * @see https://tailwindcss.com/docs/backdrop-opacity
+       */ 'backdrop-opacity': [
+                {
+                    'backdrop-opacity': [
+                        opacity
+                    ]
+                }
+            ],
+            /**
+       * Backdrop Saturate
+       * @see https://tailwindcss.com/docs/backdrop-saturate
+       */ 'backdrop-saturate': [
+                {
+                    'backdrop-saturate': [
+                        saturate
+                    ]
+                }
+            ],
+            /**
+       * Backdrop Sepia
+       * @see https://tailwindcss.com/docs/backdrop-sepia
+       */ 'backdrop-sepia': [
+                {
+                    'backdrop-sepia': [
+                        sepia
+                    ]
+                }
+            ],
+            // Tables
+            /**
+       * Border Collapse
+       * @see https://tailwindcss.com/docs/border-collapse
+       */ 'border-collapse': [
+                {
+                    border: [
+                        'collapse',
+                        'separate'
+                    ]
+                }
+            ],
+            /**
+       * Border Spacing
+       * @see https://tailwindcss.com/docs/border-spacing
+       */ 'border-spacing': [
+                {
+                    'border-spacing': [
+                        borderSpacing
+                    ]
+                }
+            ],
+            /**
+       * Border Spacing X
+       * @see https://tailwindcss.com/docs/border-spacing
+       */ 'border-spacing-x': [
+                {
+                    'border-spacing-x': [
+                        borderSpacing
+                    ]
+                }
+            ],
+            /**
+       * Border Spacing Y
+       * @see https://tailwindcss.com/docs/border-spacing
+       */ 'border-spacing-y': [
+                {
+                    'border-spacing-y': [
+                        borderSpacing
+                    ]
+                }
+            ],
+            /**
+       * Table Layout
+       * @see https://tailwindcss.com/docs/table-layout
+       */ 'table-layout': [
+                {
+                    table: [
+                        'auto',
+                        'fixed'
+                    ]
+                }
+            ],
+            /**
+       * Caption Side
+       * @see https://tailwindcss.com/docs/caption-side
+       */ caption: [
+                {
+                    caption: [
+                        'top',
+                        'bottom'
+                    ]
+                }
+            ],
+            // Transitions and Animation
+            /**
+       * Tranisition Property
+       * @see https://tailwindcss.com/docs/transition-property
+       */ transition: [
+                {
+                    transition: [
+                        'none',
+                        'all',
+                        '',
+                        'colors',
+                        'opacity',
+                        'shadow',
+                        'transform',
+                        isArbitraryValue
+                    ]
+                }
+            ],
+            /**
+       * Transition Duration
+       * @see https://tailwindcss.com/docs/transition-duration
+       */ duration: [
+                {
+                    duration: getNumberAndArbitrary()
+                }
+            ],
+            /**
+       * Transition Timing Function
+       * @see https://tailwindcss.com/docs/transition-timing-function
+       */ ease: [
+                {
+                    ease: [
+                        'linear',
+                        'in',
+                        'out',
+                        'in-out',
+                        isArbitraryValue
+                    ]
+                }
+            ],
+            /**
+       * Transition Delay
+       * @see https://tailwindcss.com/docs/transition-delay
+       */ delay: [
+                {
+                    delay: getNumberAndArbitrary()
+                }
+            ],
+            /**
+       * Animation
+       * @see https://tailwindcss.com/docs/animation
+       */ animate: [
+                {
+                    animate: [
+                        'none',
+                        'spin',
+                        'ping',
+                        'pulse',
+                        'bounce',
+                        isArbitraryValue
+                    ]
+                }
+            ],
+            // Transforms
+            /**
+       * Transform
+       * @see https://tailwindcss.com/docs/transform
+       */ transform: [
+                {
+                    transform: [
+                        '',
+                        'gpu',
+                        'none'
+                    ]
+                }
+            ],
+            /**
+       * Scale
+       * @see https://tailwindcss.com/docs/scale
+       */ scale: [
+                {
+                    scale: [
+                        scale
+                    ]
+                }
+            ],
+            /**
+       * Scale X
+       * @see https://tailwindcss.com/docs/scale
+       */ 'scale-x': [
+                {
+                    'scale-x': [
+                        scale
+                    ]
+                }
+            ],
+            /**
+       * Scale Y
+       * @see https://tailwindcss.com/docs/scale
+       */ 'scale-y': [
+                {
+                    'scale-y': [
+                        scale
+                    ]
+                }
+            ],
+            /**
+       * Rotate
+       * @see https://tailwindcss.com/docs/rotate
+       */ rotate: [
+                {
+                    rotate: [
+                        isInteger,
+                        isArbitraryValue
+                    ]
+                }
+            ],
+            /**
+       * Translate X
+       * @see https://tailwindcss.com/docs/translate
+       */ 'translate-x': [
+                {
+                    'translate-x': [
+                        translate
+                    ]
+                }
+            ],
+            /**
+       * Translate Y
+       * @see https://tailwindcss.com/docs/translate
+       */ 'translate-y': [
+                {
+                    'translate-y': [
+                        translate
+                    ]
+                }
+            ],
+            /**
+       * Skew X
+       * @see https://tailwindcss.com/docs/skew
+       */ 'skew-x': [
+                {
+                    'skew-x': [
+                        skew
+                    ]
+                }
+            ],
+            /**
+       * Skew Y
+       * @see https://tailwindcss.com/docs/skew
+       */ 'skew-y': [
+                {
+                    'skew-y': [
+                        skew
+                    ]
+                }
+            ],
+            /**
+       * Transform Origin
+       * @see https://tailwindcss.com/docs/transform-origin
+       */ 'transform-origin': [
+                {
+                    origin: [
+                        'center',
+                        'top',
+                        'top-right',
+                        'right',
+                        'bottom-right',
+                        'bottom',
+                        'bottom-left',
+                        'left',
+                        'top-left',
+                        isArbitraryValue
+                    ]
+                }
+            ],
+            // Interactivity
+            /**
+       * Accent Color
+       * @see https://tailwindcss.com/docs/accent-color
+       */ accent: [
+                {
+                    accent: [
+                        'auto',
+                        colors
+                    ]
+                }
+            ],
+            /**
+       * Appearance
+       * @see https://tailwindcss.com/docs/appearance
+       */ appearance: [
+                {
+                    appearance: [
+                        'none',
+                        'auto'
+                    ]
+                }
+            ],
+            /**
+       * Cursor
+       * @see https://tailwindcss.com/docs/cursor
+       */ cursor: [
+                {
+                    cursor: [
+                        'auto',
+                        'default',
+                        'pointer',
+                        'wait',
+                        'text',
+                        'move',
+                        'help',
+                        'not-allowed',
+                        'none',
+                        'context-menu',
+                        'progress',
+                        'cell',
+                        'crosshair',
+                        'vertical-text',
+                        'alias',
+                        'copy',
+                        'no-drop',
+                        'grab',
+                        'grabbing',
+                        'all-scroll',
+                        'col-resize',
+                        'row-resize',
+                        'n-resize',
+                        'e-resize',
+                        's-resize',
+                        'w-resize',
+                        'ne-resize',
+                        'nw-resize',
+                        'se-resize',
+                        'sw-resize',
+                        'ew-resize',
+                        'ns-resize',
+                        'nesw-resize',
+                        'nwse-resize',
+                        'zoom-in',
+                        'zoom-out',
+                        isArbitraryValue
+                    ]
+                }
+            ],
+            /**
+       * Caret Color
+       * @see https://tailwindcss.com/docs/just-in-time-mode#caret-color-utilities
+       */ 'caret-color': [
+                {
+                    caret: [
+                        colors
+                    ]
+                }
+            ],
+            /**
+       * Pointer Events
+       * @see https://tailwindcss.com/docs/pointer-events
+       */ 'pointer-events': [
+                {
+                    'pointer-events': [
+                        'none',
+                        'auto'
+                    ]
+                }
+            ],
+            /**
+       * Resize
+       * @see https://tailwindcss.com/docs/resize
+       */ resize: [
+                {
+                    resize: [
+                        'none',
+                        'y',
+                        'x',
+                        ''
+                    ]
+                }
+            ],
+            /**
+       * Scroll Behavior
+       * @see https://tailwindcss.com/docs/scroll-behavior
+       */ 'scroll-behavior': [
+                {
+                    scroll: [
+                        'auto',
+                        'smooth'
+                    ]
+                }
+            ],
+            /**
+       * Scroll Margin
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */ 'scroll-m': [
+                {
+                    'scroll-m': getSpacingWithArbitrary()
+                }
+            ],
+            /**
+       * Scroll Margin X
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */ 'scroll-mx': [
+                {
+                    'scroll-mx': getSpacingWithArbitrary()
+                }
+            ],
+            /**
+       * Scroll Margin Y
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */ 'scroll-my': [
+                {
+                    'scroll-my': getSpacingWithArbitrary()
+                }
+            ],
+            /**
+       * Scroll Margin Start
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */ 'scroll-ms': [
+                {
+                    'scroll-ms': getSpacingWithArbitrary()
+                }
+            ],
+            /**
+       * Scroll Margin End
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */ 'scroll-me': [
+                {
+                    'scroll-me': getSpacingWithArbitrary()
+                }
+            ],
+            /**
+       * Scroll Margin Top
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */ 'scroll-mt': [
+                {
+                    'scroll-mt': getSpacingWithArbitrary()
+                }
+            ],
+            /**
+       * Scroll Margin Right
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */ 'scroll-mr': [
+                {
+                    'scroll-mr': getSpacingWithArbitrary()
+                }
+            ],
+            /**
+       * Scroll Margin Bottom
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */ 'scroll-mb': [
+                {
+                    'scroll-mb': getSpacingWithArbitrary()
+                }
+            ],
+            /**
+       * Scroll Margin Left
+       * @see https://tailwindcss.com/docs/scroll-margin
+       */ 'scroll-ml': [
+                {
+                    'scroll-ml': getSpacingWithArbitrary()
+                }
+            ],
+            /**
+       * Scroll Padding
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */ 'scroll-p': [
+                {
+                    'scroll-p': getSpacingWithArbitrary()
+                }
+            ],
+            /**
+       * Scroll Padding X
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */ 'scroll-px': [
+                {
+                    'scroll-px': getSpacingWithArbitrary()
+                }
+            ],
+            /**
+       * Scroll Padding Y
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */ 'scroll-py': [
+                {
+                    'scroll-py': getSpacingWithArbitrary()
+                }
+            ],
+            /**
+       * Scroll Padding Start
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */ 'scroll-ps': [
+                {
+                    'scroll-ps': getSpacingWithArbitrary()
+                }
+            ],
+            /**
+       * Scroll Padding End
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */ 'scroll-pe': [
+                {
+                    'scroll-pe': getSpacingWithArbitrary()
+                }
+            ],
+            /**
+       * Scroll Padding Top
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */ 'scroll-pt': [
+                {
+                    'scroll-pt': getSpacingWithArbitrary()
+                }
+            ],
+            /**
+       * Scroll Padding Right
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */ 'scroll-pr': [
+                {
+                    'scroll-pr': getSpacingWithArbitrary()
+                }
+            ],
+            /**
+       * Scroll Padding Bottom
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */ 'scroll-pb': [
+                {
+                    'scroll-pb': getSpacingWithArbitrary()
+                }
+            ],
+            /**
+       * Scroll Padding Left
+       * @see https://tailwindcss.com/docs/scroll-padding
+       */ 'scroll-pl': [
+                {
+                    'scroll-pl': getSpacingWithArbitrary()
+                }
+            ],
+            /**
+       * Scroll Snap Align
+       * @see https://tailwindcss.com/docs/scroll-snap-align
+       */ 'snap-align': [
+                {
+                    snap: [
+                        'start',
+                        'end',
+                        'center',
+                        'align-none'
+                    ]
+                }
+            ],
+            /**
+       * Scroll Snap Stop
+       * @see https://tailwindcss.com/docs/scroll-snap-stop
+       */ 'snap-stop': [
+                {
+                    snap: [
+                        'normal',
+                        'always'
+                    ]
+                }
+            ],
+            /**
+       * Scroll Snap Type
+       * @see https://tailwindcss.com/docs/scroll-snap-type
+       */ 'snap-type': [
+                {
+                    snap: [
+                        'none',
+                        'x',
+                        'y',
+                        'both'
+                    ]
+                }
+            ],
+            /**
+       * Scroll Snap Type Strictness
+       * @see https://tailwindcss.com/docs/scroll-snap-type
+       */ 'snap-strictness': [
+                {
+                    snap: [
+                        'mandatory',
+                        'proximity'
+                    ]
+                }
+            ],
+            /**
+       * Touch Action
+       * @see https://tailwindcss.com/docs/touch-action
+       */ touch: [
+                {
+                    touch: [
+                        'auto',
+                        'none',
+                        'manipulation'
+                    ]
+                }
+            ],
+            /**
+       * Touch Action X
+       * @see https://tailwindcss.com/docs/touch-action
+       */ 'touch-x': [
+                {
+                    'touch-pan': [
+                        'x',
+                        'left',
+                        'right'
+                    ]
+                }
+            ],
+            /**
+       * Touch Action Y
+       * @see https://tailwindcss.com/docs/touch-action
+       */ 'touch-y': [
+                {
+                    'touch-pan': [
+                        'y',
+                        'up',
+                        'down'
+                    ]
+                }
+            ],
+            /**
+       * Touch Action Pinch Zoom
+       * @see https://tailwindcss.com/docs/touch-action
+       */ 'touch-pz': [
+                'touch-pinch-zoom'
+            ],
+            /**
+       * User Select
+       * @see https://tailwindcss.com/docs/user-select
+       */ select: [
+                {
+                    select: [
+                        'none',
+                        'text',
+                        'all',
+                        'auto'
+                    ]
+                }
+            ],
+            /**
+       * Will Change
+       * @see https://tailwindcss.com/docs/will-change
+       */ 'will-change': [
+                {
+                    'will-change': [
+                        'auto',
+                        'scroll',
+                        'contents',
+                        'transform',
+                        isArbitraryValue
+                    ]
+                }
+            ],
+            // SVG
+            /**
+       * Fill
+       * @see https://tailwindcss.com/docs/fill
+       */ fill: [
+                {
+                    fill: [
+                        colors,
+                        'none'
+                    ]
+                }
+            ],
+            /**
+       * Stroke Width
+       * @see https://tailwindcss.com/docs/stroke-width
+       */ 'stroke-w': [
+                {
+                    stroke: [
+                        isLength,
+                        isArbitraryLength,
+                        isArbitraryNumber
+                    ]
+                }
+            ],
+            /**
+       * Stroke
+       * @see https://tailwindcss.com/docs/stroke
+       */ stroke: [
+                {
+                    stroke: [
+                        colors,
+                        'none'
+                    ]
+                }
+            ],
+            // Accessibility
+            /**
+       * Screen Readers
+       * @see https://tailwindcss.com/docs/screen-readers
+       */ sr: [
+                'sr-only',
+                'not-sr-only'
+            ],
+            /**
+       * Forced Color Adjust
+       * @see https://tailwindcss.com/docs/forced-color-adjust
+       */ 'forced-color-adjust': [
+                {
+                    'forced-color-adjust': [
+                        'auto',
+                        'none'
+                    ]
+                }
+            ]
+        },
+        conflictingClassGroups: {
+            overflow: [
+                'overflow-x',
+                'overflow-y'
+            ],
+            overscroll: [
+                'overscroll-x',
+                'overscroll-y'
+            ],
+            inset: [
+                'inset-x',
+                'inset-y',
+                'start',
+                'end',
+                'top',
+                'right',
+                'bottom',
+                'left'
+            ],
+            'inset-x': [
+                'right',
+                'left'
+            ],
+            'inset-y': [
+                'top',
+                'bottom'
+            ],
+            flex: [
+                'basis',
+                'grow',
+                'shrink'
+            ],
+            gap: [
+                'gap-x',
+                'gap-y'
+            ],
+            p: [
+                'px',
+                'py',
+                'ps',
+                'pe',
+                'pt',
+                'pr',
+                'pb',
+                'pl'
+            ],
+            px: [
+                'pr',
+                'pl'
+            ],
+            py: [
+                'pt',
+                'pb'
+            ],
+            m: [
+                'mx',
+                'my',
+                'ms',
+                'me',
+                'mt',
+                'mr',
+                'mb',
+                'ml'
+            ],
+            mx: [
+                'mr',
+                'ml'
+            ],
+            my: [
+                'mt',
+                'mb'
+            ],
+            size: [
+                'w',
+                'h'
+            ],
+            'font-size': [
+                'leading'
+            ],
+            'fvn-normal': [
+                'fvn-ordinal',
+                'fvn-slashed-zero',
+                'fvn-figure',
+                'fvn-spacing',
+                'fvn-fraction'
+            ],
+            'fvn-ordinal': [
+                'fvn-normal'
+            ],
+            'fvn-slashed-zero': [
+                'fvn-normal'
+            ],
+            'fvn-figure': [
+                'fvn-normal'
+            ],
+            'fvn-spacing': [
+                'fvn-normal'
+            ],
+            'fvn-fraction': [
+                'fvn-normal'
+            ],
+            'line-clamp': [
+                'display',
+                'overflow'
+            ],
+            rounded: [
+                'rounded-s',
+                'rounded-e',
+                'rounded-t',
+                'rounded-r',
+                'rounded-b',
+                'rounded-l',
+                'rounded-ss',
+                'rounded-se',
+                'rounded-ee',
+                'rounded-es',
+                'rounded-tl',
+                'rounded-tr',
+                'rounded-br',
+                'rounded-bl'
+            ],
+            'rounded-s': [
+                'rounded-ss',
+                'rounded-es'
+            ],
+            'rounded-e': [
+                'rounded-se',
+                'rounded-ee'
+            ],
+            'rounded-t': [
+                'rounded-tl',
+                'rounded-tr'
+            ],
+            'rounded-r': [
+                'rounded-tr',
+                'rounded-br'
+            ],
+            'rounded-b': [
+                'rounded-br',
+                'rounded-bl'
+            ],
+            'rounded-l': [
+                'rounded-tl',
+                'rounded-bl'
+            ],
+            'border-spacing': [
+                'border-spacing-x',
+                'border-spacing-y'
+            ],
+            'border-w': [
+                'border-w-s',
+                'border-w-e',
+                'border-w-t',
+                'border-w-r',
+                'border-w-b',
+                'border-w-l'
+            ],
+            'border-w-x': [
+                'border-w-r',
+                'border-w-l'
+            ],
+            'border-w-y': [
+                'border-w-t',
+                'border-w-b'
+            ],
+            'border-color': [
+                'border-color-s',
+                'border-color-e',
+                'border-color-t',
+                'border-color-r',
+                'border-color-b',
+                'border-color-l'
+            ],
+            'border-color-x': [
+                'border-color-r',
+                'border-color-l'
+            ],
+            'border-color-y': [
+                'border-color-t',
+                'border-color-b'
+            ],
+            'scroll-m': [
+                'scroll-mx',
+                'scroll-my',
+                'scroll-ms',
+                'scroll-me',
+                'scroll-mt',
+                'scroll-mr',
+                'scroll-mb',
+                'scroll-ml'
+            ],
+            'scroll-mx': [
+                'scroll-mr',
+                'scroll-ml'
+            ],
+            'scroll-my': [
+                'scroll-mt',
+                'scroll-mb'
+            ],
+            'scroll-p': [
+                'scroll-px',
+                'scroll-py',
+                'scroll-ps',
+                'scroll-pe',
+                'scroll-pt',
+                'scroll-pr',
+                'scroll-pb',
+                'scroll-pl'
+            ],
+            'scroll-px': [
+                'scroll-pr',
+                'scroll-pl'
+            ],
+            'scroll-py': [
+                'scroll-pt',
+                'scroll-pb'
+            ],
+            touch: [
+                'touch-x',
+                'touch-y',
+                'touch-pz'
+            ],
+            'touch-x': [
+                'touch'
+            ],
+            'touch-y': [
+                'touch'
+            ],
+            'touch-pz': [
+                'touch'
+            ]
+        },
+        conflictingClassGroupModifiers: {
+            'font-size': [
+                'leading'
+            ]
+        }
+    };
+};
+/**
+ * @param baseConfig Config where other config will be merged into. This object will be mutated.
+ * @param configExtension Partial config to merge into the `baseConfig`.
+ */ const mergeConfigs = (baseConfig, param)=>{
+    let { cacheSize, prefix, separator, experimentalParseClassName, extend = {}, override = {} } = param;
+    overrideProperty(baseConfig, 'cacheSize', cacheSize);
+    overrideProperty(baseConfig, 'prefix', prefix);
+    overrideProperty(baseConfig, 'separator', separator);
+    overrideProperty(baseConfig, 'experimentalParseClassName', experimentalParseClassName);
+    for(const configKey in override){
+        overrideConfigProperties(baseConfig[configKey], override[configKey]);
+    }
+    for(const key in extend){
+        mergeConfigProperties(baseConfig[key], extend[key]);
+    }
+    return baseConfig;
+};
+const overrideProperty = (baseObject, overrideKey, overrideValue)=>{
+    if (overrideValue !== undefined) {
+        baseObject[overrideKey] = overrideValue;
+    }
+};
+const overrideConfigProperties = (baseObject, overrideObject)=>{
+    if (overrideObject) {
+        for(const key in overrideObject){
+            overrideProperty(baseObject, key, overrideObject[key]);
+        }
+    }
+};
+const mergeConfigProperties = (baseObject, mergeObject)=>{
+    if (mergeObject) {
+        for(const key in mergeObject){
+            const mergeValue = mergeObject[key];
+            if (mergeValue !== undefined) {
+                baseObject[key] = (baseObject[key] || []).concat(mergeValue);
+            }
+        }
+    }
+};
+const extendTailwindMerge = function(configExtension) {
+    for(var _len = arguments.length, createConfig = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++){
+        createConfig[_key - 1] = arguments[_key];
+    }
+    return typeof configExtension === 'function' ? createTailwindMerge(getDefaultConfig, configExtension, ...createConfig) : createTailwindMerge(()=>mergeConfigs(getDefaultConfig(), configExtension), ...createConfig);
+};
+const twMerge = /*#__PURE__*/ createTailwindMerge(getDefaultConfig);
+;
+ //# sourceMappingURL=bundle-mjs.mjs.map
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/shared/src/utils.js [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+/**
+ * @license lucide-react v0.545.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */ __turbopack_context__.s([
+    "hasA11yProp",
+    ()=>hasA11yProp,
+    "mergeClasses",
+    ()=>mergeClasses,
+    "toCamelCase",
+    ()=>toCamelCase,
+    "toKebabCase",
+    ()=>toKebabCase,
+    "toPascalCase",
+    ()=>toPascalCase
+]);
+const toKebabCase = (string)=>string.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
+const toCamelCase = (string)=>string.replace(/^([A-Z])|[\s-_]+(\w)/g, (match, p1, p2)=>p2 ? p2.toUpperCase() : p1.toLowerCase());
+const toPascalCase = (string)=>{
+    const camelCase = toCamelCase(string);
+    return camelCase.charAt(0).toUpperCase() + camelCase.slice(1);
+};
+const mergeClasses = function() {
+    for(var _len = arguments.length, classes = new Array(_len), _key = 0; _key < _len; _key++){
+        classes[_key] = arguments[_key];
+    }
+    return classes.filter((className, index, array)=>{
+        return Boolean(className) && className.trim() !== "" && array.indexOf(className) === index;
+    }).join(" ").trim();
+};
+const hasA11yProp = (props)=>{
+    for(const prop in props){
+        if (prop.startsWith("aria-") || prop === "role" || prop === "title") {
+            return true;
+        }
+    }
+};
+;
+ //# sourceMappingURL=utils.js.map
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/defaultAttributes.js [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+/**
+ * @license lucide-react v0.545.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */ __turbopack_context__.s([
+    "default",
+    ()=>defaultAttributes
+]);
+var defaultAttributes = {
+    xmlns: "http://www.w3.org/2000/svg",
+    width: 24,
+    height: 24,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 2,
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+};
+;
+ //# sourceMappingURL=defaultAttributes.js.map
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/Icon.js [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+/**
+ * @license lucide-react v0.545.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */ __turbopack_context__.s([
+    "default",
+    ()=>Icon
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$defaultAttributes$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/defaultAttributes.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$shared$2f$src$2f$utils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/shared/src/utils.js [app-client] (ecmascript)");
+;
+;
+;
+const Icon = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["forwardRef"])((param, ref)=>{
+    let { color = "currentColor", size = 24, strokeWidth = 2, absoluteStrokeWidth, className = "", children, iconNode, ...rest } = param;
+    return (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"])("svg", {
+        ref,
+        ...__TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$defaultAttributes$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"],
+        width: size,
+        height: size,
+        stroke: color,
+        strokeWidth: absoluteStrokeWidth ? Number(strokeWidth) * 24 / Number(size) : strokeWidth,
+        className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$shared$2f$src$2f$utils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["mergeClasses"])("lucide", className),
+        ...!children && !(0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$shared$2f$src$2f$utils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["hasA11yProp"])(rest) && {
+            "aria-hidden": "true"
+        },
+        ...rest
+    }, [
+        ...iconNode.map((param)=>{
+            let [tag, attrs] = param;
+            return (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"])(tag, attrs);
+        }),
+        ...Array.isArray(children) ? children : [
+            children
+        ]
+    ]);
+});
+;
+ //# sourceMappingURL=Icon.js.map
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/createLucideIcon.js [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+/**
+ * @license lucide-react v0.545.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */ __turbopack_context__.s([
+    "default",
+    ()=>createLucideIcon
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$shared$2f$src$2f$utils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/shared/src/utils.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$Icon$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/Icon.js [app-client] (ecmascript)");
+;
+;
+;
+const createLucideIcon = (iconName, iconNode)=>{
+    const Component = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["forwardRef"])((param, ref)=>{
+        let { className, ...props } = param;
+        return (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createElement"])(__TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$Icon$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+            ref,
+            iconNode,
+            className: (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$shared$2f$src$2f$utils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["mergeClasses"])("lucide-".concat((0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$shared$2f$src$2f$utils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toKebabCase"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$shared$2f$src$2f$utils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toPascalCase"])(iconName))), "lucide-".concat(iconName), className),
+            ...props
+        });
+    });
+    Component.displayName = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$shared$2f$src$2f$utils$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toPascalCase"])(iconName);
+    return Component;
+};
+;
+ //# sourceMappingURL=createLucideIcon.js.map
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/database.js [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+/**
+ * @license lucide-react v0.545.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */ __turbopack_context__.s([
+    "__iconNode",
+    ()=>__iconNode,
+    "default",
+    ()=>Database
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$createLucideIcon$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/createLucideIcon.js [app-client] (ecmascript)");
+;
+const __iconNode = [
+    [
+        "ellipse",
+        {
+            cx: "12",
+            cy: "5",
+            rx: "9",
+            ry: "3",
+            key: "msslwz"
+        }
+    ],
+    [
+        "path",
+        {
+            d: "M3 5V19A9 3 0 0 0 21 19V5",
+            key: "1wlel7"
+        }
+    ],
+    [
+        "path",
+        {
+            d: "M3 12A9 3 0 0 0 21 12",
+            key: "mv7ke4"
+        }
+    ]
+];
+const Database = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$createLucideIcon$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])("database", __iconNode);
+;
+ //# sourceMappingURL=database.js.map
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/database.js [app-client] (ecmascript) <export default as Database>", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "Database",
+    ()=>__TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$database$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"]
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$database$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/database.js [app-client] (ecmascript)");
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/server.js [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+/**
+ * @license lucide-react v0.545.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */ __turbopack_context__.s([
+    "__iconNode",
+    ()=>__iconNode,
+    "default",
+    ()=>Server
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$createLucideIcon$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/createLucideIcon.js [app-client] (ecmascript)");
+;
+const __iconNode = [
+    [
+        "rect",
+        {
+            width: "20",
+            height: "8",
+            x: "2",
+            y: "2",
+            rx: "2",
+            ry: "2",
+            key: "ngkwjq"
+        }
+    ],
+    [
+        "rect",
+        {
+            width: "20",
+            height: "8",
+            x: "2",
+            y: "14",
+            rx: "2",
+            ry: "2",
+            key: "iecqi9"
+        }
+    ],
+    [
+        "line",
+        {
+            x1: "6",
+            x2: "6.01",
+            y1: "6",
+            y2: "6",
+            key: "16zg32"
+        }
+    ],
+    [
+        "line",
+        {
+            x1: "6",
+            x2: "6.01",
+            y1: "18",
+            y2: "18",
+            key: "nzw8ys"
+        }
+    ]
+];
+const Server = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$createLucideIcon$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])("server", __iconNode);
+;
+ //# sourceMappingURL=server.js.map
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/server.js [app-client] (ecmascript) <export default as Server>", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "Server",
+    ()=>__TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$server$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"]
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$server$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/server.js [app-client] (ecmascript)");
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/shield.js [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+/**
+ * @license lucide-react v0.545.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */ __turbopack_context__.s([
+    "__iconNode",
+    ()=>__iconNode,
+    "default",
+    ()=>Shield
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$createLucideIcon$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/createLucideIcon.js [app-client] (ecmascript)");
+;
+const __iconNode = [
+    [
+        "path",
+        {
+            d: "M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z",
+            key: "oel41y"
+        }
+    ]
+];
+const Shield = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$createLucideIcon$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])("shield", __iconNode);
+;
+ //# sourceMappingURL=shield.js.map
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/shield.js [app-client] (ecmascript) <export default as Shield>", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "Shield",
+    ()=>__TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$shield$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"]
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$shield$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/shield.js [app-client] (ecmascript)");
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/search.js [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+/**
+ * @license lucide-react v0.545.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */ __turbopack_context__.s([
+    "__iconNode",
+    ()=>__iconNode,
+    "default",
+    ()=>Search
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$createLucideIcon$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/createLucideIcon.js [app-client] (ecmascript)");
+;
+const __iconNode = [
+    [
+        "path",
+        {
+            d: "m21 21-4.34-4.34",
+            key: "14j7rj"
+        }
+    ],
+    [
+        "circle",
+        {
+            cx: "11",
+            cy: "11",
+            r: "8",
+            key: "4ej97u"
+        }
+    ]
+];
+const Search = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$createLucideIcon$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])("search", __iconNode);
+;
+ //# sourceMappingURL=search.js.map
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/search.js [app-client] (ecmascript) <export default as Search>", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "Search",
+    ()=>__TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$search$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"]
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$search$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/search.js [app-client] (ecmascript)");
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/hard-drive.js [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+/**
+ * @license lucide-react v0.545.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */ __turbopack_context__.s([
+    "__iconNode",
+    ()=>__iconNode,
+    "default",
+    ()=>HardDrive
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$createLucideIcon$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/createLucideIcon.js [app-client] (ecmascript)");
+;
+const __iconNode = [
+    [
+        "line",
+        {
+            x1: "22",
+            x2: "2",
+            y1: "12",
+            y2: "12",
+            key: "1y58io"
+        }
+    ],
+    [
+        "path",
+        {
+            d: "M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z",
+            key: "oot6mr"
+        }
+    ],
+    [
+        "line",
+        {
+            x1: "6",
+            x2: "6.01",
+            y1: "16",
+            y2: "16",
+            key: "sgf278"
+        }
+    ],
+    [
+        "line",
+        {
+            x1: "10",
+            x2: "10.01",
+            y1: "16",
+            y2: "16",
+            key: "1l4acy"
+        }
+    ]
+];
+const HardDrive = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$createLucideIcon$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])("hard-drive", __iconNode);
+;
+ //# sourceMappingURL=hard-drive.js.map
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/hard-drive.js [app-client] (ecmascript) <export default as HardDrive>", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "HardDrive",
+    ()=>__TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$hard$2d$drive$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"]
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$hard$2d$drive$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/hard-drive.js [app-client] (ecmascript)");
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/activity.js [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+/**
+ * @license lucide-react v0.545.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */ __turbopack_context__.s([
+    "__iconNode",
+    ()=>__iconNode,
+    "default",
+    ()=>Activity
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$createLucideIcon$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/createLucideIcon.js [app-client] (ecmascript)");
+;
+const __iconNode = [
+    [
+        "path",
+        {
+            d: "M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2",
+            key: "169zse"
+        }
+    ]
+];
+const Activity = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$createLucideIcon$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])("activity", __iconNode);
+;
+ //# sourceMappingURL=activity.js.map
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/activity.js [app-client] (ecmascript) <export default as Activity>", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "Activity",
+    ()=>__TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$activity$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"]
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$activity$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/activity.js [app-client] (ecmascript)");
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/x.js [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+/**
+ * @license lucide-react v0.545.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */ __turbopack_context__.s([
+    "__iconNode",
+    ()=>__iconNode,
+    "default",
+    ()=>X
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$createLucideIcon$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/createLucideIcon.js [app-client] (ecmascript)");
+;
+const __iconNode = [
+    [
+        "path",
+        {
+            d: "M18 6 6 18",
+            key: "1bl5f8"
+        }
+    ],
+    [
+        "path",
+        {
+            d: "m6 6 12 12",
+            key: "d8bk6v"
+        }
+    ]
+];
+const X = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$createLucideIcon$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])("x", __iconNode);
+;
+ //# sourceMappingURL=x.js.map
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/x.js [app-client] (ecmascript) <export default as X>", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "X",
+    ()=>__TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$x$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"]
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$x$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/x.js [app-client] (ecmascript)");
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/arrow-up-right.js [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+/**
+ * @license lucide-react v0.545.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */ __turbopack_context__.s([
+    "__iconNode",
+    ()=>__iconNode,
+    "default",
+    ()=>ArrowUpRight
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$createLucideIcon$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/createLucideIcon.js [app-client] (ecmascript)");
+;
+const __iconNode = [
+    [
+        "path",
+        {
+            d: "M7 7h10v10",
+            key: "1tivn9"
+        }
+    ],
+    [
+        "path",
+        {
+            d: "M7 17 17 7",
+            key: "1vkiza"
+        }
+    ]
+];
+const ArrowUpRight = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$createLucideIcon$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])("arrow-up-right", __iconNode);
+;
+ //# sourceMappingURL=arrow-up-right.js.map
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/arrow-up-right.js [app-client] (ecmascript) <export default as ArrowUpRight>", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "ArrowUpRight",
+    ()=>__TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$arrow$2d$up$2d$right$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"]
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$arrow$2d$up$2d$right$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/arrow-up-right.js [app-client] (ecmascript)");
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/mail.js [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+/**
+ * @license lucide-react v0.545.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */ __turbopack_context__.s([
+    "__iconNode",
+    ()=>__iconNode,
+    "default",
+    ()=>Mail
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$createLucideIcon$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/createLucideIcon.js [app-client] (ecmascript)");
+;
+const __iconNode = [
+    [
+        "path",
+        {
+            d: "m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7",
+            key: "132q7q"
+        }
+    ],
+    [
+        "rect",
+        {
+            x: "2",
+            y: "4",
+            width: "20",
+            height: "16",
+            rx: "2",
+            key: "izxlao"
+        }
+    ]
+];
+const Mail = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$createLucideIcon$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])("mail", __iconNode);
+;
+ //# sourceMappingURL=mail.js.map
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/mail.js [app-client] (ecmascript) <export default as Mail>", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "Mail",
+    ()=>__TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$mail$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"]
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$mail$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/mail.js [app-client] (ecmascript)");
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/phone.js [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+/**
+ * @license lucide-react v0.545.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */ __turbopack_context__.s([
+    "__iconNode",
+    ()=>__iconNode,
+    "default",
+    ()=>Phone
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$createLucideIcon$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/createLucideIcon.js [app-client] (ecmascript)");
+;
+const __iconNode = [
+    [
+        "path",
+        {
+            d: "M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384",
+            key: "9njp5v"
+        }
+    ]
+];
+const Phone = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$createLucideIcon$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])("phone", __iconNode);
+;
+ //# sourceMappingURL=phone.js.map
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/phone.js [app-client] (ecmascript) <export default as Phone>", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "Phone",
+    ()=>__TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$phone$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"]
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$phone$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/phone.js [app-client] (ecmascript)");
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/linkedin.js [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+/**
+ * @license lucide-react v0.545.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */ __turbopack_context__.s([
+    "__iconNode",
+    ()=>__iconNode,
+    "default",
+    ()=>Linkedin
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$createLucideIcon$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/createLucideIcon.js [app-client] (ecmascript)");
+;
+const __iconNode = [
+    [
+        "path",
+        {
+            d: "M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z",
+            key: "c2jq9f"
+        }
+    ],
+    [
+        "rect",
+        {
+            width: "4",
+            height: "12",
+            x: "2",
+            y: "9",
+            key: "mk3on5"
+        }
+    ],
+    [
+        "circle",
+        {
+            cx: "4",
+            cy: "4",
+            r: "2",
+            key: "bt5ra8"
+        }
+    ]
+];
+const Linkedin = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$createLucideIcon$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])("linkedin", __iconNode);
+;
+ //# sourceMappingURL=linkedin.js.map
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/linkedin.js [app-client] (ecmascript) <export default as Linkedin>", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "Linkedin",
+    ()=>__TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$linkedin$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"]
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$linkedin$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/linkedin.js [app-client] (ecmascript)");
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/shield-check.js [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+/**
+ * @license lucide-react v0.545.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */ __turbopack_context__.s([
+    "__iconNode",
+    ()=>__iconNode,
+    "default",
+    ()=>ShieldCheck
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$createLucideIcon$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/createLucideIcon.js [app-client] (ecmascript)");
+;
+const __iconNode = [
+    [
+        "path",
+        {
+            d: "M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z",
+            key: "oel41y"
+        }
+    ],
+    [
+        "path",
+        {
+            d: "m9 12 2 2 4-4",
+            key: "dzmm74"
+        }
+    ]
+];
+const ShieldCheck = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$createLucideIcon$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])("shield-check", __iconNode);
+;
+ //# sourceMappingURL=shield-check.js.map
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/shield-check.js [app-client] (ecmascript) <export default as ShieldCheck>", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "ShieldCheck",
+    ()=>__TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$shield$2d$check$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"]
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$shield$2d$check$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/shield-check.js [app-client] (ecmascript)");
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/menu.js [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+/**
+ * @license lucide-react v0.545.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */ __turbopack_context__.s([
+    "__iconNode",
+    ()=>__iconNode,
+    "default",
+    ()=>Menu
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$createLucideIcon$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/createLucideIcon.js [app-client] (ecmascript)");
+;
+const __iconNode = [
+    [
+        "path",
+        {
+            d: "M4 5h16",
+            key: "1tepv9"
+        }
+    ],
+    [
+        "path",
+        {
+            d: "M4 12h16",
+            key: "1lakjw"
+        }
+    ],
+    [
+        "path",
+        {
+            d: "M4 19h16",
+            key: "1djgab"
+        }
+    ]
+];
+const Menu = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$createLucideIcon$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])("menu", __iconNode);
+;
+ //# sourceMappingURL=menu.js.map
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/menu.js [app-client] (ecmascript) <export default as Menu>", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "Menu",
+    ()=>__TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$menu$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"]
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$menu$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/lucide-react/dist/esm/icons/menu.js [app-client] (ecmascript)");
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/motion-dom/dist/es/scroll/observe.mjs [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "observeTimeline",
+    ()=>observeTimeline
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$frameloop$2f$frame$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/motion-dom/dist/es/frameloop/frame.mjs [app-client] (ecmascript)");
+;
+function observeTimeline(update, timeline) {
+    let prevProgress;
+    const onFrame = ()=>{
+        const { currentTime } = timeline;
+        const percentage = currentTime === null ? 0 : currentTime.value;
+        const progress = percentage / 100;
+        if (prevProgress !== progress) {
+            update(progress);
+        }
+        prevProgress = progress;
+    };
+    __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$frameloop$2f$frame$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["frame"].preUpdate(onFrame, true);
+    return ()=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$frameloop$2f$frame$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["cancelFrame"])(onFrame);
+}
+;
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/motion-dom/dist/es/resize/handle-element.mjs [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "resizeElement",
+    ()=>resizeElement
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$utils$2f$is$2d$svg$2d$element$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/motion-dom/dist/es/utils/is-svg-element.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$utils$2f$resolve$2d$elements$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/motion-dom/dist/es/utils/resolve-elements.mjs [app-client] (ecmascript)");
+;
+;
+const resizeHandlers = new WeakMap();
+let observer;
+const getSize = (borderBoxAxis, svgAxis, htmlAxis)=>(target, borderBoxSize)=>{
+        if (borderBoxSize && borderBoxSize[0]) {
+            return borderBoxSize[0][borderBoxAxis + "Size"];
+        } else if ((0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$utils$2f$is$2d$svg$2d$element$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["isSVGElement"])(target) && "getBBox" in target) {
+            return target.getBBox()[svgAxis];
+        } else {
+            return target[htmlAxis];
+        }
+    };
+const getWidth = /*@__PURE__*/ getSize("inline", "width", "offsetWidth");
+const getHeight = /*@__PURE__*/ getSize("block", "height", "offsetHeight");
+function notifyTarget(param) {
+    let { target, borderBoxSize } = param;
+    var _resizeHandlers_get;
+    (_resizeHandlers_get = resizeHandlers.get(target)) === null || _resizeHandlers_get === void 0 ? void 0 : _resizeHandlers_get.forEach((handler)=>{
+        handler(target, {
+            get width () {
+                return getWidth(target, borderBoxSize);
+            },
+            get height () {
+                return getHeight(target, borderBoxSize);
+            }
+        });
+    });
+}
+function notifyAll(entries) {
+    entries.forEach(notifyTarget);
+}
+function createResizeObserver() {
+    if (typeof ResizeObserver === "undefined") return;
+    observer = new ResizeObserver(notifyAll);
+}
+function resizeElement(target, handler) {
+    if (!observer) createResizeObserver();
+    const elements = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$utils$2f$resolve$2d$elements$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["resolveElements"])(target);
+    elements.forEach((element)=>{
+        let elementHandlers = resizeHandlers.get(element);
+        if (!elementHandlers) {
+            elementHandlers = new Set();
+            resizeHandlers.set(element, elementHandlers);
+        }
+        elementHandlers.add(handler);
+        observer === null || observer === void 0 ? void 0 : observer.observe(element);
+    });
+    return ()=>{
+        elements.forEach((element)=>{
+            const elementHandlers = resizeHandlers.get(element);
+            elementHandlers === null || elementHandlers === void 0 ? void 0 : elementHandlers.delete(handler);
+            if (!(elementHandlers === null || elementHandlers === void 0 ? void 0 : elementHandlers.size)) {
+                observer === null || observer === void 0 ? void 0 : observer.unobserve(element);
+            }
+        });
+    };
+}
+;
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/motion-dom/dist/es/resize/handle-window.mjs [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "resizeWindow",
+    ()=>resizeWindow
+]);
+const windowCallbacks = new Set();
+let windowResizeHandler;
+function createWindowResizeHandler() {
+    windowResizeHandler = ()=>{
+        const info = {
+            get width () {
+                return window.innerWidth;
+            },
+            get height () {
+                return window.innerHeight;
+            }
+        };
+        windowCallbacks.forEach((callback)=>callback(info));
+    };
+    window.addEventListener("resize", windowResizeHandler);
+}
+function resizeWindow(callback) {
+    windowCallbacks.add(callback);
+    if (!windowResizeHandler) createWindowResizeHandler();
+    return ()=>{
+        windowCallbacks.delete(callback);
+        if (!windowCallbacks.size && typeof windowResizeHandler === "function") {
+            window.removeEventListener("resize", windowResizeHandler);
+            windowResizeHandler = undefined;
+        }
+    };
+}
+;
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/motion-dom/dist/es/resize/index.mjs [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "resize",
+    ()=>resize
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$resize$2f$handle$2d$element$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/motion-dom/dist/es/resize/handle-element.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$resize$2f$handle$2d$window$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/motion-dom/dist/es/resize/handle-window.mjs [app-client] (ecmascript)");
+;
+;
+function resize(a, b) {
+    return typeof a === "function" ? (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$resize$2f$handle$2d$window$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["resizeWindow"])(a) : (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$motion$2d$dom$2f$dist$2f$es$2f$resize$2f$handle$2d$element$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["resizeElement"])(a, b);
+}
+;
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/react-hook-form/dist/index.esm.mjs [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "Controller",
+    ()=>Controller,
+    "Form",
+    ()=>Form,
+    "FormProvider",
+    ()=>FormProvider,
+    "Watch",
+    ()=>Watch,
+    "appendErrors",
+    ()=>appendErrors,
+    "createFormControl",
+    ()=>createFormControl,
+    "get",
+    ()=>get,
+    "set",
+    ()=>set,
+    "useController",
+    ()=>useController,
+    "useFieldArray",
+    ()=>useFieldArray,
+    "useForm",
+    ()=>useForm,
+    "useFormContext",
+    ()=>useFormContext,
+    "useFormState",
+    ()=>useFormState,
+    "useWatch",
+    ()=>useWatch
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+;
+var isCheckBoxInput = (element)=>element.type === 'checkbox';
+var isDateObject = (value1)=>value1 instanceof Date;
+var isNullOrUndefined = (value1)=>value1 == null;
+const isObjectType = (value1)=>typeof value1 === 'object';
+var isObject = (value1)=>!isNullOrUndefined(value1) && !Array.isArray(value1) && isObjectType(value1) && !isDateObject(value1);
+var getEventValue = (event)=>isObject(event) && event.target ? isCheckBoxInput(event.target) ? event.target.checked : event.target.value : event;
+var getNodeParentName = (name)=>name.substring(0, name.search(/\.\d+(\.|$)/)) || name;
+var isNameInFieldArray = (names, name)=>names.has(getNodeParentName(name));
+var isPlainObject = (tempObject)=>{
+    const prototypeCopy = tempObject.constructor && tempObject.constructor.prototype;
+    return isObject(prototypeCopy) && prototypeCopy.hasOwnProperty('isPrototypeOf');
+};
+var isWeb = typeof window !== 'undefined' && typeof window.HTMLElement !== 'undefined' && typeof document !== 'undefined';
+function cloneObject(data) {
+    let copy;
+    const isArray = Array.isArray(data);
+    const isFileListInstance = typeof FileList !== 'undefined' ? data instanceof FileList : false;
+    if (data instanceof Date) {
+        copy = new Date(data);
+    } else if (!(isWeb && (data instanceof Blob || isFileListInstance)) && (isArray || isObject(data))) {
+        copy = isArray ? [] : Object.create(Object.getPrototypeOf(data));
+        if (!isArray && !isPlainObject(data)) {
+            copy = data;
+        } else {
+            for(const key in data){
+                if (data.hasOwnProperty(key)) {
+                    copy[key] = cloneObject(data[key]);
+                }
+            }
+        }
+    } else {
+        return data;
+    }
+    return copy;
+}
+var isKey = (value1)=>/^\w*$/.test(value1);
+var isUndefined = (val)=>val === undefined;
+var compact = (value1)=>Array.isArray(value1) ? value1.filter(Boolean) : [];
+var stringToPath = (input)=>compact(input.replace(/["|']|\]/g, '').split(/\.|\[/));
+var get = (object, path, defaultValue)=>{
+    if (!path || !isObject(object)) {
+        return defaultValue;
+    }
+    const result = (isKey(path) ? [
+        path
+    ] : stringToPath(path)).reduce((result, key)=>isNullOrUndefined(result) ? result : result[key], object);
+    return isUndefined(result) || result === object ? isUndefined(object[path]) ? defaultValue : object[path] : result;
+};
+var isBoolean = (value1)=>typeof value1 === 'boolean';
+var set = (object, path, value1)=>{
+    let index = -1;
+    const tempPath = isKey(path) ? [
+        path
+    ] : stringToPath(path);
+    const length = tempPath.length;
+    const lastIndex = length - 1;
+    while(++index < length){
+        const key = tempPath[index];
+        let newValue = value1;
+        if (index !== lastIndex) {
+            const objValue = object[key];
+            newValue = isObject(objValue) || Array.isArray(objValue) ? objValue : !isNaN(+tempPath[index + 1]) ? [] : {};
+        }
+        if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
+            return;
+        }
+        object[key] = newValue;
+        object = object[key];
+    }
+};
+const EVENTS = {
+    BLUR: 'blur',
+    FOCUS_OUT: 'focusout',
+    CHANGE: 'change'
+};
+const VALIDATION_MODE = {
+    onBlur: 'onBlur',
+    onChange: 'onChange',
+    onSubmit: 'onSubmit',
+    onTouched: 'onTouched',
+    all: 'all'
+};
+const INPUT_VALIDATION_RULES = {
+    max: 'max',
+    min: 'min',
+    maxLength: 'maxLength',
+    minLength: 'minLength',
+    pattern: 'pattern',
+    required: 'required',
+    validate: 'validate'
+};
+const HookFormContext = __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].createContext(null);
+HookFormContext.displayName = 'HookFormContext';
+/**
+ * This custom hook allows you to access the form context. useFormContext is intended to be used in deeply nested structures, where it would become inconvenient to pass the context as a prop. To be used with {@link FormProvider}.
+ *
+ * @remarks
+ * [API](https://react-hook-form.com/docs/useformcontext) • [Demo](https://codesandbox.io/s/react-hook-form-v7-form-context-ytudi)
+ *
+ * @returns return all useForm methods
+ *
+ * @example
+ * ```tsx
+ * function App() {
+ *   const methods = useForm();
+ *   const onSubmit = data => console.log(data);
+ *
+ *   return (
+ *     <FormProvider {...methods} >
+ *       <form onSubmit={methods.handleSubmit(onSubmit)}>
+ *         <NestedInput />
+ *         <input type="submit" />
+ *       </form>
+ *     </FormProvider>
+ *   );
+ * }
+ *
+ *  function NestedInput() {
+ *   const { register } = useFormContext(); // retrieve all hook methods
+ *   return <input {...register("test")} />;
+ * }
+ * ```
+ */ const useFormContext = ()=>__TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useContext(HookFormContext);
+/**
+ * A provider component that propagates the `useForm` methods to all children components via [React Context](https://reactjs.org/docs/context.html) API. To be used with {@link useFormContext}.
+ *
+ * @remarks
+ * [API](https://react-hook-form.com/docs/useformcontext) • [Demo](https://codesandbox.io/s/react-hook-form-v7-form-context-ytudi)
+ *
+ * @param props - all useForm methods
+ *
+ * @example
+ * ```tsx
+ * function App() {
+ *   const methods = useForm();
+ *   const onSubmit = data => console.log(data);
+ *
+ *   return (
+ *     <FormProvider {...methods} >
+ *       <form onSubmit={methods.handleSubmit(onSubmit)}>
+ *         <NestedInput />
+ *         <input type="submit" />
+ *       </form>
+ *     </FormProvider>
+ *   );
+ * }
+ *
+ *  function NestedInput() {
+ *   const { register } = useFormContext(); // retrieve all hook methods
+ *   return <input {...register("test")} />;
+ * }
+ * ```
+ */ const FormProvider = (props)=>{
+    const { children, ...data } = props;
+    return __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].createElement(HookFormContext.Provider, {
+        value: data
+    }, children);
+};
+var getProxyFormState = function(formState, control, localProxyFormState) {
+    let isRoot = arguments.length > 3 && arguments[3] !== void 0 ? arguments[3] : true;
+    const result = {
+        defaultValues: control._defaultValues
+    };
+    for(const key in formState){
+        Object.defineProperty(result, key, {
+            get: ()=>{
+                const _key = key;
+                if (control._proxyFormState[_key] !== VALIDATION_MODE.all) {
+                    control._proxyFormState[_key] = !isRoot || VALIDATION_MODE.all;
+                }
+                localProxyFormState && (localProxyFormState[_key] = true);
+                return formState[_key];
+            }
+        });
+    }
+    return result;
+};
+const useIsomorphicLayoutEffect = typeof window !== 'undefined' ? __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useLayoutEffect : __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useEffect;
+/**
+ * This custom hook allows you to subscribe to each form state, and isolate the re-render at the custom hook level. It has its scope in terms of form state subscription, so it would not affect other useFormState and useForm. Using this hook can reduce the re-render impact on large and complex form application.
+ *
+ * @remarks
+ * [API](https://react-hook-form.com/docs/useformstate) • [Demo](https://codesandbox.io/s/useformstate-75xly)
+ *
+ * @param props - include options on specify fields to subscribe. {@link UseFormStateReturn}
+ *
+ * @example
+ * ```tsx
+ * function App() {
+ *   const { register, handleSubmit, control } = useForm({
+ *     defaultValues: {
+ *     firstName: "firstName"
+ *   }});
+ *   const { dirtyFields } = useFormState({
+ *     control
+ *   });
+ *   const onSubmit = (data) => console.log(data);
+ *
+ *   return (
+ *     <form onSubmit={handleSubmit(onSubmit)}>
+ *       <input {...register("firstName")} placeholder="First Name" />
+ *       {dirtyFields.firstName && <p>Field is dirty.</p>}
+ *       <input type="submit" />
+ *     </form>
+ *   );
+ * }
+ * ```
+ */ function useFormState(props) {
+    const methods = useFormContext();
+    const { control = methods.control, disabled, name, exact } = props || {};
+    const [formState, updateFormState] = __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useState(control._formState);
+    const _localProxyFormState = __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useRef({
+        isDirty: false,
+        isLoading: false,
+        dirtyFields: false,
+        touchedFields: false,
+        validatingFields: false,
+        isValidating: false,
+        isValid: false,
+        errors: false
+    });
+    useIsomorphicLayoutEffect({
+        "useFormState.useIsomorphicLayoutEffect": ()=>control._subscribe({
+                name,
+                formState: _localProxyFormState.current,
+                exact,
+                callback: {
+                    "useFormState.useIsomorphicLayoutEffect": (formState)=>{
+                        !disabled && updateFormState({
+                            ...control._formState,
+                            ...formState
+                        });
+                    }
+                }["useFormState.useIsomorphicLayoutEffect"]
+            })
+    }["useFormState.useIsomorphicLayoutEffect"], [
+        name,
+        disabled,
+        exact
+    ]);
+    __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useEffect({
+        "useFormState.useEffect": ()=>{
+            _localProxyFormState.current.isValid && control._setValid(true);
+        }
+    }["useFormState.useEffect"], [
+        control
+    ]);
+    return __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useMemo({
+        "useFormState.useMemo": ()=>getProxyFormState(formState, control, _localProxyFormState.current, false)
+    }["useFormState.useMemo"], [
+        formState,
+        control
+    ]);
+}
+var isString = (value1)=>typeof value1 === 'string';
+var generateWatchOutput = (names, _names, formValues, isGlobal, defaultValue)=>{
+    if (isString(names)) {
+        isGlobal && _names.watch.add(names);
+        return get(formValues, names, defaultValue);
+    }
+    if (Array.isArray(names)) {
+        return names.map((fieldName)=>(isGlobal && _names.watch.add(fieldName), get(formValues, fieldName)));
+    }
+    isGlobal && (_names.watchAll = true);
+    return formValues;
+};
+var isPrimitive = (value1)=>isNullOrUndefined(value1) || !isObjectType(value1);
+function deepEqual(object1, object2) {
+    let _internal_visited = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : new WeakSet();
+    if (isPrimitive(object1) || isPrimitive(object2)) {
+        return object1 === object2;
+    }
+    if (isDateObject(object1) && isDateObject(object2)) {
+        return object1.getTime() === object2.getTime();
+    }
+    const keys1 = Object.keys(object1);
+    const keys2 = Object.keys(object2);
+    if (keys1.length !== keys2.length) {
+        return false;
+    }
+    if (_internal_visited.has(object1) || _internal_visited.has(object2)) {
+        return true;
+    }
+    _internal_visited.add(object1);
+    _internal_visited.add(object2);
+    for (const key of keys1){
+        const val1 = object1[key];
+        if (!keys2.includes(key)) {
+            return false;
+        }
+        if (key !== 'ref') {
+            const val2 = object2[key];
+            if (isDateObject(val1) && isDateObject(val2) || isObject(val1) && isObject(val2) || Array.isArray(val1) && Array.isArray(val2) ? !deepEqual(val1, val2, _internal_visited) : val1 !== val2) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+/**
+ * Custom hook to subscribe to field change and isolate re-rendering at the component level.
+ *
+ * @remarks
+ *
+ * [API](https://react-hook-form.com/docs/usewatch) • [Demo](https://codesandbox.io/s/react-hook-form-v7-ts-usewatch-h9i5e)
+ *
+ * @example
+ * ```tsx
+ * const { control } = useForm();
+ * const values = useWatch({
+ *   name: "fieldName"
+ *   control,
+ * })
+ * ```
+ */ function useWatch(props) {
+    const methods = useFormContext();
+    const { control = methods.control, name, defaultValue, disabled, exact, compute } = props || {};
+    const _defaultValue = __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useRef(defaultValue);
+    const _compute = __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useRef(compute);
+    const _computeFormValues = __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useRef(undefined);
+    _compute.current = compute;
+    const defaultValueMemo = __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useMemo({
+        "useWatch.useMemo[defaultValueMemo]": ()=>control._getWatch(name, _defaultValue.current)
+    }["useWatch.useMemo[defaultValueMemo]"], [
+        control,
+        name
+    ]);
+    const [value1, updateValue] = __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useState(_compute.current ? _compute.current(defaultValueMemo) : defaultValueMemo);
+    useIsomorphicLayoutEffect({
+        "useWatch.useIsomorphicLayoutEffect": ()=>control._subscribe({
+                name,
+                formState: {
+                    values: true
+                },
+                exact,
+                callback: {
+                    "useWatch.useIsomorphicLayoutEffect": (formState)=>{
+                        if (!disabled) {
+                            const formValues = generateWatchOutput(name, control._names, formState.values || control._formValues, false, _defaultValue.current);
+                            if (_compute.current) {
+                                const computedFormValues = _compute.current(formValues);
+                                if (!deepEqual(computedFormValues, _computeFormValues.current)) {
+                                    updateValue(computedFormValues);
+                                    _computeFormValues.current = computedFormValues;
+                                }
+                            } else {
+                                updateValue(formValues);
+                            }
+                        }
+                    }
+                }["useWatch.useIsomorphicLayoutEffect"]
+            })
+    }["useWatch.useIsomorphicLayoutEffect"], [
+        control,
+        disabled,
+        name,
+        exact
+    ]);
+    __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useEffect({
+        "useWatch.useEffect": ()=>control._removeUnmounted()
+    }["useWatch.useEffect"]);
+    return value1;
+}
+/**
+ * Custom hook to work with controlled component, this function provide you with both form and field level state. Re-render is isolated at the hook level.
+ *
+ * @remarks
+ * [API](https://react-hook-form.com/docs/usecontroller) • [Demo](https://codesandbox.io/s/usecontroller-0o8px)
+ *
+ * @param props - the path name to the form field value, and validation rules.
+ *
+ * @returns field properties, field and form state. {@link UseControllerReturn}
+ *
+ * @example
+ * ```tsx
+ * function Input(props) {
+ *   const { field, fieldState, formState } = useController(props);
+ *   return (
+ *     <div>
+ *       <input {...field} placeholder={props.name} />
+ *       <p>{fieldState.isTouched && "Touched"}</p>
+ *       <p>{formState.isSubmitted ? "submitted" : ""}</p>
+ *     </div>
+ *   );
+ * }
+ * ```
+ */ function useController(props) {
+    const methods = useFormContext();
+    const { name, disabled, control = methods.control, shouldUnregister, defaultValue } = props;
+    const isArrayField = isNameInFieldArray(control._names.array, name);
+    const defaultValueMemo = __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useMemo({
+        "useController.useMemo[defaultValueMemo]": ()=>get(control._formValues, name, get(control._defaultValues, name, defaultValue))
+    }["useController.useMemo[defaultValueMemo]"], [
+        control,
+        name,
+        defaultValue
+    ]);
+    const value1 = useWatch({
+        control,
+        name,
+        defaultValue: defaultValueMemo,
+        exact: true
+    });
+    const formState = useFormState({
+        control,
+        name,
+        exact: true
+    });
+    const _props = __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useRef(props);
+    const _previousNameRef = __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useRef(undefined);
+    const _registerProps = __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useRef(control.register(name, {
+        ...props.rules,
+        value: value1,
+        ...isBoolean(props.disabled) ? {
+            disabled: props.disabled
+        } : {}
+    }));
+    _props.current = props;
+    const fieldState = __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useMemo({
+        "useController.useMemo[fieldState]": ()=>Object.defineProperties({}, {
+                invalid: {
+                    enumerable: true,
+                    get: {
+                        "useController.useMemo[fieldState]": ()=>!!get(formState.errors, name)
+                    }["useController.useMemo[fieldState]"]
+                },
+                isDirty: {
+                    enumerable: true,
+                    get: {
+                        "useController.useMemo[fieldState]": ()=>!!get(formState.dirtyFields, name)
+                    }["useController.useMemo[fieldState]"]
+                },
+                isTouched: {
+                    enumerable: true,
+                    get: {
+                        "useController.useMemo[fieldState]": ()=>!!get(formState.touchedFields, name)
+                    }["useController.useMemo[fieldState]"]
+                },
+                isValidating: {
+                    enumerable: true,
+                    get: {
+                        "useController.useMemo[fieldState]": ()=>!!get(formState.validatingFields, name)
+                    }["useController.useMemo[fieldState]"]
+                },
+                error: {
+                    enumerable: true,
+                    get: {
+                        "useController.useMemo[fieldState]": ()=>get(formState.errors, name)
+                    }["useController.useMemo[fieldState]"]
+                }
+            })
+    }["useController.useMemo[fieldState]"], [
+        formState,
+        name
+    ]);
+    const onChange = __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useCallback({
+        "useController.useCallback[onChange]": (event)=>_registerProps.current.onChange({
+                target: {
+                    value: getEventValue(event),
+                    name: name
+                },
+                type: EVENTS.CHANGE
+            })
+    }["useController.useCallback[onChange]"], [
+        name
+    ]);
+    const onBlur = __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useCallback({
+        "useController.useCallback[onBlur]": ()=>_registerProps.current.onBlur({
+                target: {
+                    value: get(control._formValues, name),
+                    name: name
+                },
+                type: EVENTS.BLUR
+            })
+    }["useController.useCallback[onBlur]"], [
+        name,
+        control._formValues
+    ]);
+    const ref = __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useCallback({
+        "useController.useCallback[ref]": (elm)=>{
+            const field = get(control._fields, name);
+            if (field && elm) {
+                field._f.ref = {
+                    focus: ({
+                        "useController.useCallback[ref]": ()=>elm.focus && elm.focus()
+                    })["useController.useCallback[ref]"],
+                    select: ({
+                        "useController.useCallback[ref]": ()=>elm.select && elm.select()
+                    })["useController.useCallback[ref]"],
+                    setCustomValidity: ({
+                        "useController.useCallback[ref]": (message)=>elm.setCustomValidity(message)
+                    })["useController.useCallback[ref]"],
+                    reportValidity: ({
+                        "useController.useCallback[ref]": ()=>elm.reportValidity()
+                    })["useController.useCallback[ref]"]
+                };
+            }
+        }
+    }["useController.useCallback[ref]"], [
+        control._fields,
+        name
+    ]);
+    const field = __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useMemo({
+        "useController.useMemo[field]": ()=>({
+                name,
+                value: value1,
+                ...isBoolean(disabled) || formState.disabled ? {
+                    disabled: formState.disabled || disabled
+                } : {},
+                onChange,
+                onBlur,
+                ref
+            })
+    }["useController.useMemo[field]"], [
+        name,
+        disabled,
+        formState.disabled,
+        onChange,
+        onBlur,
+        ref,
+        value1
+    ]);
+    __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useEffect({
+        "useController.useEffect": ()=>{
+            const _shouldUnregisterField = control._options.shouldUnregister || shouldUnregister;
+            const previousName = _previousNameRef.current;
+            if (previousName && previousName !== name && !isArrayField) {
+                control.unregister(previousName);
+            }
+            control.register(name, {
+                ..._props.current.rules,
+                ...isBoolean(_props.current.disabled) ? {
+                    disabled: _props.current.disabled
+                } : {}
+            });
+            const updateMounted = {
+                "useController.useEffect.updateMounted": (name, value1)=>{
+                    const field = get(control._fields, name);
+                    if (field && field._f) {
+                        field._f.mount = value1;
+                    }
+                }
+            }["useController.useEffect.updateMounted"];
+            updateMounted(name, true);
+            if (_shouldUnregisterField) {
+                const value1 = cloneObject(get(control._options.defaultValues, name, _props.current.defaultValue));
+                set(control._defaultValues, name, value1);
+                if (isUndefined(get(control._formValues, name))) {
+                    set(control._formValues, name, value1);
+                }
+            }
+            !isArrayField && control.register(name);
+            _previousNameRef.current = name;
+            return ({
+                "useController.useEffect": ()=>{
+                    (isArrayField ? _shouldUnregisterField && !control._state.action : _shouldUnregisterField) ? control.unregister(name) : updateMounted(name, false);
+                }
+            })["useController.useEffect"];
+        }
+    }["useController.useEffect"], [
+        name,
+        control,
+        isArrayField,
+        shouldUnregister
+    ]);
+    __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useEffect({
+        "useController.useEffect": ()=>{
+            control._setDisabledField({
+                disabled,
+                name
+            });
+        }
+    }["useController.useEffect"], [
+        disabled,
+        name,
+        control
+    ]);
+    return __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useMemo({
+        "useController.useMemo": ()=>({
+                field,
+                formState,
+                fieldState
+            })
+    }["useController.useMemo"], [
+        field,
+        formState,
+        fieldState
+    ]);
+}
+/**
+ * Component based on `useController` hook to work with controlled component.
+ *
+ * @remarks
+ * [API](https://react-hook-form.com/docs/usecontroller/controller) • [Demo](https://codesandbox.io/s/react-hook-form-v6-controller-ts-jwyzw) • [Video](https://www.youtube.com/watch?v=N2UNk_UCVyA)
+ *
+ * @param props - the path name to the form field value, and validation rules.
+ *
+ * @returns provide field handler functions, field and form state.
+ *
+ * @example
+ * ```tsx
+ * function App() {
+ *   const { control } = useForm<FormValues>({
+ *     defaultValues: {
+ *       test: ""
+ *     }
+ *   });
+ *
+ *   return (
+ *     <form>
+ *       <Controller
+ *         control={control}
+ *         name="test"
+ *         render={({ field: { onChange, onBlur, value, ref }, formState, fieldState }) => (
+ *           <>
+ *             <input
+ *               onChange={onChange} // send value to hook form
+ *               onBlur={onBlur} // notify when input is touched
+ *               value={value} // return updated value
+ *               ref={ref} // set ref for focus management
+ *             />
+ *             <p>{formState.isSubmitted ? "submitted" : ""}</p>
+ *             <p>{fieldState.isTouched ? "touched" : ""}</p>
+ *           </>
+ *         )}
+ *       />
+ *     </form>
+ *   );
+ * }
+ * ```
+ */ const Controller = (props)=>props.render(useController(props));
+const flatten = (obj)=>{
+    const output = {};
+    for (const key of Object.keys(obj)){
+        if (isObjectType(obj[key]) && obj[key] !== null) {
+            const nested = flatten(obj[key]);
+            for (const nestedKey of Object.keys(nested)){
+                output["".concat(key, ".").concat(nestedKey)] = nested[nestedKey];
+            }
+        } else {
+            output[key] = obj[key];
+        }
+    }
+    return output;
+};
+const POST_REQUEST = 'post';
+/**
+ * Form component to manage submission.
+ *
+ * @param props - to setup submission detail. {@link FormProps}
+ *
+ * @returns form component or headless render prop.
+ *
+ * @example
+ * ```tsx
+ * function App() {
+ *   const { control, formState: { errors } } = useForm();
+ *
+ *   return (
+ *     <Form action="/api" control={control}>
+ *       <input {...register("name")} />
+ *       <p>{errors?.root?.server && 'Server error'}</p>
+ *       <button>Submit</button>
+ *     </Form>
+ *   );
+ * }
+ * ```
+ */ function Form(props) {
+    const methods = useFormContext();
+    const [mounted, setMounted] = __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useState(false);
+    const { control = methods.control, onSubmit, children, action, method = POST_REQUEST, headers, encType, onError, render, onSuccess, validateStatus, ...rest } = props;
+    const submit = async (event)=>{
+        let hasError = false;
+        let type = '';
+        await control.handleSubmit(async (data)=>{
+            const formData = new FormData();
+            let formDataJson = '';
+            try {
+                formDataJson = JSON.stringify(data);
+            } catch (_a) {}
+            const flattenFormValues = flatten(control._formValues);
+            for(const key in flattenFormValues){
+                formData.append(key, flattenFormValues[key]);
+            }
+            if (onSubmit) {
+                await onSubmit({
+                    data,
+                    event,
+                    method,
+                    formData,
+                    formDataJson
+                });
+            }
+            if (action) {
+                try {
+                    const shouldStringifySubmissionData = [
+                        headers && headers['Content-Type'],
+                        encType
+                    ].some((value1)=>value1 && value1.includes('json'));
+                    const response = await fetch(String(action), {
+                        method,
+                        headers: {
+                            ...headers,
+                            ...encType && encType !== 'multipart/form-data' ? {
+                                'Content-Type': encType
+                            } : {}
+                        },
+                        body: shouldStringifySubmissionData ? formDataJson : formData
+                    });
+                    if (response && (validateStatus ? !validateStatus(response.status) : response.status < 200 || response.status >= 300)) {
+                        hasError = true;
+                        onError && onError({
+                            response
+                        });
+                        type = String(response.status);
+                    } else {
+                        onSuccess && onSuccess({
+                            response
+                        });
+                    }
+                } catch (error) {
+                    hasError = true;
+                    onError && onError({
+                        error
+                    });
+                }
+            }
+        })(event);
+        if (hasError && props.control) {
+            props.control._subjects.state.next({
+                isSubmitSuccessful: false
+            });
+            props.control.setError('root.server', {
+                type
+            });
+        }
+    };
+    __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useEffect({
+        "Form.useEffect": ()=>{
+            setMounted(true);
+        }
+    }["Form.useEffect"], []);
+    return render ? __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].createElement(__TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].Fragment, null, render({
+        submit
+    })) : __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].createElement("form", {
+        noValidate: mounted,
+        action: action,
+        method: method,
+        encType: encType,
+        onSubmit: submit,
+        ...rest
+    }, children);
+}
+var appendErrors = (name, validateAllFieldCriteria, errors, type, message)=>validateAllFieldCriteria ? {
+        ...errors[name],
+        types: {
+            ...errors[name] && errors[name].types ? errors[name].types : {},
+            [type]: message || true
+        }
+    } : {};
+var convertToArrayPayload = (value1)=>Array.isArray(value1) ? value1 : [
+        value1
+    ];
+var createSubject = ()=>{
+    let _observers = [];
+    const next = (value1)=>{
+        for (const observer of _observers){
+            observer.next && observer.next(value1);
+        }
+    };
+    const subscribe = (observer)=>{
+        _observers.push(observer);
+        return {
+            unsubscribe: ()=>{
+                _observers = _observers.filter((o)=>o !== observer);
+            }
+        };
+    };
+    const unsubscribe = ()=>{
+        _observers = [];
+    };
+    return {
+        get observers () {
+            return _observers;
+        },
+        next,
+        subscribe,
+        unsubscribe
+    };
+};
+function extractFormValues(fieldsState, formValues) {
+    const values = {};
+    for(const key in fieldsState){
+        if (fieldsState.hasOwnProperty(key)) {
+            const fieldState = fieldsState[key];
+            const fieldValue = formValues[key];
+            if (fieldState && isObject(fieldState) && fieldValue) {
+                const nestedFieldsState = extractFormValues(fieldState, fieldValue);
+                if (isObject(nestedFieldsState)) {
+                    values[key] = nestedFieldsState;
+                }
+            } else if (fieldsState[key]) {
+                values[key] = fieldValue;
+            }
+        }
+    }
+    return values;
+}
+var isEmptyObject = (value1)=>isObject(value1) && !Object.keys(value1).length;
+var isFileInput = (element)=>element.type === 'file';
+var isFunction = (value1)=>typeof value1 === 'function';
+var isHTMLElement = (value1)=>{
+    if (!isWeb) {
+        return false;
+    }
+    const owner = value1 ? value1.ownerDocument : 0;
+    return value1 instanceof (owner && owner.defaultView ? owner.defaultView.HTMLElement : HTMLElement);
+};
+var isMultipleSelect = (element)=>element.type === "select-multiple";
+var isRadioInput = (element)=>element.type === 'radio';
+var isRadioOrCheckbox = (ref)=>isRadioInput(ref) || isCheckBoxInput(ref);
+var live = (ref)=>isHTMLElement(ref) && ref.isConnected;
+function baseGet(object, updatePath) {
+    const length = updatePath.slice(0, -1).length;
+    let index = 0;
+    while(index < length){
+        object = isUndefined(object) ? index++ : object[updatePath[index++]];
+    }
+    return object;
+}
+function isEmptyArray(obj) {
+    for(const key in obj){
+        if (obj.hasOwnProperty(key) && !isUndefined(obj[key])) {
+            return false;
+        }
+    }
+    return true;
+}
+function unset(object, path) {
+    const paths = Array.isArray(path) ? path : isKey(path) ? [
+        path
+    ] : stringToPath(path);
+    const childObject = paths.length === 1 ? object : baseGet(object, paths);
+    const index = paths.length - 1;
+    const key = paths[index];
+    if (childObject) {
+        delete childObject[key];
+    }
+    if (index !== 0 && (isObject(childObject) && isEmptyObject(childObject) || Array.isArray(childObject) && isEmptyArray(childObject))) {
+        unset(object, paths.slice(0, -1));
+    }
+    return object;
+}
+var objectHasFunction = (data)=>{
+    for(const key in data){
+        if (isFunction(data[key])) {
+            return true;
+        }
+    }
+    return false;
+};
+function isTraversable(value1) {
+    return Array.isArray(value1) || isObject(value1) && !objectHasFunction(value1);
+}
+function markFieldsDirty(data) {
+    let fields = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
+    for(const key in data){
+        if (isTraversable(data[key])) {
+            fields[key] = Array.isArray(data[key]) ? [] : {};
+            markFieldsDirty(data[key], fields[key]);
+        } else if (!isUndefined(data[key])) {
+            fields[key] = true;
+        }
+    }
+    return fields;
+}
+function getDirtyFields(data, formValues, dirtyFieldsFromValues) {
+    if (!dirtyFieldsFromValues) {
+        dirtyFieldsFromValues = markFieldsDirty(formValues);
+    }
+    for(const key in data){
+        if (isTraversable(data[key])) {
+            if (isUndefined(formValues) || isPrimitive(dirtyFieldsFromValues[key])) {
+                dirtyFieldsFromValues[key] = markFieldsDirty(data[key], Array.isArray(data[key]) ? [] : {});
+            } else {
+                getDirtyFields(data[key], isNullOrUndefined(formValues) ? {} : formValues[key], dirtyFieldsFromValues[key]);
+            }
+        } else {
+            dirtyFieldsFromValues[key] = !deepEqual(data[key], formValues[key]);
+        }
+    }
+    return dirtyFieldsFromValues;
+}
+const defaultResult = {
+    value: false,
+    isValid: false
+};
+const validResult = {
+    value: true,
+    isValid: true
+};
+var getCheckboxValue = (options)=>{
+    if (Array.isArray(options)) {
+        if (options.length > 1) {
+            const values = options.filter((option)=>option && option.checked && !option.disabled).map((option)=>option.value);
+            return {
+                value: values,
+                isValid: !!values.length
+            };
+        }
+        return options[0].checked && !options[0].disabled ? options[0].attributes && !isUndefined(options[0].attributes.value) ? isUndefined(options[0].value) || options[0].value === '' ? validResult : {
+            value: options[0].value,
+            isValid: true
+        } : validResult : defaultResult;
+    }
+    return defaultResult;
+};
+var getFieldValueAs = (value1, param)=>{
+    let { valueAsNumber, valueAsDate, setValueAs } = param;
+    return isUndefined(value1) ? value1 : valueAsNumber ? value1 === '' ? NaN : value1 ? +value1 : value1 : valueAsDate && isString(value1) ? new Date(value1) : setValueAs ? setValueAs(value1) : value1;
+};
+const defaultReturn = {
+    isValid: false,
+    value: null
+};
+var getRadioValue = (options)=>Array.isArray(options) ? options.reduce((previous, option)=>option && option.checked && !option.disabled ? {
+            isValid: true,
+            value: option.value
+        } : previous, defaultReturn) : defaultReturn;
+function getFieldValue(_f) {
+    const ref = _f.ref;
+    if (isFileInput(ref)) {
+        return ref.files;
+    }
+    if (isRadioInput(ref)) {
+        return getRadioValue(_f.refs).value;
+    }
+    if (isMultipleSelect(ref)) {
+        return [
+            ...ref.selectedOptions
+        ].map((param)=>{
+            let { value: value1 } = param;
+            return value1;
+        });
+    }
+    if (isCheckBoxInput(ref)) {
+        return getCheckboxValue(_f.refs).value;
+    }
+    return getFieldValueAs(isUndefined(ref.value) ? _f.ref.value : ref.value, _f);
+}
+var getResolverOptions = (fieldsNames, _fields, criteriaMode, shouldUseNativeValidation)=>{
+    const fields = {};
+    for (const name of fieldsNames){
+        const field = get(_fields, name);
+        field && set(fields, name, field._f);
+    }
+    return {
+        criteriaMode,
+        names: [
+            ...fieldsNames
+        ],
+        fields,
+        shouldUseNativeValidation
+    };
+};
+var isRegex = (value1)=>value1 instanceof RegExp;
+var getRuleValue = (rule)=>isUndefined(rule) ? rule : isRegex(rule) ? rule.source : isObject(rule) ? isRegex(rule.value) ? rule.value.source : rule.value : rule;
+var getValidationModes = (mode)=>({
+        isOnSubmit: !mode || mode === VALIDATION_MODE.onSubmit,
+        isOnBlur: mode === VALIDATION_MODE.onBlur,
+        isOnChange: mode === VALIDATION_MODE.onChange,
+        isOnAll: mode === VALIDATION_MODE.all,
+        isOnTouch: mode === VALIDATION_MODE.onTouched
+    });
+const ASYNC_FUNCTION = 'AsyncFunction';
+var hasPromiseValidation = (fieldReference)=>!!fieldReference && !!fieldReference.validate && !!(isFunction(fieldReference.validate) && fieldReference.validate.constructor.name === ASYNC_FUNCTION || isObject(fieldReference.validate) && Object.values(fieldReference.validate).find((validateFunction)=>validateFunction.constructor.name === ASYNC_FUNCTION));
+var hasValidation = (options)=>options.mount && (options.required || options.min || options.max || options.maxLength || options.minLength || options.pattern || options.validate);
+var isWatched = (name, _names, isBlurEvent)=>!isBlurEvent && (_names.watchAll || _names.watch.has(name) || [
+        ..._names.watch
+    ].some((watchName)=>name.startsWith(watchName) && /^\.\w+/.test(name.slice(watchName.length))));
+const iterateFieldsByAction = (fields, action, fieldsNames, abortEarly)=>{
+    for (const key of fieldsNames || Object.keys(fields)){
+        const field = get(fields, key);
+        if (field) {
+            const { _f, ...currentField } = field;
+            if (_f) {
+                if (_f.refs && _f.refs[0] && action(_f.refs[0], key) && !abortEarly) {
+                    return true;
+                } else if (_f.ref && action(_f.ref, _f.name) && !abortEarly) {
+                    return true;
+                } else {
+                    if (iterateFieldsByAction(currentField, action)) {
+                        break;
+                    }
+                }
+            } else if (isObject(currentField)) {
+                if (iterateFieldsByAction(currentField, action)) {
+                    break;
+                }
+            }
+        }
+    }
+    return;
+};
+function schemaErrorLookup(errors, _fields, name) {
+    const error = get(errors, name);
+    if (error || isKey(name)) {
+        return {
+            error,
+            name
+        };
+    }
+    const names = name.split('.');
+    while(names.length){
+        const fieldName = names.join('.');
+        const field = get(_fields, fieldName);
+        const foundError = get(errors, fieldName);
+        if (field && !Array.isArray(field) && name !== fieldName) {
+            return {
+                name
+            };
+        }
+        if (foundError && foundError.type) {
+            return {
+                name: fieldName,
+                error: foundError
+            };
+        }
+        if (foundError && foundError.root && foundError.root.type) {
+            return {
+                name: "".concat(fieldName, ".root"),
+                error: foundError.root
+            };
+        }
+        names.pop();
+    }
+    return {
+        name
+    };
+}
+var shouldRenderFormState = (formStateData, _proxyFormState, updateFormState, isRoot)=>{
+    updateFormState(formStateData);
+    const { name, ...formState } = formStateData;
+    return isEmptyObject(formState) || Object.keys(formState).length >= Object.keys(_proxyFormState).length || Object.keys(formState).find((key)=>_proxyFormState[key] === (!isRoot || VALIDATION_MODE.all));
+};
+var shouldSubscribeByName = (name, signalName, exact)=>!name || !signalName || name === signalName || convertToArrayPayload(name).some((currentName)=>currentName && (exact ? currentName === signalName : currentName.startsWith(signalName) || signalName.startsWith(currentName)));
+var skipValidation = (isBlurEvent, isTouched, isSubmitted, reValidateMode, mode)=>{
+    if (mode.isOnAll) {
+        return false;
+    } else if (!isSubmitted && mode.isOnTouch) {
+        return !(isTouched || isBlurEvent);
+    } else if (isSubmitted ? reValidateMode.isOnBlur : mode.isOnBlur) {
+        return !isBlurEvent;
+    } else if (isSubmitted ? reValidateMode.isOnChange : mode.isOnChange) {
+        return isBlurEvent;
+    }
+    return true;
+};
+var unsetEmptyArray = (ref, name)=>!compact(get(ref, name)).length && unset(ref, name);
+var updateFieldArrayRootError = (errors, error, name)=>{
+    const fieldArrayErrors = convertToArrayPayload(get(errors, name));
+    set(fieldArrayErrors, 'root', error[name]);
+    set(errors, name, fieldArrayErrors);
+    return errors;
+};
+function getValidateError(result, ref) {
+    let type = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : 'validate';
+    if (isString(result) || Array.isArray(result) && result.every(isString) || isBoolean(result) && !result) {
+        return {
+            type,
+            message: isString(result) ? result : '',
+            ref
+        };
+    }
+}
+var getValueAndMessage = (validationData)=>isObject(validationData) && !isRegex(validationData) ? validationData : {
+        value: validationData,
+        message: ''
+    };
+var validateField = async (field, disabledFieldNames, formValues, validateAllFieldCriteria, shouldUseNativeValidation, isFieldArray)=>{
+    const { ref, refs, required, maxLength, minLength, min, max, pattern, validate, name, valueAsNumber, mount } = field._f;
+    const inputValue = get(formValues, name);
+    if (!mount || disabledFieldNames.has(name)) {
+        return {};
+    }
+    const inputRef = refs ? refs[0] : ref;
+    const setCustomValidity = (message)=>{
+        if (shouldUseNativeValidation && inputRef.reportValidity) {
+            inputRef.setCustomValidity(isBoolean(message) ? '' : message || '');
+            inputRef.reportValidity();
+        }
+    };
+    const error = {};
+    const isRadio = isRadioInput(ref);
+    const isCheckBox = isCheckBoxInput(ref);
+    const isRadioOrCheckbox = isRadio || isCheckBox;
+    const isEmpty = (valueAsNumber || isFileInput(ref)) && isUndefined(ref.value) && isUndefined(inputValue) || isHTMLElement(ref) && ref.value === '' || inputValue === '' || Array.isArray(inputValue) && !inputValue.length;
+    const appendErrorsCurry = appendErrors.bind(null, name, validateAllFieldCriteria, error);
+    const getMinMaxMessage = function(exceedMax, maxLengthMessage, minLengthMessage) {
+        let maxType = arguments.length > 3 && arguments[3] !== void 0 ? arguments[3] : INPUT_VALIDATION_RULES.maxLength, minType = arguments.length > 4 && arguments[4] !== void 0 ? arguments[4] : INPUT_VALIDATION_RULES.minLength;
+        const message = exceedMax ? maxLengthMessage : minLengthMessage;
+        error[name] = {
+            type: exceedMax ? maxType : minType,
+            message,
+            ref,
+            ...appendErrorsCurry(exceedMax ? maxType : minType, message)
+        };
+    };
+    if (isFieldArray ? !Array.isArray(inputValue) || !inputValue.length : required && (!isRadioOrCheckbox && (isEmpty || isNullOrUndefined(inputValue)) || isBoolean(inputValue) && !inputValue || isCheckBox && !getCheckboxValue(refs).isValid || isRadio && !getRadioValue(refs).isValid)) {
+        const { value: value1, message } = isString(required) ? {
+            value: !!required,
+            message: required
+        } : getValueAndMessage(required);
+        if (value1) {
+            error[name] = {
+                type: INPUT_VALIDATION_RULES.required,
+                message,
+                ref: inputRef,
+                ...appendErrorsCurry(INPUT_VALIDATION_RULES.required, message)
+            };
+            if (!validateAllFieldCriteria) {
+                setCustomValidity(message);
+                return error;
+            }
+        }
+    }
+    if (!isEmpty && (!isNullOrUndefined(min) || !isNullOrUndefined(max))) {
+        let exceedMax;
+        let exceedMin;
+        const maxOutput = getValueAndMessage(max);
+        const minOutput = getValueAndMessage(min);
+        if (!isNullOrUndefined(inputValue) && !isNaN(inputValue)) {
+            const valueNumber = ref.valueAsNumber || (inputValue ? +inputValue : inputValue);
+            if (!isNullOrUndefined(maxOutput.value)) {
+                exceedMax = valueNumber > maxOutput.value;
+            }
+            if (!isNullOrUndefined(minOutput.value)) {
+                exceedMin = valueNumber < minOutput.value;
+            }
+        } else {
+            const valueDate = ref.valueAsDate || new Date(inputValue);
+            const convertTimeToDate = (time)=>new Date(new Date().toDateString() + ' ' + time);
+            const isTime = ref.type == 'time';
+            const isWeek = ref.type == 'week';
+            if (isString(maxOutput.value) && inputValue) {
+                exceedMax = isTime ? convertTimeToDate(inputValue) > convertTimeToDate(maxOutput.value) : isWeek ? inputValue > maxOutput.value : valueDate > new Date(maxOutput.value);
+            }
+            if (isString(minOutput.value) && inputValue) {
+                exceedMin = isTime ? convertTimeToDate(inputValue) < convertTimeToDate(minOutput.value) : isWeek ? inputValue < minOutput.value : valueDate < new Date(minOutput.value);
+            }
+        }
+        if (exceedMax || exceedMin) {
+            getMinMaxMessage(!!exceedMax, maxOutput.message, minOutput.message, INPUT_VALIDATION_RULES.max, INPUT_VALIDATION_RULES.min);
+            if (!validateAllFieldCriteria) {
+                setCustomValidity(error[name].message);
+                return error;
+            }
+        }
+    }
+    if ((maxLength || minLength) && !isEmpty && (isString(inputValue) || isFieldArray && Array.isArray(inputValue))) {
+        const maxLengthOutput = getValueAndMessage(maxLength);
+        const minLengthOutput = getValueAndMessage(minLength);
+        const exceedMax = !isNullOrUndefined(maxLengthOutput.value) && inputValue.length > +maxLengthOutput.value;
+        const exceedMin = !isNullOrUndefined(minLengthOutput.value) && inputValue.length < +minLengthOutput.value;
+        if (exceedMax || exceedMin) {
+            getMinMaxMessage(exceedMax, maxLengthOutput.message, minLengthOutput.message);
+            if (!validateAllFieldCriteria) {
+                setCustomValidity(error[name].message);
+                return error;
+            }
+        }
+    }
+    if (pattern && !isEmpty && isString(inputValue)) {
+        const { value: patternValue, message } = getValueAndMessage(pattern);
+        if (isRegex(patternValue) && !inputValue.match(patternValue)) {
+            error[name] = {
+                type: INPUT_VALIDATION_RULES.pattern,
+                message,
+                ref,
+                ...appendErrorsCurry(INPUT_VALIDATION_RULES.pattern, message)
+            };
+            if (!validateAllFieldCriteria) {
+                setCustomValidity(message);
+                return error;
+            }
+        }
+    }
+    if (validate) {
+        if (isFunction(validate)) {
+            const result = await validate(inputValue, formValues);
+            const validateError = getValidateError(result, inputRef);
+            if (validateError) {
+                error[name] = {
+                    ...validateError,
+                    ...appendErrorsCurry(INPUT_VALIDATION_RULES.validate, validateError.message)
+                };
+                if (!validateAllFieldCriteria) {
+                    setCustomValidity(validateError.message);
+                    return error;
+                }
+            }
+        } else if (isObject(validate)) {
+            let validationResult = {};
+            for(const key in validate){
+                if (!isEmptyObject(validationResult) && !validateAllFieldCriteria) {
+                    break;
+                }
+                const validateError = getValidateError(await validate[key](inputValue, formValues), inputRef, key);
+                if (validateError) {
+                    validationResult = {
+                        ...validateError,
+                        ...appendErrorsCurry(key, validateError.message)
+                    };
+                    setCustomValidity(validateError.message);
+                    if (validateAllFieldCriteria) {
+                        error[name] = validationResult;
+                    }
+                }
+            }
+            if (!isEmptyObject(validationResult)) {
+                error[name] = {
+                    ref: inputRef,
+                    ...validationResult
+                };
+                if (!validateAllFieldCriteria) {
+                    return error;
+                }
+            }
+        }
+    }
+    setCustomValidity(true);
+    return error;
+};
+const defaultOptions = {
+    mode: VALIDATION_MODE.onSubmit,
+    reValidateMode: VALIDATION_MODE.onChange,
+    shouldFocusError: true
+};
+function createFormControl() {
+    let props = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {};
+    let _options = {
+        ...defaultOptions,
+        ...props
+    };
+    let _formState = {
+        submitCount: 0,
+        isDirty: false,
+        isReady: false,
+        isLoading: isFunction(_options.defaultValues),
+        isValidating: false,
+        isSubmitted: false,
+        isSubmitting: false,
+        isSubmitSuccessful: false,
+        isValid: false,
+        touchedFields: {},
+        dirtyFields: {},
+        validatingFields: {},
+        errors: _options.errors || {},
+        disabled: _options.disabled || false
+    };
+    let _fields = {};
+    let _defaultValues = isObject(_options.defaultValues) || isObject(_options.values) ? cloneObject(_options.defaultValues || _options.values) || {} : {};
+    let _formValues = _options.shouldUnregister ? {} : cloneObject(_defaultValues);
+    let _state = {
+        action: false,
+        mount: false,
+        watch: false
+    };
+    let _names = {
+        mount: new Set(),
+        disabled: new Set(),
+        unMount: new Set(),
+        array: new Set(),
+        watch: new Set()
+    };
+    let delayErrorCallback;
+    let timer = 0;
+    const _proxyFormState = {
+        isDirty: false,
+        dirtyFields: false,
+        validatingFields: false,
+        touchedFields: false,
+        isValidating: false,
+        isValid: false,
+        errors: false
+    };
+    let _proxySubscribeFormState = {
+        ..._proxyFormState
+    };
+    const _subjects = {
+        array: createSubject(),
+        state: createSubject()
+    };
+    const shouldDisplayAllAssociatedErrors = _options.criteriaMode === VALIDATION_MODE.all;
+    const debounce = (callback)=>(wait)=>{
+            clearTimeout(timer);
+            timer = setTimeout(callback, wait);
+        };
+    const _setValid = async (shouldUpdateValid)=>{
+        if (!_options.disabled && (_proxyFormState.isValid || _proxySubscribeFormState.isValid || shouldUpdateValid)) {
+            const isValid = _options.resolver ? isEmptyObject((await _runSchema()).errors) : await executeBuiltInValidation(_fields, true);
+            if (isValid !== _formState.isValid) {
+                _subjects.state.next({
+                    isValid
+                });
+            }
+        }
+    };
+    const _updateIsValidating = (names, isValidating)=>{
+        if (!_options.disabled && (_proxyFormState.isValidating || _proxyFormState.validatingFields || _proxySubscribeFormState.isValidating || _proxySubscribeFormState.validatingFields)) {
+            (names || Array.from(_names.mount)).forEach((name)=>{
+                if (name) {
+                    isValidating ? set(_formState.validatingFields, name, isValidating) : unset(_formState.validatingFields, name);
+                }
+            });
+            _subjects.state.next({
+                validatingFields: _formState.validatingFields,
+                isValidating: !isEmptyObject(_formState.validatingFields)
+            });
+        }
+    };
+    const _setFieldArray = function(name) {
+        let values = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : [], method = arguments.length > 2 ? arguments[2] : void 0, args = arguments.length > 3 ? arguments[3] : void 0, shouldSetValues = arguments.length > 4 && arguments[4] !== void 0 ? arguments[4] : true, shouldUpdateFieldsAndState = arguments.length > 5 && arguments[5] !== void 0 ? arguments[5] : true;
+        if (args && method && !_options.disabled) {
+            _state.action = true;
+            if (shouldUpdateFieldsAndState && Array.isArray(get(_fields, name))) {
+                const fieldValues = method(get(_fields, name), args.argA, args.argB);
+                shouldSetValues && set(_fields, name, fieldValues);
+            }
+            if (shouldUpdateFieldsAndState && Array.isArray(get(_formState.errors, name))) {
+                const errors = method(get(_formState.errors, name), args.argA, args.argB);
+                shouldSetValues && set(_formState.errors, name, errors);
+                unsetEmptyArray(_formState.errors, name);
+            }
+            if ((_proxyFormState.touchedFields || _proxySubscribeFormState.touchedFields) && shouldUpdateFieldsAndState && Array.isArray(get(_formState.touchedFields, name))) {
+                const touchedFields = method(get(_formState.touchedFields, name), args.argA, args.argB);
+                shouldSetValues && set(_formState.touchedFields, name, touchedFields);
+            }
+            if (_proxyFormState.dirtyFields || _proxySubscribeFormState.dirtyFields) {
+                _formState.dirtyFields = getDirtyFields(_defaultValues, _formValues);
+            }
+            _subjects.state.next({
+                name,
+                isDirty: _getDirty(name, values),
+                dirtyFields: _formState.dirtyFields,
+                errors: _formState.errors,
+                isValid: _formState.isValid
+            });
+        } else {
+            set(_formValues, name, values);
+        }
+    };
+    const updateErrors = (name, error)=>{
+        set(_formState.errors, name, error);
+        _subjects.state.next({
+            errors: _formState.errors
+        });
+    };
+    const _setErrors = (errors)=>{
+        _formState.errors = errors;
+        _subjects.state.next({
+            errors: _formState.errors,
+            isValid: false
+        });
+    };
+    const updateValidAndValue = (name, shouldSkipSetValueAs, value1, ref)=>{
+        const field = get(_fields, name);
+        if (field) {
+            const defaultValue = get(_formValues, name, isUndefined(value1) ? get(_defaultValues, name) : value1);
+            isUndefined(defaultValue) || ref && ref.defaultChecked || shouldSkipSetValueAs ? set(_formValues, name, shouldSkipSetValueAs ? defaultValue : getFieldValue(field._f)) : setFieldValue(name, defaultValue);
+            _state.mount && _setValid();
+        }
+    };
+    const updateTouchAndDirty = (name, fieldValue, isBlurEvent, shouldDirty, shouldRender)=>{
+        let shouldUpdateField = false;
+        let isPreviousDirty = false;
+        const output = {
+            name
+        };
+        if (!_options.disabled) {
+            if (!isBlurEvent || shouldDirty) {
+                if (_proxyFormState.isDirty || _proxySubscribeFormState.isDirty) {
+                    isPreviousDirty = _formState.isDirty;
+                    _formState.isDirty = output.isDirty = _getDirty();
+                    shouldUpdateField = isPreviousDirty !== output.isDirty;
+                }
+                const isCurrentFieldPristine = deepEqual(get(_defaultValues, name), fieldValue);
+                isPreviousDirty = !!get(_formState.dirtyFields, name);
+                isCurrentFieldPristine ? unset(_formState.dirtyFields, name) : set(_formState.dirtyFields, name, true);
+                output.dirtyFields = _formState.dirtyFields;
+                shouldUpdateField = shouldUpdateField || (_proxyFormState.dirtyFields || _proxySubscribeFormState.dirtyFields) && isPreviousDirty !== !isCurrentFieldPristine;
+            }
+            if (isBlurEvent) {
+                const isPreviousFieldTouched = get(_formState.touchedFields, name);
+                if (!isPreviousFieldTouched) {
+                    set(_formState.touchedFields, name, isBlurEvent);
+                    output.touchedFields = _formState.touchedFields;
+                    shouldUpdateField = shouldUpdateField || (_proxyFormState.touchedFields || _proxySubscribeFormState.touchedFields) && isPreviousFieldTouched !== isBlurEvent;
+                }
+            }
+            shouldUpdateField && shouldRender && _subjects.state.next(output);
+        }
+        return shouldUpdateField ? output : {};
+    };
+    const shouldRenderByError = (name, isValid, error, fieldState)=>{
+        const previousFieldError = get(_formState.errors, name);
+        const shouldUpdateValid = (_proxyFormState.isValid || _proxySubscribeFormState.isValid) && isBoolean(isValid) && _formState.isValid !== isValid;
+        if (_options.delayError && error) {
+            delayErrorCallback = debounce(()=>updateErrors(name, error));
+            delayErrorCallback(_options.delayError);
+        } else {
+            clearTimeout(timer);
+            delayErrorCallback = null;
+            error ? set(_formState.errors, name, error) : unset(_formState.errors, name);
+        }
+        if ((error ? !deepEqual(previousFieldError, error) : previousFieldError) || !isEmptyObject(fieldState) || shouldUpdateValid) {
+            const updatedFormState = {
+                ...fieldState,
+                ...shouldUpdateValid && isBoolean(isValid) ? {
+                    isValid
+                } : {},
+                errors: _formState.errors,
+                name
+            };
+            _formState = {
+                ..._formState,
+                ...updatedFormState
+            };
+            _subjects.state.next(updatedFormState);
+        }
+    };
+    const _runSchema = async (name)=>{
+        _updateIsValidating(name, true);
+        const result = await _options.resolver(_formValues, _options.context, getResolverOptions(name || _names.mount, _fields, _options.criteriaMode, _options.shouldUseNativeValidation));
+        _updateIsValidating(name);
+        return result;
+    };
+    const executeSchemaAndUpdateState = async (names)=>{
+        const { errors } = await _runSchema(names);
+        if (names) {
+            for (const name of names){
+                const error = get(errors, name);
+                error ? set(_formState.errors, name, error) : unset(_formState.errors, name);
+            }
+        } else {
+            _formState.errors = errors;
+        }
+        return errors;
+    };
+    const executeBuiltInValidation = async function(fields, shouldOnlyCheckValid) {
+        let context = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : {
+            valid: true
+        };
+        for(const name in fields){
+            const field = fields[name];
+            if (field) {
+                const { _f, ...fieldValue } = field;
+                if (_f) {
+                    const isFieldArrayRoot = _names.array.has(_f.name);
+                    const isPromiseFunction = field._f && hasPromiseValidation(field._f);
+                    if (isPromiseFunction && _proxyFormState.validatingFields) {
+                        _updateIsValidating([
+                            _f.name
+                        ], true);
+                    }
+                    const fieldError = await validateField(field, _names.disabled, _formValues, shouldDisplayAllAssociatedErrors, _options.shouldUseNativeValidation && !shouldOnlyCheckValid, isFieldArrayRoot);
+                    if (isPromiseFunction && _proxyFormState.validatingFields) {
+                        _updateIsValidating([
+                            _f.name
+                        ]);
+                    }
+                    if (fieldError[_f.name]) {
+                        context.valid = false;
+                        if (shouldOnlyCheckValid) {
+                            break;
+                        }
+                    }
+                    !shouldOnlyCheckValid && (get(fieldError, _f.name) ? isFieldArrayRoot ? updateFieldArrayRootError(_formState.errors, fieldError, _f.name) : set(_formState.errors, _f.name, fieldError[_f.name]) : unset(_formState.errors, _f.name));
+                }
+                !isEmptyObject(fieldValue) && await executeBuiltInValidation(fieldValue, shouldOnlyCheckValid, context);
+            }
+        }
+        return context.valid;
+    };
+    const _removeUnmounted = ()=>{
+        for (const name of _names.unMount){
+            const field = get(_fields, name);
+            field && (field._f.refs ? field._f.refs.every((ref)=>!live(ref)) : !live(field._f.ref)) && unregister(name);
+        }
+        _names.unMount = new Set();
+    };
+    const _getDirty = (name, data)=>!_options.disabled && (name && data && set(_formValues, name, data), !deepEqual(getValues(), _defaultValues));
+    const _getWatch = (names, defaultValue, isGlobal)=>generateWatchOutput(names, _names, {
+            ..._state.mount ? _formValues : isUndefined(defaultValue) ? _defaultValues : isString(names) ? {
+                [names]: defaultValue
+            } : defaultValue
+        }, isGlobal, defaultValue);
+    const _getFieldArray = (name)=>compact(get(_state.mount ? _formValues : _defaultValues, name, _options.shouldUnregister ? get(_defaultValues, name, []) : []));
+    const setFieldValue = function(name, value1) {
+        let options = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : {};
+        const field = get(_fields, name);
+        let fieldValue = value1;
+        if (field) {
+            const fieldReference = field._f;
+            if (fieldReference) {
+                !fieldReference.disabled && set(_formValues, name, getFieldValueAs(value1, fieldReference));
+                fieldValue = isHTMLElement(fieldReference.ref) && isNullOrUndefined(value1) ? '' : value1;
+                if (isMultipleSelect(fieldReference.ref)) {
+                    [
+                        ...fieldReference.ref.options
+                    ].forEach((optionRef)=>optionRef.selected = fieldValue.includes(optionRef.value));
+                } else if (fieldReference.refs) {
+                    if (isCheckBoxInput(fieldReference.ref)) {
+                        fieldReference.refs.forEach((checkboxRef)=>{
+                            if (!checkboxRef.defaultChecked || !checkboxRef.disabled) {
+                                if (Array.isArray(fieldValue)) {
+                                    checkboxRef.checked = !!fieldValue.find((data)=>data === checkboxRef.value);
+                                } else {
+                                    checkboxRef.checked = fieldValue === checkboxRef.value || !!fieldValue;
+                                }
+                            }
+                        });
+                    } else {
+                        fieldReference.refs.forEach((radioRef)=>radioRef.checked = radioRef.value === fieldValue);
+                    }
+                } else if (isFileInput(fieldReference.ref)) {
+                    fieldReference.ref.value = '';
+                } else {
+                    fieldReference.ref.value = fieldValue;
+                    if (!fieldReference.ref.type) {
+                        _subjects.state.next({
+                            name,
+                            values: cloneObject(_formValues)
+                        });
+                    }
+                }
+            }
+        }
+        (options.shouldDirty || options.shouldTouch) && updateTouchAndDirty(name, fieldValue, options.shouldTouch, options.shouldDirty, true);
+        options.shouldValidate && trigger(name);
+    };
+    const setValues = (name, value1, options)=>{
+        for(const fieldKey in value1){
+            if (!value1.hasOwnProperty(fieldKey)) {
+                return;
+            }
+            const fieldValue = value1[fieldKey];
+            const fieldName = name + '.' + fieldKey;
+            const field = get(_fields, fieldName);
+            (_names.array.has(name) || isObject(fieldValue) || field && !field._f) && !isDateObject(fieldValue) ? setValues(fieldName, fieldValue, options) : setFieldValue(fieldName, fieldValue, options);
+        }
+    };
+    const setValue = function(name, value1) {
+        let options = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : {};
+        const field = get(_fields, name);
+        const isFieldArray = _names.array.has(name);
+        const cloneValue = cloneObject(value1);
+        set(_formValues, name, cloneValue);
+        if (isFieldArray) {
+            _subjects.array.next({
+                name,
+                values: cloneObject(_formValues)
+            });
+            if ((_proxyFormState.isDirty || _proxyFormState.dirtyFields || _proxySubscribeFormState.isDirty || _proxySubscribeFormState.dirtyFields) && options.shouldDirty) {
+                _subjects.state.next({
+                    name,
+                    dirtyFields: getDirtyFields(_defaultValues, _formValues),
+                    isDirty: _getDirty(name, cloneValue)
+                });
+            }
+        } else {
+            field && !field._f && !isNullOrUndefined(cloneValue) ? setValues(name, cloneValue, options) : setFieldValue(name, cloneValue, options);
+        }
+        isWatched(name, _names) && _subjects.state.next({
+            ..._formState,
+            name
+        });
+        _subjects.state.next({
+            name: _state.mount ? name : undefined,
+            values: cloneObject(_formValues)
+        });
+    };
+    const onChange = async (event)=>{
+        _state.mount = true;
+        const target = event.target;
+        let name = target.name;
+        let isFieldValueUpdated = true;
+        const field = get(_fields, name);
+        const _updateIsFieldValueUpdated = (fieldValue)=>{
+            isFieldValueUpdated = Number.isNaN(fieldValue) || isDateObject(fieldValue) && isNaN(fieldValue.getTime()) || deepEqual(fieldValue, get(_formValues, name, fieldValue));
+        };
+        const validationModeBeforeSubmit = getValidationModes(_options.mode);
+        const validationModeAfterSubmit = getValidationModes(_options.reValidateMode);
+        if (field) {
+            let error;
+            let isValid;
+            const fieldValue = target.type ? getFieldValue(field._f) : getEventValue(event);
+            const isBlurEvent = event.type === EVENTS.BLUR || event.type === EVENTS.FOCUS_OUT;
+            const shouldSkipValidation = !hasValidation(field._f) && !_options.resolver && !get(_formState.errors, name) && !field._f.deps || skipValidation(isBlurEvent, get(_formState.touchedFields, name), _formState.isSubmitted, validationModeAfterSubmit, validationModeBeforeSubmit);
+            const watched = isWatched(name, _names, isBlurEvent);
+            set(_formValues, name, fieldValue);
+            if (isBlurEvent) {
+                if (!target || !target.readOnly) {
+                    field._f.onBlur && field._f.onBlur(event);
+                    delayErrorCallback && delayErrorCallback(0);
+                }
+            } else if (field._f.onChange) {
+                field._f.onChange(event);
+            }
+            const fieldState = updateTouchAndDirty(name, fieldValue, isBlurEvent);
+            const shouldRender = !isEmptyObject(fieldState) || watched;
+            !isBlurEvent && _subjects.state.next({
+                name,
+                type: event.type,
+                values: cloneObject(_formValues)
+            });
+            if (shouldSkipValidation) {
+                if (_proxyFormState.isValid || _proxySubscribeFormState.isValid) {
+                    if (_options.mode === 'onBlur') {
+                        if (isBlurEvent) {
+                            _setValid();
+                        }
+                    } else if (!isBlurEvent) {
+                        _setValid();
+                    }
+                }
+                return shouldRender && _subjects.state.next({
+                    name,
+                    ...watched ? {} : fieldState
+                });
+            }
+            !isBlurEvent && watched && _subjects.state.next({
+                ..._formState
+            });
+            if (_options.resolver) {
+                const { errors } = await _runSchema([
+                    name
+                ]);
+                _updateIsFieldValueUpdated(fieldValue);
+                if (isFieldValueUpdated) {
+                    const previousErrorLookupResult = schemaErrorLookup(_formState.errors, _fields, name);
+                    const errorLookupResult = schemaErrorLookup(errors, _fields, previousErrorLookupResult.name || name);
+                    error = errorLookupResult.error;
+                    name = errorLookupResult.name;
+                    isValid = isEmptyObject(errors);
+                }
+            } else {
+                _updateIsValidating([
+                    name
+                ], true);
+                error = (await validateField(field, _names.disabled, _formValues, shouldDisplayAllAssociatedErrors, _options.shouldUseNativeValidation))[name];
+                _updateIsValidating([
+                    name
+                ]);
+                _updateIsFieldValueUpdated(fieldValue);
+                if (isFieldValueUpdated) {
+                    if (error) {
+                        isValid = false;
+                    } else if (_proxyFormState.isValid || _proxySubscribeFormState.isValid) {
+                        isValid = await executeBuiltInValidation(_fields, true);
+                    }
+                }
+            }
+            if (isFieldValueUpdated) {
+                field._f.deps && (!Array.isArray(field._f.deps) || field._f.deps.length > 0) && trigger(field._f.deps);
+                shouldRenderByError(name, isValid, error, fieldState);
+            }
+        }
+    };
+    const _focusInput = (ref, key)=>{
+        if (get(_formState.errors, key) && ref.focus) {
+            ref.focus();
+            return 1;
+        }
+        return;
+    };
+    const trigger = async function(name) {
+        let options = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
+        let isValid;
+        let validationResult;
+        const fieldNames = convertToArrayPayload(name);
+        if (_options.resolver) {
+            const errors = await executeSchemaAndUpdateState(isUndefined(name) ? name : fieldNames);
+            isValid = isEmptyObject(errors);
+            validationResult = name ? !fieldNames.some((name)=>get(errors, name)) : isValid;
+        } else if (name) {
+            validationResult = (await Promise.all(fieldNames.map(async (fieldName)=>{
+                const field = get(_fields, fieldName);
+                return await executeBuiltInValidation(field && field._f ? {
+                    [fieldName]: field
+                } : field);
+            }))).every(Boolean);
+            !(!validationResult && !_formState.isValid) && _setValid();
+        } else {
+            validationResult = isValid = await executeBuiltInValidation(_fields);
+        }
+        _subjects.state.next({
+            ...!isString(name) || (_proxyFormState.isValid || _proxySubscribeFormState.isValid) && isValid !== _formState.isValid ? {} : {
+                name
+            },
+            ..._options.resolver || !name ? {
+                isValid
+            } : {},
+            errors: _formState.errors
+        });
+        options.shouldFocus && !validationResult && iterateFieldsByAction(_fields, _focusInput, name ? fieldNames : _names.mount);
+        return validationResult;
+    };
+    const getValues = (fieldNames, config)=>{
+        let values = {
+            ..._state.mount ? _formValues : _defaultValues
+        };
+        if (config) {
+            values = extractFormValues(config.dirtyFields ? _formState.dirtyFields : _formState.touchedFields, values);
+        }
+        return isUndefined(fieldNames) ? values : isString(fieldNames) ? get(values, fieldNames) : fieldNames.map((name)=>get(values, name));
+    };
+    const getFieldState = (name, formState)=>({
+            invalid: !!get((formState || _formState).errors, name),
+            isDirty: !!get((formState || _formState).dirtyFields, name),
+            error: get((formState || _formState).errors, name),
+            isValidating: !!get(_formState.validatingFields, name),
+            isTouched: !!get((formState || _formState).touchedFields, name)
+        });
+    const clearErrors = (name)=>{
+        name && convertToArrayPayload(name).forEach((inputName)=>unset(_formState.errors, inputName));
+        _subjects.state.next({
+            errors: name ? _formState.errors : {}
+        });
+    };
+    const setError = (name, error, options)=>{
+        const ref = (get(_fields, name, {
+            _f: {}
+        })._f || {}).ref;
+        const currentError = get(_formState.errors, name) || {};
+        // Don't override existing error messages elsewhere in the object tree.
+        const { ref: currentRef, message, type, ...restOfErrorTree } = currentError;
+        set(_formState.errors, name, {
+            ...restOfErrorTree,
+            ...error,
+            ref
+        });
+        _subjects.state.next({
+            name,
+            errors: _formState.errors,
+            isValid: false
+        });
+        options && options.shouldFocus && ref && ref.focus && ref.focus();
+    };
+    const watch = (name, defaultValue)=>isFunction(name) ? _subjects.state.subscribe({
+            next: (payload)=>'values' in payload && name(_getWatch(undefined, defaultValue), payload)
+        }) : _getWatch(name, defaultValue, true);
+    const _subscribe = (props)=>_subjects.state.subscribe({
+            next: (formState)=>{
+                if (shouldSubscribeByName(props.name, formState.name, props.exact) && shouldRenderFormState(formState, props.formState || _proxyFormState, _setFormState, props.reRenderRoot)) {
+                    props.callback({
+                        values: {
+                            ..._formValues
+                        },
+                        ..._formState,
+                        ...formState,
+                        defaultValues: _defaultValues
+                    });
+                }
+            }
+        }).unsubscribe;
+    const subscribe = (props)=>{
+        _state.mount = true;
+        _proxySubscribeFormState = {
+            ..._proxySubscribeFormState,
+            ...props.formState
+        };
+        return _subscribe({
+            ...props,
+            formState: _proxySubscribeFormState
+        });
+    };
+    const unregister = function(name) {
+        let options = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
+        for (const fieldName of name ? convertToArrayPayload(name) : _names.mount){
+            _names.mount.delete(fieldName);
+            _names.array.delete(fieldName);
+            if (!options.keepValue) {
+                unset(_fields, fieldName);
+                unset(_formValues, fieldName);
+            }
+            !options.keepError && unset(_formState.errors, fieldName);
+            !options.keepDirty && unset(_formState.dirtyFields, fieldName);
+            !options.keepTouched && unset(_formState.touchedFields, fieldName);
+            !options.keepIsValidating && unset(_formState.validatingFields, fieldName);
+            !_options.shouldUnregister && !options.keepDefaultValue && unset(_defaultValues, fieldName);
+        }
+        _subjects.state.next({
+            values: cloneObject(_formValues)
+        });
+        _subjects.state.next({
+            ..._formState,
+            ...!options.keepDirty ? {} : {
+                isDirty: _getDirty()
+            }
+        });
+        !options.keepIsValid && _setValid();
+    };
+    const _setDisabledField = (param)=>{
+        let { disabled, name } = param;
+        if (isBoolean(disabled) && _state.mount || !!disabled || _names.disabled.has(name)) {
+            disabled ? _names.disabled.add(name) : _names.disabled.delete(name);
+        }
+    };
+    const register = function(name) {
+        let options = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
+        let field = get(_fields, name);
+        const disabledIsDefined = isBoolean(options.disabled) || isBoolean(_options.disabled);
+        set(_fields, name, {
+            ...field || {},
+            _f: {
+                ...field && field._f ? field._f : {
+                    ref: {
+                        name
+                    }
+                },
+                name,
+                mount: true,
+                ...options
+            }
+        });
+        _names.mount.add(name);
+        if (field) {
+            _setDisabledField({
+                disabled: isBoolean(options.disabled) ? options.disabled : _options.disabled,
+                name
+            });
+        } else {
+            updateValidAndValue(name, true, options.value);
+        }
+        return {
+            ...disabledIsDefined ? {
+                disabled: options.disabled || _options.disabled
+            } : {},
+            ..._options.progressive ? {
+                required: !!options.required,
+                min: getRuleValue(options.min),
+                max: getRuleValue(options.max),
+                minLength: getRuleValue(options.minLength),
+                maxLength: getRuleValue(options.maxLength),
+                pattern: getRuleValue(options.pattern)
+            } : {},
+            name,
+            onChange,
+            onBlur: onChange,
+            ref: (ref)=>{
+                if (ref) {
+                    register(name, options);
+                    field = get(_fields, name);
+                    const fieldRef = isUndefined(ref.value) ? ref.querySelectorAll ? ref.querySelectorAll('input,select,textarea')[0] || ref : ref : ref;
+                    const radioOrCheckbox = isRadioOrCheckbox(fieldRef);
+                    const refs = field._f.refs || [];
+                    if (radioOrCheckbox ? refs.find((option)=>option === fieldRef) : fieldRef === field._f.ref) {
+                        return;
+                    }
+                    set(_fields, name, {
+                        _f: {
+                            ...field._f,
+                            ...radioOrCheckbox ? {
+                                refs: [
+                                    ...refs.filter(live),
+                                    fieldRef,
+                                    ...Array.isArray(get(_defaultValues, name)) ? [
+                                        {}
+                                    ] : []
+                                ],
+                                ref: {
+                                    type: fieldRef.type,
+                                    name
+                                }
+                            } : {
+                                ref: fieldRef
+                            }
+                        }
+                    });
+                    updateValidAndValue(name, false, undefined, fieldRef);
+                } else {
+                    field = get(_fields, name, {});
+                    if (field._f) {
+                        field._f.mount = false;
+                    }
+                    (_options.shouldUnregister || options.shouldUnregister) && !(isNameInFieldArray(_names.array, name) && _state.action) && _names.unMount.add(name);
+                }
+            }
+        };
+    };
+    const _focusError = ()=>_options.shouldFocusError && iterateFieldsByAction(_fields, _focusInput, _names.mount);
+    const _disableForm = (disabled)=>{
+        if (isBoolean(disabled)) {
+            _subjects.state.next({
+                disabled
+            });
+            iterateFieldsByAction(_fields, (ref, name)=>{
+                const currentField = get(_fields, name);
+                if (currentField) {
+                    ref.disabled = currentField._f.disabled || disabled;
+                    if (Array.isArray(currentField._f.refs)) {
+                        currentField._f.refs.forEach((inputRef)=>{
+                            inputRef.disabled = currentField._f.disabled || disabled;
+                        });
+                    }
+                }
+            }, 0, false);
+        }
+    };
+    const handleSubmit = (onValid, onInvalid)=>async (e)=>{
+            let onValidError = undefined;
+            if (e) {
+                e.preventDefault && e.preventDefault();
+                e.persist && e.persist();
+            }
+            let fieldValues = cloneObject(_formValues);
+            _subjects.state.next({
+                isSubmitting: true
+            });
+            if (_options.resolver) {
+                const { errors, values } = await _runSchema();
+                _formState.errors = errors;
+                fieldValues = cloneObject(values);
+            } else {
+                await executeBuiltInValidation(_fields);
+            }
+            if (_names.disabled.size) {
+                for (const name of _names.disabled){
+                    unset(fieldValues, name);
+                }
+            }
+            unset(_formState.errors, 'root');
+            if (isEmptyObject(_formState.errors)) {
+                _subjects.state.next({
+                    errors: {}
+                });
+                try {
+                    await onValid(fieldValues, e);
+                } catch (error) {
+                    onValidError = error;
+                }
+            } else {
+                if (onInvalid) {
+                    await onInvalid({
+                        ..._formState.errors
+                    }, e);
+                }
+                _focusError();
+                setTimeout(_focusError);
+            }
+            _subjects.state.next({
+                isSubmitted: true,
+                isSubmitting: false,
+                isSubmitSuccessful: isEmptyObject(_formState.errors) && !onValidError,
+                submitCount: _formState.submitCount + 1,
+                errors: _formState.errors
+            });
+            if (onValidError) {
+                throw onValidError;
+            }
+        };
+    const resetField = function(name) {
+        let options = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
+        if (get(_fields, name)) {
+            if (isUndefined(options.defaultValue)) {
+                setValue(name, cloneObject(get(_defaultValues, name)));
+            } else {
+                setValue(name, options.defaultValue);
+                set(_defaultValues, name, cloneObject(options.defaultValue));
+            }
+            if (!options.keepTouched) {
+                unset(_formState.touchedFields, name);
+            }
+            if (!options.keepDirty) {
+                unset(_formState.dirtyFields, name);
+                _formState.isDirty = options.defaultValue ? _getDirty(name, cloneObject(get(_defaultValues, name))) : _getDirty();
+            }
+            if (!options.keepError) {
+                unset(_formState.errors, name);
+                _proxyFormState.isValid && _setValid();
+            }
+            _subjects.state.next({
+                ..._formState
+            });
+        }
+    };
+    const _reset = function(formValues) {
+        let keepStateOptions = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
+        const updatedValues = formValues ? cloneObject(formValues) : _defaultValues;
+        const cloneUpdatedValues = cloneObject(updatedValues);
+        const isEmptyResetValues = isEmptyObject(formValues);
+        const values = isEmptyResetValues ? _defaultValues : cloneUpdatedValues;
+        if (!keepStateOptions.keepDefaultValues) {
+            _defaultValues = updatedValues;
+        }
+        if (!keepStateOptions.keepValues) {
+            if (keepStateOptions.keepDirtyValues) {
+                const fieldsToCheck = new Set([
+                    ..._names.mount,
+                    ...Object.keys(getDirtyFields(_defaultValues, _formValues))
+                ]);
+                for (const fieldName of Array.from(fieldsToCheck)){
+                    get(_formState.dirtyFields, fieldName) ? set(values, fieldName, get(_formValues, fieldName)) : setValue(fieldName, get(values, fieldName));
+                }
+            } else {
+                if (isWeb && isUndefined(formValues)) {
+                    for (const name of _names.mount){
+                        const field = get(_fields, name);
+                        if (field && field._f) {
+                            const fieldReference = Array.isArray(field._f.refs) ? field._f.refs[0] : field._f.ref;
+                            if (isHTMLElement(fieldReference)) {
+                                const form = fieldReference.closest('form');
+                                if (form) {
+                                    form.reset();
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+                if (keepStateOptions.keepFieldsRef) {
+                    for (const fieldName of _names.mount){
+                        setValue(fieldName, get(values, fieldName));
+                    }
+                } else {
+                    _fields = {};
+                }
+            }
+            _formValues = _options.shouldUnregister ? keepStateOptions.keepDefaultValues ? cloneObject(_defaultValues) : {} : cloneObject(values);
+            _subjects.array.next({
+                values: {
+                    ...values
+                }
+            });
+            _subjects.state.next({
+                values: {
+                    ...values
+                }
+            });
+        }
+        _names = {
+            mount: keepStateOptions.keepDirtyValues ? _names.mount : new Set(),
+            unMount: new Set(),
+            array: new Set(),
+            disabled: new Set(),
+            watch: new Set(),
+            watchAll: false,
+            focus: ''
+        };
+        _state.mount = !_proxyFormState.isValid || !!keepStateOptions.keepIsValid || !!keepStateOptions.keepDirtyValues;
+        _state.watch = !!_options.shouldUnregister;
+        _subjects.state.next({
+            submitCount: keepStateOptions.keepSubmitCount ? _formState.submitCount : 0,
+            isDirty: isEmptyResetValues ? false : keepStateOptions.keepDirty ? _formState.isDirty : !!(keepStateOptions.keepDefaultValues && !deepEqual(formValues, _defaultValues)),
+            isSubmitted: keepStateOptions.keepIsSubmitted ? _formState.isSubmitted : false,
+            dirtyFields: isEmptyResetValues ? {} : keepStateOptions.keepDirtyValues ? keepStateOptions.keepDefaultValues && _formValues ? getDirtyFields(_defaultValues, _formValues) : _formState.dirtyFields : keepStateOptions.keepDefaultValues && formValues ? getDirtyFields(_defaultValues, formValues) : keepStateOptions.keepDirty ? _formState.dirtyFields : {},
+            touchedFields: keepStateOptions.keepTouched ? _formState.touchedFields : {},
+            errors: keepStateOptions.keepErrors ? _formState.errors : {},
+            isSubmitSuccessful: keepStateOptions.keepIsSubmitSuccessful ? _formState.isSubmitSuccessful : false,
+            isSubmitting: false,
+            defaultValues: _defaultValues
+        });
+    };
+    const reset = (formValues, keepStateOptions)=>_reset(isFunction(formValues) ? formValues(_formValues) : formValues, keepStateOptions);
+    const setFocus = function(name) {
+        let options = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : {};
+        const field = get(_fields, name);
+        const fieldReference = field && field._f;
+        if (fieldReference) {
+            const fieldRef = fieldReference.refs ? fieldReference.refs[0] : fieldReference.ref;
+            if (fieldRef.focus) {
+                fieldRef.focus();
+                options.shouldSelect && isFunction(fieldRef.select) && fieldRef.select();
+            }
+        }
+    };
+    const _setFormState = (updatedFormState)=>{
+        _formState = {
+            ..._formState,
+            ...updatedFormState
+        };
+    };
+    const _resetDefaultValues = ()=>isFunction(_options.defaultValues) && _options.defaultValues().then((values)=>{
+            reset(values, _options.resetOptions);
+            _subjects.state.next({
+                isLoading: false
+            });
+        });
+    const methods = {
+        control: {
+            register,
+            unregister,
+            getFieldState,
+            handleSubmit,
+            setError,
+            _subscribe,
+            _runSchema,
+            _focusError,
+            _getWatch,
+            _getDirty,
+            _setValid,
+            _setFieldArray,
+            _setDisabledField,
+            _setErrors,
+            _getFieldArray,
+            _reset,
+            _resetDefaultValues,
+            _removeUnmounted,
+            _disableForm,
+            _subjects,
+            _proxyFormState,
+            get _fields () {
+                return _fields;
+            },
+            get _formValues () {
+                return _formValues;
+            },
+            get _state () {
+                return _state;
+            },
+            set _state (value){
+                _state = value;
+            },
+            get _defaultValues () {
+                return _defaultValues;
+            },
+            get _names () {
+                return _names;
+            },
+            set _names (value){
+                _names = value;
+            },
+            get _formState () {
+                return _formState;
+            },
+            get _options () {
+                return _options;
+            },
+            set _options (value){
+                _options = {
+                    ..._options,
+                    ...value
+                };
+            }
+        },
+        subscribe,
+        trigger,
+        register,
+        handleSubmit,
+        watch,
+        setValue,
+        getValues,
+        reset,
+        resetField,
+        clearErrors,
+        unregister,
+        setError,
+        setFocus,
+        getFieldState
+    };
+    return {
+        ...methods,
+        formControl: methods
+    };
+}
+var generateId = ()=>{
+    if (typeof crypto !== 'undefined' && crypto.randomUUID) {
+        return crypto.randomUUID();
+    }
+    const d = typeof performance === 'undefined' ? Date.now() : performance.now() * 1000;
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c)=>{
+        const r = (Math.random() * 16 + d) % 16 | 0;
+        return (c == 'x' ? r : r & 0x3 | 0x8).toString(16);
+    });
+};
+var getFocusFieldName = function(name, index) {
+    let options = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : {};
+    return options.shouldFocus || isUndefined(options.shouldFocus) ? options.focusName || "".concat(name, ".").concat(isUndefined(options.focusIndex) ? index : options.focusIndex, ".") : '';
+};
+var appendAt = (data, value1)=>[
+        ...data,
+        ...convertToArrayPayload(value1)
+    ];
+var fillEmptyArray = (value1)=>Array.isArray(value1) ? value1.map(()=>undefined) : undefined;
+function insert(data, index, value1) {
+    return [
+        ...data.slice(0, index),
+        ...convertToArrayPayload(value1),
+        ...data.slice(index)
+    ];
+}
+var moveArrayAt = (data, from, to)=>{
+    if (!Array.isArray(data)) {
+        return [];
+    }
+    if (isUndefined(data[to])) {
+        data[to] = undefined;
+    }
+    data.splice(to, 0, data.splice(from, 1)[0]);
+    return data;
+};
+var prependAt = (data, value1)=>[
+        ...convertToArrayPayload(value1),
+        ...convertToArrayPayload(data)
+    ];
+function removeAtIndexes(data, indexes) {
+    let i = 0;
+    const temp = [
+        ...data
+    ];
+    for (const index of indexes){
+        temp.splice(index - i, 1);
+        i++;
+    }
+    return compact(temp).length ? temp : [];
+}
+var removeArrayAt = (data, index)=>isUndefined(index) ? [] : removeAtIndexes(data, convertToArrayPayload(index).sort((a, b)=>a - b));
+var swapArrayAt = (data, indexA, indexB)=>{
+    [data[indexA], data[indexB]] = [
+        data[indexB],
+        data[indexA]
+    ];
+};
+var updateAt = (fieldValues, index, value1)=>{
+    fieldValues[index] = value1;
+    return fieldValues;
+};
+/**
+ * A custom hook that exposes convenient methods to perform operations with a list of dynamic inputs that need to be appended, updated, removed etc. • [Demo](https://codesandbox.io/s/react-hook-form-usefieldarray-ssugn) • [Video](https://youtu.be/4MrbfGSFY2A)
+ *
+ * @remarks
+ * [API](https://react-hook-form.com/docs/usefieldarray) • [Demo](https://codesandbox.io/s/react-hook-form-usefieldarray-ssugn)
+ *
+ * @param props - useFieldArray props
+ *
+ * @returns methods - functions to manipulate with the Field Arrays (dynamic inputs) {@link UseFieldArrayReturn}
+ *
+ * @example
+ * ```tsx
+ * function App() {
+ *   const { register, control, handleSubmit, reset, trigger, setError } = useForm({
+ *     defaultValues: {
+ *       test: []
+ *     }
+ *   });
+ *   const { fields, append } = useFieldArray({
+ *     control,
+ *     name: "test"
+ *   });
+ *
+ *   return (
+ *     <form onSubmit={handleSubmit(data => console.log(data))}>
+ *       {fields.map((item, index) => (
+ *          <input key={item.id} {...register(`test.${index}.firstName`)}  />
+ *       ))}
+ *       <button type="button" onClick={() => append({ firstName: "bill" })}>
+ *         append
+ *       </button>
+ *       <input type="submit" />
+ *     </form>
+ *   );
+ * }
+ * ```
+ */ function useFieldArray(props) {
+    const methods = useFormContext();
+    const { control = methods.control, name, keyName = 'id', shouldUnregister, rules } = props;
+    const [fields, setFields] = __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useState(control._getFieldArray(name));
+    const ids = __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useRef(control._getFieldArray(name).map(generateId));
+    const _actioned = __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useRef(false);
+    control._names.array.add(name);
+    __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useMemo({
+        "useFieldArray.useMemo": ()=>rules && fields.length >= 0 && control.register(name, rules)
+    }["useFieldArray.useMemo"], [
+        control,
+        name,
+        fields.length,
+        rules
+    ]);
+    useIsomorphicLayoutEffect({
+        "useFieldArray.useIsomorphicLayoutEffect": ()=>control._subjects.array.subscribe({
+                next: {
+                    "useFieldArray.useIsomorphicLayoutEffect": (param)=>{
+                        let { values, name: fieldArrayName } = param;
+                        if (fieldArrayName === name || !fieldArrayName) {
+                            const fieldValues = get(values, name);
+                            if (Array.isArray(fieldValues)) {
+                                setFields(fieldValues);
+                                ids.current = fieldValues.map(generateId);
+                            }
+                        }
+                    }
+                }["useFieldArray.useIsomorphicLayoutEffect"]
+            }).unsubscribe
+    }["useFieldArray.useIsomorphicLayoutEffect"], [
+        control,
+        name
+    ]);
+    const updateValues = __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useCallback({
+        "useFieldArray.useCallback[updateValues]": (updatedFieldArrayValues)=>{
+            _actioned.current = true;
+            control._setFieldArray(name, updatedFieldArrayValues);
+        }
+    }["useFieldArray.useCallback[updateValues]"], [
+        control,
+        name
+    ]);
+    const append = (value1, options)=>{
+        const appendValue = convertToArrayPayload(cloneObject(value1));
+        const updatedFieldArrayValues = appendAt(control._getFieldArray(name), appendValue);
+        control._names.focus = getFocusFieldName(name, updatedFieldArrayValues.length - 1, options);
+        ids.current = appendAt(ids.current, appendValue.map(generateId));
+        updateValues(updatedFieldArrayValues);
+        setFields(updatedFieldArrayValues);
+        control._setFieldArray(name, updatedFieldArrayValues, appendAt, {
+            argA: fillEmptyArray(value1)
+        });
+    };
+    const prepend = (value1, options)=>{
+        const prependValue = convertToArrayPayload(cloneObject(value1));
+        const updatedFieldArrayValues = prependAt(control._getFieldArray(name), prependValue);
+        control._names.focus = getFocusFieldName(name, 0, options);
+        ids.current = prependAt(ids.current, prependValue.map(generateId));
+        updateValues(updatedFieldArrayValues);
+        setFields(updatedFieldArrayValues);
+        control._setFieldArray(name, updatedFieldArrayValues, prependAt, {
+            argA: fillEmptyArray(value1)
+        });
+    };
+    const remove = (index)=>{
+        const updatedFieldArrayValues = removeArrayAt(control._getFieldArray(name), index);
+        ids.current = removeArrayAt(ids.current, index);
+        updateValues(updatedFieldArrayValues);
+        setFields(updatedFieldArrayValues);
+        !Array.isArray(get(control._fields, name)) && set(control._fields, name, undefined);
+        control._setFieldArray(name, updatedFieldArrayValues, removeArrayAt, {
+            argA: index
+        });
+    };
+    const insert$1 = (index, value1, options)=>{
+        const insertValue = convertToArrayPayload(cloneObject(value1));
+        const updatedFieldArrayValues = insert(control._getFieldArray(name), index, insertValue);
+        control._names.focus = getFocusFieldName(name, index, options);
+        ids.current = insert(ids.current, index, insertValue.map(generateId));
+        updateValues(updatedFieldArrayValues);
+        setFields(updatedFieldArrayValues);
+        control._setFieldArray(name, updatedFieldArrayValues, insert, {
+            argA: index,
+            argB: fillEmptyArray(value1)
+        });
+    };
+    const swap = (indexA, indexB)=>{
+        const updatedFieldArrayValues = control._getFieldArray(name);
+        swapArrayAt(updatedFieldArrayValues, indexA, indexB);
+        swapArrayAt(ids.current, indexA, indexB);
+        updateValues(updatedFieldArrayValues);
+        setFields(updatedFieldArrayValues);
+        control._setFieldArray(name, updatedFieldArrayValues, swapArrayAt, {
+            argA: indexA,
+            argB: indexB
+        }, false);
+    };
+    const move = (from, to)=>{
+        const updatedFieldArrayValues = control._getFieldArray(name);
+        moveArrayAt(updatedFieldArrayValues, from, to);
+        moveArrayAt(ids.current, from, to);
+        updateValues(updatedFieldArrayValues);
+        setFields(updatedFieldArrayValues);
+        control._setFieldArray(name, updatedFieldArrayValues, moveArrayAt, {
+            argA: from,
+            argB: to
+        }, false);
+    };
+    const update = (index, value1)=>{
+        const updateValue = cloneObject(value1);
+        const updatedFieldArrayValues = updateAt(control._getFieldArray(name), index, updateValue);
+        ids.current = [
+            ...updatedFieldArrayValues
+        ].map((item, i)=>!item || i === index ? generateId() : ids.current[i]);
+        updateValues(updatedFieldArrayValues);
+        setFields([
+            ...updatedFieldArrayValues
+        ]);
+        control._setFieldArray(name, updatedFieldArrayValues, updateAt, {
+            argA: index,
+            argB: updateValue
+        }, true, false);
+    };
+    const replace = (value1)=>{
+        const updatedFieldArrayValues = convertToArrayPayload(cloneObject(value1));
+        ids.current = updatedFieldArrayValues.map(generateId);
+        updateValues([
+            ...updatedFieldArrayValues
+        ]);
+        setFields([
+            ...updatedFieldArrayValues
+        ]);
+        control._setFieldArray(name, [
+            ...updatedFieldArrayValues
+        ], (data)=>data, {}, true, false);
+    };
+    __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useEffect({
+        "useFieldArray.useEffect": ()=>{
+            control._state.action = false;
+            isWatched(name, control._names) && control._subjects.state.next({
+                ...control._formState
+            });
+            if (_actioned.current && (!getValidationModes(control._options.mode).isOnSubmit || control._formState.isSubmitted) && !getValidationModes(control._options.reValidateMode).isOnSubmit) {
+                if (control._options.resolver) {
+                    control._runSchema([
+                        name
+                    ]).then({
+                        "useFieldArray.useEffect": (result)=>{
+                            const error = get(result.errors, name);
+                            const existingError = get(control._formState.errors, name);
+                            if (existingError ? !error && existingError.type || error && (existingError.type !== error.type || existingError.message !== error.message) : error && error.type) {
+                                error ? set(control._formState.errors, name, error) : unset(control._formState.errors, name);
+                                control._subjects.state.next({
+                                    errors: control._formState.errors
+                                });
+                            }
+                        }
+                    }["useFieldArray.useEffect"]);
+                } else {
+                    const field = get(control._fields, name);
+                    if (field && field._f && !(getValidationModes(control._options.reValidateMode).isOnSubmit && getValidationModes(control._options.mode).isOnSubmit)) {
+                        validateField(field, control._names.disabled, control._formValues, control._options.criteriaMode === VALIDATION_MODE.all, control._options.shouldUseNativeValidation, true).then({
+                            "useFieldArray.useEffect": (error)=>!isEmptyObject(error) && control._subjects.state.next({
+                                    errors: updateFieldArrayRootError(control._formState.errors, error, name)
+                                })
+                        }["useFieldArray.useEffect"]);
+                    }
+                }
+            }
+            control._subjects.state.next({
+                name,
+                values: cloneObject(control._formValues)
+            });
+            control._names.focus && iterateFieldsByAction(control._fields, {
+                "useFieldArray.useEffect": (ref, key)=>{
+                    if (control._names.focus && key.startsWith(control._names.focus) && ref.focus) {
+                        ref.focus();
+                        return 1;
+                    }
+                    return;
+                }
+            }["useFieldArray.useEffect"]);
+            control._names.focus = '';
+            control._setValid();
+            _actioned.current = false;
+        }
+    }["useFieldArray.useEffect"], [
+        fields,
+        name,
+        control
+    ]);
+    __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useEffect({
+        "useFieldArray.useEffect": ()=>{
+            !get(control._formValues, name) && control._setFieldArray(name);
+            return ({
+                "useFieldArray.useEffect": ()=>{
+                    const updateMounted = {
+                        "useFieldArray.useEffect.updateMounted": (name, value1)=>{
+                            const field = get(control._fields, name);
+                            if (field && field._f) {
+                                field._f.mount = value1;
+                            }
+                        }
+                    }["useFieldArray.useEffect.updateMounted"];
+                    control._options.shouldUnregister || shouldUnregister ? control.unregister(name) : updateMounted(name, false);
+                }
+            })["useFieldArray.useEffect"];
+        }
+    }["useFieldArray.useEffect"], [
+        name,
+        control,
+        keyName,
+        shouldUnregister
+    ]);
+    return {
+        swap: __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useCallback(swap, [
+            updateValues,
+            name,
+            control
+        ]),
+        move: __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useCallback(move, [
+            updateValues,
+            name,
+            control
+        ]),
+        prepend: __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useCallback(prepend, [
+            updateValues,
+            name,
+            control
+        ]),
+        append: __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useCallback(append, [
+            updateValues,
+            name,
+            control
+        ]),
+        remove: __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useCallback(remove, [
+            updateValues,
+            name,
+            control
+        ]),
+        insert: __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useCallback(insert$1, [
+            updateValues,
+            name,
+            control
+        ]),
+        update: __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useCallback(update, [
+            updateValues,
+            name,
+            control
+        ]),
+        replace: __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useCallback(replace, [
+            updateValues,
+            name,
+            control
+        ]),
+        fields: __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useMemo({
+            "useFieldArray.useMemo": ()=>fields.map({
+                    "useFieldArray.useMemo": (field, index)=>({
+                            ...field,
+                            [keyName]: ids.current[index] || generateId()
+                        })
+                }["useFieldArray.useMemo"])
+        }["useFieldArray.useMemo"], [
+            fields,
+            keyName
+        ])
+    };
+}
+/**
+ * Custom hook to manage the entire form.
+ *
+ * @remarks
+ * [API](https://react-hook-form.com/docs/useform) • [Demo](https://codesandbox.io/s/react-hook-form-get-started-ts-5ksmm) • [Video](https://www.youtube.com/watch?v=RkXv4AXXC_4)
+ *
+ * @param props - form configuration and validation parameters.
+ *
+ * @returns methods - individual functions to manage the form state. {@link UseFormReturn}
+ *
+ * @example
+ * ```tsx
+ * function App() {
+ *   const { register, handleSubmit, watch, formState: { errors } } = useForm();
+ *   const onSubmit = data => console.log(data);
+ *
+ *   console.log(watch("example"));
+ *
+ *   return (
+ *     <form onSubmit={handleSubmit(onSubmit)}>
+ *       <input defaultValue="test" {...register("example")} />
+ *       <input {...register("exampleRequired", { required: true })} />
+ *       {errors.exampleRequired && <span>This field is required</span>}
+ *       <button>Submit</button>
+ *     </form>
+ *   );
+ * }
+ * ```
+ */ function useForm() {
+    let props = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {};
+    const _formControl = __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useRef(undefined);
+    const _values = __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useRef(undefined);
+    const [formState, updateFormState] = __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useState({
+        isDirty: false,
+        isValidating: false,
+        isLoading: isFunction(props.defaultValues),
+        isSubmitted: false,
+        isSubmitting: false,
+        isSubmitSuccessful: false,
+        isValid: false,
+        submitCount: 0,
+        dirtyFields: {},
+        touchedFields: {},
+        validatingFields: {},
+        errors: props.errors || {},
+        disabled: props.disabled || false,
+        isReady: false,
+        defaultValues: isFunction(props.defaultValues) ? undefined : props.defaultValues
+    });
+    if (!_formControl.current) {
+        if (props.formControl) {
+            _formControl.current = {
+                ...props.formControl,
+                formState
+            };
+            if (props.defaultValues && !isFunction(props.defaultValues)) {
+                props.formControl.reset(props.defaultValues, props.resetOptions);
+            }
+        } else {
+            const { formControl, ...rest } = createFormControl(props);
+            _formControl.current = {
+                ...rest,
+                formState
+            };
+        }
+    }
+    const control = _formControl.current.control;
+    control._options = props;
+    useIsomorphicLayoutEffect({
+        "useForm.useIsomorphicLayoutEffect": ()=>{
+            const sub = control._subscribe({
+                formState: control._proxyFormState,
+                callback: {
+                    "useForm.useIsomorphicLayoutEffect.sub": ()=>updateFormState({
+                            ...control._formState
+                        })
+                }["useForm.useIsomorphicLayoutEffect.sub"],
+                reRenderRoot: true
+            });
+            updateFormState({
+                "useForm.useIsomorphicLayoutEffect": (data)=>({
+                        ...data,
+                        isReady: true
+                    })
+            }["useForm.useIsomorphicLayoutEffect"]);
+            control._formState.isReady = true;
+            return sub;
+        }
+    }["useForm.useIsomorphicLayoutEffect"], [
+        control
+    ]);
+    __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useEffect({
+        "useForm.useEffect": ()=>control._disableForm(props.disabled)
+    }["useForm.useEffect"], [
+        control,
+        props.disabled
+    ]);
+    __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useEffect({
+        "useForm.useEffect": ()=>{
+            if (props.mode) {
+                control._options.mode = props.mode;
+            }
+            if (props.reValidateMode) {
+                control._options.reValidateMode = props.reValidateMode;
+            }
+        }
+    }["useForm.useEffect"], [
+        control,
+        props.mode,
+        props.reValidateMode
+    ]);
+    __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useEffect({
+        "useForm.useEffect": ()=>{
+            if (props.errors) {
+                control._setErrors(props.errors);
+                control._focusError();
+            }
+        }
+    }["useForm.useEffect"], [
+        control,
+        props.errors
+    ]);
+    __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useEffect({
+        "useForm.useEffect": ()=>{
+            props.shouldUnregister && control._subjects.state.next({
+                values: control._getWatch()
+            });
+        }
+    }["useForm.useEffect"], [
+        control,
+        props.shouldUnregister
+    ]);
+    __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useEffect({
+        "useForm.useEffect": ()=>{
+            if (control._proxyFormState.isDirty) {
+                const isDirty = control._getDirty();
+                if (isDirty !== formState.isDirty) {
+                    control._subjects.state.next({
+                        isDirty
+                    });
+                }
+            }
+        }
+    }["useForm.useEffect"], [
+        control,
+        formState.isDirty
+    ]);
+    __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useEffect({
+        "useForm.useEffect": ()=>{
+            if (props.values && !deepEqual(props.values, _values.current)) {
+                control._reset(props.values, {
+                    keepFieldsRef: true,
+                    ...control._options.resetOptions
+                });
+                _values.current = props.values;
+                updateFormState({
+                    "useForm.useEffect": (state)=>({
+                            ...state
+                        })
+                }["useForm.useEffect"]);
+            } else {
+                control._resetDefaultValues();
+            }
+        }
+    }["useForm.useEffect"], [
+        control,
+        props.values
+    ]);
+    __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].useEffect({
+        "useForm.useEffect": ()=>{
+            if (!control._state.mount) {
+                control._setValid();
+                control._state.mount = true;
+            }
+            if (control._state.watch) {
+                control._state.watch = false;
+                control._subjects.state.next({
+                    ...control._formState
+                });
+            }
+            control._removeUnmounted();
+        }
+    }["useForm.useEffect"]);
+    _formControl.current.formState = getProxyFormState(formState, control);
+    return _formControl.current;
+}
+/**
+ * Watch component that subscribes to form field changes and re-renders when watched fields update.
+ *
+ * @param control - The form control object from useForm
+ * @param names - Array of field names to watch for changes
+ * @param render - The function that receives watched values and returns ReactNode
+ * @returns The result of calling render function with watched values
+ *
+ * @example
+ * The `Watch` component only re-render when the values of `foo`, `bar`, and `baz.qux` change.
+ * The types of `foo`, `bar`, and `baz.qux` are precisely inferred.
+ *
+ * ```tsx
+ * const { control } = useForm();
+ *
+ * <Watch
+ *   control={control}
+ *   names={['foo', 'bar', 'baz.qux']}
+ *   render={([foo, bar, baz_qux]) => <div>{foo}{bar}{baz_qux}</div>}
+ * />
+ * ```
+ */ const Watch = (param)=>{
+    let { control, names, render } = param;
+    return render(useWatch({
+        control,
+        name: names
+    }));
+};
+;
+ //# sourceMappingURL=index.esm.mjs.map
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/@hookform/resolvers/dist/resolvers.mjs [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "toNestErrors",
+    ()=>s,
+    "validateFieldsNatively",
+    ()=>o
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/react-hook-form/dist/index.esm.mjs [app-client] (ecmascript)");
+;
+const r = (t, r, o)=>{
+    if (t && "reportValidity" in t) {
+        const s = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["get"])(o, r);
+        t.setCustomValidity(s && s.message || ""), t.reportValidity();
+    }
+}, o = (e, t)=>{
+    for(const o in t.fields){
+        const s = t.fields[o];
+        s && s.ref && "reportValidity" in s.ref ? r(s.ref, o, e) : s && s.refs && s.refs.forEach((t)=>r(t, o, e));
+    }
+}, s = (r, s)=>{
+    s.shouldUseNativeValidation && o(r, s);
+    const n = {};
+    for(const o in r){
+        const f = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["get"])(s.fields, o), c = Object.assign(r[o] || {}, {
+            ref: f && f.ref
+        });
+        if (i(s.names || Object.keys(r), o)) {
+            const r = Object.assign({}, (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["get"])(n, o));
+            (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["set"])(r, "root", c), (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["set"])(n, o, r);
+        } else (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["set"])(n, o, c);
+    }
+    return n;
+}, i = (e, t)=>{
+    const r = n(t);
+    return e.some((e)=>n(e).match("^".concat(r, "\\.\\d+")));
+};
+function n(e) {
+    return e.replace(/\]|\[/g, "");
+}
+;
+ //# sourceMappingURL=resolvers.mjs.map
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/@hookform/resolvers/zod/dist/zod.mjs [app-client] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "zodResolver",
+    ()=>a
+]);
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f40$hookform$2f$resolvers$2f$dist$2f$resolvers$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/@hookform/resolvers/dist/resolvers.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/react-hook-form/dist/index.esm.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$zod$2f$v4$2f$core$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/zod/v4/core/index.js [app-client] (ecmascript) <locals>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$zod$2f$v4$2f$core$2f$errors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/zod/v4/core/errors.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$zod$2f$v4$2f$core$2f$parse$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/zod/v4/core/parse.js [app-client] (ecmascript)");
+;
+;
+;
+function t(r, e) {
+    try {
+        var o = r();
+    } catch (r) {
+        return e(r);
+    }
+    return o && o.then ? o.then(void 0, e) : o;
+}
+function s(r, e) {
+    for(var n = {}; r.length;){
+        var t = r[0], s = t.code, i = t.message, a = t.path.join(".");
+        if (!n[a]) if ("unionErrors" in t) {
+            var u = t.unionErrors[0].errors[0];
+            n[a] = {
+                message: u.message,
+                type: u.code
+            };
+        } else n[a] = {
+            message: i,
+            type: s
+        };
+        if ("unionErrors" in t && t.unionErrors.forEach(function(e) {
+            return e.errors.forEach(function(e) {
+                return r.push(e);
+            });
+        }), e) {
+            var c = n[a].types, f = c && c[t.code];
+            n[a] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["appendErrors"])(a, e, n, s, f ? [].concat(f, t.message) : t.message);
+        }
+        r.shift();
+    }
+    return n;
+}
+function i(r, e) {
+    for(var n = {}; r.length;){
+        var t = r[0], s = t.code, i = t.message, a = t.path.join(".");
+        if (!n[a]) if ("invalid_union" === t.code && t.errors.length > 0) {
+            var u = t.errors[0][0];
+            n[a] = {
+                message: u.message,
+                type: u.code
+            };
+        } else n[a] = {
+            message: i,
+            type: s
+        };
+        if ("invalid_union" === t.code && t.errors.forEach(function(e) {
+            return e.forEach(function(e) {
+                return r.push(e);
+            });
+        }), e) {
+            var c = n[a].types, f = c && c[t.code];
+            n[a] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$react$2d$hook$2d$form$2f$dist$2f$index$2e$esm$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["appendErrors"])(a, e, n, s, f ? [].concat(f, t.message) : t.message);
+        }
+        r.shift();
+    }
+    return n;
+}
+function a(o, a, u) {
+    if (void 0 === u && (u = {}), function(r) {
+        return "_def" in r && "object" == typeof r._def && "typeName" in r._def;
+    }(o)) return function(n, i, c) {
+        try {
+            return Promise.resolve(t(function() {
+                return Promise.resolve(o["sync" === u.mode ? "parse" : "parseAsync"](n, a)).then(function(e) {
+                    return c.shouldUseNativeValidation && (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f40$hookform$2f$resolvers$2f$dist$2f$resolvers$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["validateFieldsNatively"])({}, c), {
+                        errors: {},
+                        values: u.raw ? Object.assign({}, n) : e
+                    };
+                });
+            }, function(r) {
+                if (function(r) {
+                    return Array.isArray(null == r ? void 0 : r.issues);
+                }(r)) return {
+                    values: {},
+                    errors: (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f40$hookform$2f$resolvers$2f$dist$2f$resolvers$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toNestErrors"])(s(r.errors, !c.shouldUseNativeValidation && "all" === c.criteriaMode), c)
+                };
+                throw r;
+            }));
+        } catch (r) {
+            return Promise.reject(r);
+        }
+    };
+    if (function(r) {
+        return "_zod" in r && "object" == typeof r._zod;
+    }(o)) return function(s, c, f) {
+        try {
+            return Promise.resolve(t(function() {
+                return Promise.resolve(("sync" === u.mode ? __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$zod$2f$v4$2f$core$2f$parse$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["parse"] : __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$zod$2f$v4$2f$core$2f$parse$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["parseAsync"])(o, s, a)).then(function(e) {
+                    return f.shouldUseNativeValidation && (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f40$hookform$2f$resolvers$2f$dist$2f$resolvers$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["validateFieldsNatively"])({}, f), {
+                        errors: {},
+                        values: u.raw ? Object.assign({}, s) : e
+                    };
+                });
+            }, function(r) {
+                if (function(r) {
+                    return r instanceof __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$zod$2f$v4$2f$core$2f$errors$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["$ZodError"];
+                }(r)) return {
+                    values: {},
+                    errors: (0, __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f40$hookform$2f$resolvers$2f$dist$2f$resolvers$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["toNestErrors"])(i(r.issues, !f.shouldUseNativeValidation && "all" === f.criteriaMode), f)
+                };
+                throw r;
+            }));
+        } catch (r) {
+            return Promise.reject(r);
+        }
+    };
+    throw new Error("Invalid input: not a Zod schema");
+}
+;
+ //# sourceMappingURL=zod.module.js.map
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/next/dist/shared/lib/lazy-dynamic/dynamic-bailout-to-csr.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+Object.defineProperty(exports, "BailoutToCSR", {
+    enumerable: true,
+    get: function() {
+        return BailoutToCSR;
+    }
+});
+const _bailouttocsr = __turbopack_context__.r("[project]/rohithpeyarusahib.github.io/node_modules/next/dist/shared/lib/lazy-dynamic/bailout-to-csr.js [app-client] (ecmascript)");
+function BailoutToCSR(param) {
+    let { reason, children } = param;
+    if (typeof window === 'undefined') {
+        throw Object.defineProperty(new _bailouttocsr.BailoutToCSRError(reason), "__NEXT_ERROR_CODE", {
+            value: "E394",
+            enumerable: false,
+            configurable: true
+        });
+    }
+    return children;
+} //# sourceMappingURL=dynamic-bailout-to-csr.js.map
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/next/dist/shared/lib/encode-uri-path.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+Object.defineProperty(exports, "encodeURIPath", {
+    enumerable: true,
+    get: function() {
+        return encodeURIPath;
+    }
+});
+function encodeURIPath(file) {
+    return file.split('/').map((p)=>encodeURIComponent(p)).join('/');
+} //# sourceMappingURL=encode-uri-path.js.map
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/next/dist/shared/lib/lazy-dynamic/preload-chunks.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
+"use strict";
+
+var __TURBOPACK__imported__module__$5b$project$5d2f$rohithpeyarusahib$2e$github$2e$io$2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = /*#__PURE__*/ __turbopack_context__.i("[project]/rohithpeyarusahib.github.io/node_modules/next/dist/build/polyfills/process.js [app-client] (ecmascript)");
+'use client';
+"use strict";
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+Object.defineProperty(exports, "PreloadChunks", {
+    enumerable: true,
+    get: function() {
+        return PreloadChunks;
+    }
+});
+const _jsxruntime = __turbopack_context__.r("[project]/rohithpeyarusahib.github.io/node_modules/next/dist/compiled/react/jsx-runtime.js [app-client] (ecmascript)");
+const _reactdom = __turbopack_context__.r("[project]/rohithpeyarusahib.github.io/node_modules/next/dist/compiled/react-dom/index.js [app-client] (ecmascript)");
+const _workasyncstorageexternal = __turbopack_context__.r("[project]/rohithpeyarusahib.github.io/node_modules/next/dist/server/app-render/work-async-storage.external.js [app-client] (ecmascript)");
+const _encodeuripath = __turbopack_context__.r("[project]/rohithpeyarusahib.github.io/node_modules/next/dist/shared/lib/encode-uri-path.js [app-client] (ecmascript)");
+function PreloadChunks(param) {
+    let { moduleIds } = param;
+    // Early return in client compilation and only load requestStore on server side
+    if (typeof window !== 'undefined') {
+        return null;
+    }
+    const workStore = _workasyncstorageexternal.workAsyncStorage.getStore();
+    if (workStore === undefined) {
+        return null;
+    }
+    const allFiles = [];
+    // Search the current dynamic call unique key id in react loadable manifest,
+    // and find the corresponding CSS files to preload
+    if (workStore.reactLoadableManifest && moduleIds) {
+        const manifest = workStore.reactLoadableManifest;
+        for (const key of moduleIds){
+            if (!manifest[key]) continue;
+            const chunks = manifest[key].files;
+            allFiles.push(...chunks);
+        }
+    }
+    if (allFiles.length === 0) {
+        return null;
+    }
+    const dplId = ("TURBOPACK compile-time falsy", 0) ? "TURBOPACK unreachable" : '';
+    return /*#__PURE__*/ (0, _jsxruntime.jsx)(_jsxruntime.Fragment, {
+        children: allFiles.map((chunk)=>{
+            const href = workStore.assetPrefix + "/_next/" + (0, _encodeuripath.encodeURIPath)(chunk) + dplId;
+            const isCss = chunk.endsWith('.css');
+            // If it's stylesheet we use `precedence` o help hoist with React Float.
+            // For stylesheets we actually need to render the CSS because nothing else is going to do it so it needs to be part of the component tree.
+            // The `preload` for stylesheet is not optional.
+            if (isCss) {
+                return /*#__PURE__*/ (0, _jsxruntime.jsx)("link", {
+                    // @ts-ignore
+                    precedence: "dynamic",
+                    href: href,
+                    rel: "stylesheet",
+                    as: "style"
+                }, chunk);
+            } else {
+                // If it's script we use ReactDOM.preload to preload the resources
+                (0, _reactdom.preload)(href, {
+                    as: 'script',
+                    fetchPriority: 'low'
+                });
+                return null;
+            }
+        })
+    });
+} //# sourceMappingURL=preload-chunks.js.map
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/next/dist/shared/lib/lazy-dynamic/loadable.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+Object.defineProperty(exports, "default", {
+    enumerable: true,
+    get: function() {
+        return _default;
+    }
+});
+const _jsxruntime = __turbopack_context__.r("[project]/rohithpeyarusahib.github.io/node_modules/next/dist/compiled/react/jsx-runtime.js [app-client] (ecmascript)");
+const _react = __turbopack_context__.r("[project]/rohithpeyarusahib.github.io/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+const _dynamicbailouttocsr = __turbopack_context__.r("[project]/rohithpeyarusahib.github.io/node_modules/next/dist/shared/lib/lazy-dynamic/dynamic-bailout-to-csr.js [app-client] (ecmascript)");
+const _preloadchunks = __turbopack_context__.r("[project]/rohithpeyarusahib.github.io/node_modules/next/dist/shared/lib/lazy-dynamic/preload-chunks.js [app-client] (ecmascript)");
+// Normalize loader to return the module as form { default: Component } for `React.lazy`.
+// Also for backward compatible since next/dynamic allows to resolve a component directly with loader
+// Client component reference proxy need to be converted to a module.
+function convertModule(mod) {
+    // Check "default" prop before accessing it, as it could be client reference proxy that could break it reference.
+    // Cases:
+    // mod: { default: Component }
+    // mod: Component
+    // mod: { default: proxy(Component) }
+    // mod: proxy(Component)
+    const hasDefault = mod && 'default' in mod;
+    return {
+        default: hasDefault ? mod.default : mod
+    };
+}
+const defaultOptions = {
+    loader: ()=>Promise.resolve(convertModule(()=>null)),
+    loading: null,
+    ssr: true
+};
+function Loadable(options) {
+    const opts = {
+        ...defaultOptions,
+        ...options
+    };
+    const Lazy = /*#__PURE__*/ (0, _react.lazy)(()=>opts.loader().then(convertModule));
+    const Loading = opts.loading;
+    function LoadableComponent(props) {
+        const fallbackElement = Loading ? /*#__PURE__*/ (0, _jsxruntime.jsx)(Loading, {
+            isLoading: true,
+            pastDelay: true,
+            error: null
+        }) : null;
+        // If it's non-SSR or provided a loading component, wrap it in a suspense boundary
+        const hasSuspenseBoundary = !opts.ssr || !!opts.loading;
+        const Wrap = hasSuspenseBoundary ? _react.Suspense : _react.Fragment;
+        const wrapProps = hasSuspenseBoundary ? {
+            fallback: fallbackElement
+        } : {};
+        const children = opts.ssr ? /*#__PURE__*/ (0, _jsxruntime.jsxs)(_jsxruntime.Fragment, {
+            children: [
+                typeof window === 'undefined' ? /*#__PURE__*/ (0, _jsxruntime.jsx)(_preloadchunks.PreloadChunks, {
+                    moduleIds: opts.modules
+                }) : null,
+                /*#__PURE__*/ (0, _jsxruntime.jsx)(Lazy, {
+                    ...props
+                })
+            ]
+        }) : /*#__PURE__*/ (0, _jsxruntime.jsx)(_dynamicbailouttocsr.BailoutToCSR, {
+            reason: "next/dynamic",
+            children: /*#__PURE__*/ (0, _jsxruntime.jsx)(Lazy, {
+                ...props
+            })
+        });
+        return /*#__PURE__*/ (0, _jsxruntime.jsx)(Wrap, {
+            ...wrapProps,
+            children: children
+        });
+    }
+    LoadableComponent.displayName = 'LoadableComponent';
+    return LoadableComponent;
+}
+const _default = Loadable; //# sourceMappingURL=loadable.js.map
+}),
+"[project]/rohithpeyarusahib.github.io/node_modules/next/dist/shared/lib/app-dynamic.js [app-client] (ecmascript)", ((__turbopack_context__, module, exports) => {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+Object.defineProperty(exports, "default", {
+    enumerable: true,
+    get: function() {
+        return dynamic;
+    }
+});
+const _interop_require_default = __turbopack_context__.r("[project]/rohithpeyarusahib.github.io/node_modules/@swc/helpers/cjs/_interop_require_default.cjs [app-client] (ecmascript)");
+const _loadable = /*#__PURE__*/ _interop_require_default._(__turbopack_context__.r("[project]/rohithpeyarusahib.github.io/node_modules/next/dist/shared/lib/lazy-dynamic/loadable.js [app-client] (ecmascript)"));
+function dynamic(dynamicOptions, options) {
+    var _mergedOptions_loadableGenerated;
+    const loadableOptions = {};
+    if (typeof dynamicOptions === 'function') {
+        loadableOptions.loader = dynamicOptions;
+    }
+    const mergedOptions = {
+        ...loadableOptions,
+        ...options
+    };
+    return (0, _loadable.default)({
+        ...mergedOptions,
+        modules: (_mergedOptions_loadableGenerated = mergedOptions.loadableGenerated) == null ? void 0 : _mergedOptions_loadableGenerated.modules
+    });
+}
+if ((typeof exports.default === 'function' || typeof exports.default === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
+    Object.defineProperty(exports.default, '__esModule', {
+        value: true
+    });
+    Object.assign(exports.default, exports);
+    module.exports = exports.default;
+} //# sourceMappingURL=app-dynamic.js.map
+}),
+]);
+
+//# sourceMappingURL=3347b_03fd9182._.js.map
