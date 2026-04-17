@@ -99,7 +99,7 @@
         "transform": "lodash/{{member}}"
       }
     },
-    "outputFileTracingRoot": "/Users/rohith.p/Desktop/rohithpeyarusahib.github.io",
+    "outputFileTracingRoot": "/home/ro",
     "experimental": {
       "useSkewCookie": false,
       "cacheLife": {
@@ -158,7 +158,7 @@
       "middlewarePrefetch": "flexible",
       "optimisticClientCache": true,
       "manualClientBasePath": false,
-      "cpus": 9,
+      "cpus": 21,
       "memoryBasedWorkersCount": false,
       "imgOptConcurrency": null,
       "imgOptTimeoutInSeconds": 7,
@@ -288,11 +288,11 @@
     "bundlePagesRouterDependencies": false,
     "configFileName": "next.config.ts",
     "turbopack": {
-      "root": "/Users/rohith.p/Desktop/rohithpeyarusahib.github.io"
+      "root": "/home/ro"
     }
   },
-  "appDir": "/Users/rohith.p/Desktop/rohithpeyarusahib.github.io",
-  "relativeAppDir": "",
+  "appDir": "/home/ro/rohithpeyarusahib.github.io",
+  "relativeAppDir": "rohithpeyarusahib.github.io",
   "files": [
     ".next/routes-manifest.json",
     ".next/server/pages-manifest.json",

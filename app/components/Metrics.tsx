@@ -1,64 +1,44 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
-import { motion, useInView, useAnimation, useSpring, useTransform } from "framer-motion";
-import AnimatedSection from "./ui/AnimatedSection";
-
-interface MetricProps {
-  label: string;
-  value: number;
-  suffix?: string;
-  duration?: number;
-}
-
-function Counter({ value, suffix = "", duration = 2 }: MetricProps) {
-  const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px 0px" });
-  
-  const spring = useSpring(0, {
-    duration: duration * 1000,
-    bounce: 0,
-  });
-
-  const display = useTransform(spring, (current) => Math.floor(current) + suffix);
-
-  useEffect(() => {
-    if (isInView) {
-      spring.set(value);
-    }
-  }, [isInView, spring, value]);
-
-  return <motion.span ref={ref}>{display}</motion.span>;
-}
+import FadeIn from "./ui/FadeIn";
+import AnimatedCounter from "./ui/AnimatedCounter";
 
 export default function Metrics() {
   const metrics = [
-    { label: "Databases Managed", value: 500, suffix: "+" },
+    { label: "Sys.Node.Active", value: 500, suffix: "+" },
     { label: "Uptime Guaranteed", value: 99, suffix: ".99%" },
-    { label: "Query Speed Improved", value: 60, suffix: "%" },
-    { label: "Terabytes Migrated", value: 50, suffix: "+" }
+    { label: "Query Speed Optimized", value: 60, suffix: "%" },
+    { label: "Terabytes Migrated", value: 50, suffix: "TB+" }
   ];
 
   return (
-    <section className="py-20 bg-background/50 border-t border-b border-border relative overflow-hidden">
-      {/* Background graphic */}
-      <div className="absolute top-0 right-0 w-1/2 h-full bg-accent/5 blur-[120px] rounded-full pointer-events-none" />
+    <section className="py-24 bg-black border-y border-white/10 relative overflow-hidden flex flex-col">
+      {/* Background terminal grid */}
+      <div className="absolute inset-0 opacity-[0.02] bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:4vw_4vw]" />
       
-      <div className="max-w-6xl mx-auto px-4 relative z-10">
-        <AnimatedSection>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 text-center">
+      <div className="max-w-7xl mx-auto px-4 relative z-10 w-full">
+        <FadeIn>
+          {/* Readout Header */}
+          <div className="flex items-center gap-4 mb-10 text-[10px] font-mono text-white/40 uppercase tracking-[0.3em]">
+            <span className="w-8 h-[1px] bg-white/40" />
+            Active Telemetry Readout
+            <span className="flex-1 border-b border-dashed border-white/10" />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-0 border border-white/10 divide-y md:divide-y-0 md:divide-x divide-white/10 bg-[#020202]">
             {metrics.map((metric, i) => (
-              <div key={i} className="flex flex-col items-center">
-                <div className="text-4xl md:text-5xl font-bold text-foreground mb-2 font-mono drop-shadow-md">
-                  <Counter value={metric.value} suffix={metric.suffix} />
+              <div key={i} className="flex flex-col items-start p-8 group hover:bg-white/5 transition-colors">
+                <div className="text-[10px] text-white/50 font-mono uppercase tracking-[0.2em] mb-6 flex justify-between w-full">
+                  <span>{metric.label}</span>
+                  <span className="opacity-0 group-hover:opacity-100 transition-opacity animate-pulse text-white">&gt;_</span>
                 </div>
-                <div className="text-sm md:text-base text-foreground/60 uppercase tracking-widest">
-                  {metric.label}
+                <div className="text-5xl lg:text-6xl font-bold text-white tracking-tighter">
+                  <AnimatedCounter value={metric.value} suffix={metric.suffix} />
                 </div>
               </div>
             ))}
           </div>
-        </AnimatedSection>
+        </FadeIn>
       </div>
     </section>
   );

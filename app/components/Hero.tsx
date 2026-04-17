@@ -1,131 +1,76 @@
 "use client";
 
-import { useMemo, useRef } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Stars } from "@react-three/drei";
 import { motion } from "framer-motion";
-import * as THREE from "three";
 import { personalInfo } from "../config";
+import dynamic from "next/dynamic";
+import FadeIn from "./ui/FadeIn";
 
-function ParticleNetwork() {
-  const pointsRef = useRef<THREE.Points>(null);
-  
-  const particleCount = 700;
-  
-  const [positions, setPositions] = useMemo(() => {
-    const pos = new Float32Array(particleCount * 3);
-    for (let i = 0; i < particleCount * 3; i++) {
-        pos[i] = (Math.random() - 0.5) * 10;
-    }
-    return [pos, null];
-  }, [particleCount]);
-
-  useFrame((state) => {
-    if (pointsRef.current) {
-      pointsRef.current.rotation.y = state.clock.getElapsedTime() * 0.05;
-      pointsRef.current.rotation.x = state.clock.getElapsedTime() * 0.02;
-    }
-  });
-
-  return (
-    <points ref={pointsRef}>
-      <bufferGeometry>
-        <bufferAttribute
-          attach="attributes-position"
-          count={positions.length / 3}
-          array={positions}
-          itemSize={3}
-        />
-      </bufferGeometry>
-      <pointsMaterial 
-        size={0.03} 
-        color="#2ab673" 
-        transparent 
-        opacity={0.8} 
-        sizeAttenuation 
-      />
-    </points>
-  );
-}
+const HeroCanvas = dynamic(() => import("./canvas/HeroCanvas"), { ssr: false });
 
 export default function Hero() {
   return (
-    <section className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-background">
-      {/* 3D Background */}
-      <div className="absolute inset-0 z-0">
-        <Canvas camera={{ position: [0, 0, 5], fov: 60 }}>
-          <color attach="background" args={['#050505']} />
-          <ambientLight intensity={0.5} />
-          <Stars radius={100} depth={50} count={2000} factor={4} saturation={0} fade speed={1} />
-          <ParticleNetwork />
-          <OrbitControls 
-            enableZoom={false} 
-            enablePan={false} 
-            autoRotate 
-            autoRotateSpeed={0.5} 
-          />
-        </Canvas>
+    <section id="hero" className="relative h-[100svh] flex items-center justify-center overflow-hidden bg-black">
+      {/* 3D Canvas Background mapped behind */}
+      <div className="absolute inset-0 z-0 opacity-80 mix-blend-screen hidden lg:block">
+        <HeroCanvas />
       </div>
 
-      {/* Content overlay */}
-      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto flex flex-col items-center">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-4">
-            Hi, I'm <span className="text-accent">{personalInfo.name}</span>
-          </h1>
-        </motion.div>
+      <div className="absolute inset-0 -z-10 lg:hidden bg-black" />
+
+      {/* Main Content Area */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-8 flex flex-col md:flex-row items-center justify-between h-full pointer-events-none pb-20">
+        <div className="w-full md:w-1/2 flex flex-col items-start text-left pt-20 md:pt-0">
+          <FadeIn delay={0}>
+            <div className="flex items-center gap-4 mb-6">
+              <div className="w-8 h-[2px] bg-white/50" />
+              <span className="text-white/40 font-mono tracking-[0.4em] uppercase text-xs">Sys.Root_Access</span>
+            </div>
+            <h1 className="text-5xl md:text-7xl lg:text-[6.5rem] leading-[0.9] font-black tracking-tighter mb-4 text-white uppercase">
+              Rohith <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white/80 to-white/30 drop-shadow-[0_0_20px_rgba(255,255,255,0.2)] block mt-2">
+                Database Engineer
+              </span>
+            </h1>
+          </FadeIn>
         
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-        >
-          <h2 className="text-2xl md:text-3xl text-foreground/80 font-mono mb-6">
-            Database Engineer Consultant
-          </h2>
-        </motion.div>
+          <FadeIn delay={0.2}>
+            <p className="text-xs md:text-sm text-white/60 max-w-md font-mono tracking-[0.2em] uppercase mt-8 border-l border-white/20 pl-4 py-1">
+              Master Data Architect & Ops Engineer. Designing High-Concurrency Architecture.
+            </p>
+          </FadeIn>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.6 }}
-          className="max-w-2xl mx-auto"
-        >
-          <p className="text-foreground/60 text-lg mb-8">
-            Specializing in high-performance data architecture, zero-downtime migrations, 
-            and scalable solutions across MySQL, MongoDB, and PostgreSQL.
-          </p>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.8 }}
-          className="flex gap-4"
-        >
-          <a href="#projects" className="px-6 py-3 bg-accent text-accent-foreground font-semibold rounded-md hover:bg-accent/90 transition-colors">
-            View Projects
-          </a>
-          <a href="#contact" className="px-6 py-3 bg-surface border border-border text-foreground font-semibold rounded-md hover:bg-white/5 transition-colors">
-            Contact Me
-          </a>
-        </motion.div>
+          <FadeIn delay={0.4} className="mt-12 pointer-events-auto">
+            <div className="flex flex-col sm:flex-row gap-6">
+              <a 
+                href="#projects" 
+                className="group relative px-8 py-4 bg-white text-black font-semibold rounded-none overflow-hidden transition-all hover:scale-[1.02] shadow-[0_0_20px_rgba(255,255,255,0.1)]"
+              >
+                <span className="relative z-10 uppercase tracking-widest text-xs font-mono group-hover:text-white transition-colors">View Topology</span>
+                <div className="absolute inset-0 bg-[#111] translate-y-[100%] group-hover:translate-y-0 transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)]" />
+              </a>
+              <a 
+                href="#contact" 
+                className="group px-8 py-4 border border-white/20 text-white font-semibold rounded-none hover:bg-white/5 transition-all uppercase tracking-widest text-xs backdrop-blur-sm font-mono flex items-center justify-center"
+              >
+                Initialize Auth
+              </a>
+            </div>
+          </FadeIn>
+        </div>
+        
+        {/* Invisible spacer allowing 3D canvas to exist on the right without overlap */}
+        <div className="hidden md:block w-1/2 h-full" />
       </div>
 
-      {/* Scroll indicator */}
-      <motion.div 
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ repeat: Infinity, duration: 2 }}
-      >
-        <div className="w-6 h-10 border-2 border-border rounded-full flex justify-center p-1">
-          <div className="w-1.5 h-1.5 bg-accent rounded-full" />
-        </div>
-      </motion.div>
+      {/* Futuristic Scroll Indicator */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center pointer-events-none opacity-50">
+        <span className="text-[10px] tracking-[0.5em] uppercase mb-4 text-white">Scroll</span>
+        <motion.div 
+          className="w-[1px] h-16 bg-gradient-to-b from-white to-transparent" 
+          animate={{ opacity: [0.2, 1, 0.2] }}
+          transition={{ repeat: Infinity, duration: 2 }}
+        />
+      </div>
     </section>
   );
 }
