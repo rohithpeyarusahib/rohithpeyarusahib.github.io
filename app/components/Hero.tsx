@@ -1,128 +1,131 @@
 "use client";
 
+import { useMemo, useRef } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { OrbitControls, Stars } from "@react-three/drei";
 import { motion } from "framer-motion";
-import { Download, Linkedin } from "lucide-react";
+import * as THREE from "three";
 import { personalInfo } from "../config";
-import { useEffect, useState } from "react";
 
-const Hero = () => {
-  const [dimensions, setDimensions] = useState({ width: 1200, height: 800 });
-  const [particles, setParticles] = useState<Array<{ x: number; y: number; duration: number }>>([]);
+function ParticleNetwork() {
+  const pointsRef = useRef<THREE.Points>(null);
+  
+  const particleCount = 700;
+  
+  const [positions, setPositions] = useMemo(() => {
+    const pos = new Float32Array(particleCount * 3);
+    for (let i = 0; i < particleCount * 3; i++) {
+        pos[i] = (Math.random() - 0.5) * 10;
+    }
+    return [pos, null];
+  }, [particleCount]);
 
-  useEffect(() => {
-    const updateDimensions = () => {
-      if (typeof window !== 'undefined') {
-        setDimensions({ width: window.innerWidth, height: window.innerHeight });
-      }
-    };
-
-    updateDimensions();
-
-    const newParticles = [...Array(20)].map(() => ({
-      x: Math.random() * dimensions.width,
-      y: Math.random() * dimensions.height,
-      duration: Math.random() * 10 + 10,
-    }));
-    setParticles(newParticles);
-
-    window.addEventListener('resize', updateDimensions);
-    return () => window.removeEventListener('resize', updateDimensions);
-  }, [dimensions.width, dimensions.height]);
+  useFrame((state) => {
+    if (pointsRef.current) {
+      pointsRef.current.rotation.y = state.clock.getElapsedTime() * 0.05;
+      pointsRef.current.rotation.x = state.clock.getElapsedTime() * 0.02;
+    }
+  });
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Animated Background */}
-      <div className="absolute inset-0">
-        {particles.map((particle, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-2 h-2 bg-teal-400 rounded-full opacity-20"
-            initial={{
-              x: particle.x,
-              y: particle.y,
-            }}
-            animate={{
-              x: Math.random() * dimensions.width,
-              y: Math.random() * dimensions.height,
-            }}
-            transition={{
-              duration: particle.duration,
-              repeat: Infinity,
-              repeatType: "reverse",
-            }}
+    <points ref={pointsRef}>
+      <bufferGeometry>
+        <bufferAttribute
+          attach="attributes-position"
+          count={positions.length / 3}
+          array={positions}
+          itemSize={3}
+        />
+      </bufferGeometry>
+      <pointsMaterial 
+        size={0.03} 
+        color="#2ab673" 
+        transparent 
+        opacity={0.8} 
+        sizeAttenuation 
+      />
+    </points>
+  );
+}
+
+export default function Hero() {
+  return (
+    <section className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-background">
+      {/* 3D Background */}
+      <div className="absolute inset-0 z-0">
+        <Canvas camera={{ position: [0, 0, 5], fov: 60 }}>
+          <color attach="background" args={['#050505']} />
+          <ambientLight intensity={0.5} />
+          <Stars radius={100} depth={50} count={2000} factor={4} saturation={0} fade speed={1} />
+          <ParticleNetwork />
+          <OrbitControls 
+            enableZoom={false} 
+            enablePan={false} 
+            autoRotate 
+            autoRotateSpeed={0.5} 
           />
-        ))}
-        {/* Data flow lines */}
-        <svg className="absolute inset-0 w-full h-full">
-          <motion.path
-            d="M0 200 Q 300 100 600 200 T 1200 200"
-            stroke="rgba(20, 184, 166, 0.3)"
-            strokeWidth="2"
-            fill="none"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 3, repeat: Infinity }}
-          />
-          <motion.path
-            d="M0 400 Q 300 300 600 400 T 1200 400"
-            stroke="rgba(20, 184, 166, 0.3)"
-            strokeWidth="2"
-            fill="none"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 3, delay: 1, repeat: Infinity }}
-          />
-        </svg>
+        </Canvas>
       </div>
 
-      <div className="relative z-10 text-center px-4">
-        <motion.h1
-          className="text-5xl md:text-7xl font-bold mb-4 bg-gradient-to-r from-teal-400 to-blue-500 bg-clip-text text-transparent"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          {personalInfo.name}
-        </motion.h1>
-        <motion.p
-          className="text-xl md:text-2xl text-white mb-4 font-semibold"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          {personalInfo.title}
-        </motion.p>
-        <motion.p
-          className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-        >
-          Helping businesses achieve faster, reliable, and scalable database systems with minimal downtime.
-        </motion.p>
+      {/* Content overlay */}
+      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto flex flex-col items-center">
         <motion.div
-          className="flex flex-col sm:flex-row gap-4 justify-center"
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
         >
-          <a
-            href="#contact"
-            className="flex items-center gap-2 px-6 py-3 bg-teal-500 hover:bg-teal-600 rounded-lg transition-colors"
-          >
-            📅 Schedule a Free Consultation
-          </a>
-          <a
-            href="#projects"
-            className="flex items-center gap-2 px-6 py-3 border border-teal-500 hover:bg-teal-500 rounded-lg transition-colors"
-          >
-            🚀 View My Projects
-          </a>
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-4">
+            Hi, I'm <span className="text-accent">{personalInfo.name}</span>
+          </h1>
+        </motion.div>
+        
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+        >
+          <h2 className="text-2xl md:text-3xl text-foreground/80 font-mono mb-6">
+            Database Engineer Consultant
+          </h2>
         </motion.div>
 
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.6 }}
+          className="max-w-2xl mx-auto"
+        >
+          <p className="text-foreground/60 text-lg mb-8">
+            Specializing in high-performance data architecture, zero-downtime migrations, 
+            and scalable solutions across MySQL, MongoDB, and PostgreSQL.
+          </p>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.8 }}
+          className="flex gap-4"
+        >
+          <a href="#projects" className="px-6 py-3 bg-accent text-accent-foreground font-semibold rounded-md hover:bg-accent/90 transition-colors">
+            View Projects
+          </a>
+          <a href="#contact" className="px-6 py-3 bg-surface border border-border text-foreground font-semibold rounded-md hover:bg-white/5 transition-colors">
+            Contact Me
+          </a>
+        </motion.div>
       </div>
+
+      {/* Scroll indicator */}
+      <motion.div 
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10"
+        animate={{ y: [0, 10, 0] }}
+        transition={{ repeat: Infinity, duration: 2 }}
+      >
+        <div className="w-6 h-10 border-2 border-border rounded-full flex justify-center p-1">
+          <div className="w-1.5 h-1.5 bg-accent rounded-full" />
+        </div>
+      </motion.div>
     </section>
   );
-};
-
-export default Hero;
+}

@@ -1,60 +1,54 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { skills, skillProficiency } from "../config";
+import AnimatedSection from "./ui/AnimatedSection";
 
 const Skills = () => {
-  const skillCategories = [
-    { title: "Databases", items: skills.databases },
-    { title: "Performance Tuning", items: skills.performanceTuning },
-    { title: "Automation", items: skills.automation },
-    { title: "Monitoring Tools", items: skills.monitoring },
-    { title: "Cloud Platforms", items: skills.cloud },
-  ];
-
   return (
-    <section id="skills" className="py-10 px-4 max-w-6xl mx-auto">
-      <motion.h2
-        className="text-4xl font-bold text-center mb-12"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-      >
-        Technical Skills
-      </motion.h2>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {skillCategories.map((category, index) => (
-          <motion.div
-            key={index}
-            className="bg-gray-200 dark:bg-gray-800 rounded-lg p-6"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: index * 0.1 }}
-            viewport={{ once: true }}
-          >
-            <h3 className="text-xl font-semibold mb-4 text-teal-400">{category.title}</h3>
-            <div className="space-y-4">
-              {category.items.map((skill, i) => (
-                <div key={i}>
-                  <div className="flex justify-between mb-1">
-                    <span className="text-gray-700 dark:text-gray-300">{skill}</span>
-                    <span className="text-teal-400">{skillProficiency[skill as keyof typeof skillProficiency] || 80}%</span>
-                  </div>
-                  <div className="w-full bg-gray-300 dark:bg-gray-700 rounded-full h-2">
-                    <motion.div
-                      className="bg-teal-500 h-2 rounded-full"
-                      initial={{ width: 0 }}
-                      whileInView={{ width: `${skillProficiency[skill as keyof typeof skillProficiency] || 80}%` }}
-                      transition={{ duration: 1, delay: i * 0.1 }}
-                      viewport={{ once: true }}
-                    />
-                  </div>
+    <section id="skills" className="py-24 px-4 max-w-6xl mx-auto border-t border-border mt-20">
+      <AnimatedSection>
+        <h2 className="text-3xl md:text-5xl font-bold text-center mb-16">
+          Technical <span className="text-accent">Skills</span>
+        </h2>
+      </AnimatedSection>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+        {/* Radar/Bar Chart Approximation for Proficiency */}
+        <AnimatedSection direction="left">
+          <h3 className="text-xl font-mono text-foreground mb-6 mb-8 text-center md:text-left">Core Proficiency</h3>
+          <div className="space-y-6">
+            {Object.entries(skillProficiency).map(([skill, level], i) => (
+              <div key={i}>
+                <div className="flex justify-between mb-1 text-sm font-mono">
+                  <span className="text-foreground/80">{skill}</span>
+                  <span className="text-accent">{level}%</span>
                 </div>
-              ))}
-            </div>
-          </motion.div>
-        ))}
+                <div className="w-full bg-surface rounded-full h-1.5 overflow-hidden">
+                  <div className="bg-accent h-1.5 rounded-full" style={{ width: `${level}%` }}></div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </AnimatedSection>
+
+        {/* Categories */}
+        <AnimatedSection direction="right">
+          <h3 className="text-xl font-mono text-foreground mb-6 mt-12 md:mt-0 text-center md:text-left">Tech Stack</h3>
+          <div className="space-y-6">
+            {Object.entries(skills).map(([category, items], i) => (
+              <div key={i} className="mb-4">
+                <h4 className="text-sm uppercase tracking-widest text-foreground/50 mb-2">{category.replace(/([A-Z])/g, ' $1').trim()}</h4>
+                <div className="flex flex-wrap gap-2">
+                  {items.map((item, j) => (
+                    <span key={j} className="px-3 py-1 bg-surface border border-border text-foreground/80 rounded-full text-xs font-mono">
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </AnimatedSection>
       </div>
     </section>
   );
